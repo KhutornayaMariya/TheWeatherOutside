@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4515FA47293F9A0F00A44C5E /* TheWeatherOutside.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWeatherOutside.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4515FA47293F9A0F00A44C5E /* WeatherWise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherWise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4515FA4A293F9A0F00A44C5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4515FA4C293F9A0F00A44C5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4515FA4E293F9A0F00A44C5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		4515FA48293F9A0F00A44C5E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4515FA47293F9A0F00A44C5E /* TheWeatherOutside.app */,
+				4515FA47293F9A0F00A44C5E /* WeatherWise.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,9 +70,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4515FA46293F9A0F00A44C5E /* TheWeatherOutside */ = {
+		4515FA46293F9A0F00A44C5E /* WeatherWise */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4515FA5E293F9A1000A44C5E /* Build configuration list for PBXNativeTarget "TheWeatherOutside" */;
+			buildConfigurationList = 4515FA5E293F9A1000A44C5E /* Build configuration list for PBXNativeTarget "WeatherWise" */;
 			buildPhases = (
 				4515FA43293F9A0F00A44C5E /* Sources */,
 				4515FA44293F9A0F00A44C5E /* Frameworks */,
@@ -82,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = TheWeatherOutside;
+			name = WeatherWise;
 			productName = TheWeatherOutside;
-			productReference = 4515FA47293F9A0F00A44C5E /* TheWeatherOutside.app */;
+			productReference = 4515FA47293F9A0F00A44C5E /* WeatherWise.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +102,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4515FA42293F9A0F00A44C5E /* Build configuration list for PBXProject "TheWeatherOutside" */;
+			buildConfigurationList = 4515FA42293F9A0F00A44C5E /* Build configuration list for PBXProject "WeatherWise" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +115,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4515FA46293F9A0F00A44C5E /* TheWeatherOutside */,
+				4515FA46293F9A0F00A44C5E /* WeatherWise */,
 			);
 		};
 /* End PBXProject section */
@@ -331,7 +331,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4515FA42293F9A0F00A44C5E /* Build configuration list for PBXProject "TheWeatherOutside" */ = {
+		4515FA42293F9A0F00A44C5E /* Build configuration list for PBXProject "WeatherWise" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4515FA5C293F9A1000A44C5E /* Debug */,
@@ -340,7 +340,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4515FA5E293F9A1000A44C5E /* Build configuration list for PBXNativeTarget "TheWeatherOutside" */ = {
+		4515FA5E293F9A1000A44C5E /* Build configuration list for PBXNativeTarget "WeatherWise" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4515FA5F293F9A1000A44C5E /* Debug */,
