@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  WeatherWise
+
+  Created by Mariya Khutornaya on 02.01.23.
+  
+*/
+
+NORTH = "N";
+SOUTH = "S";
+WEST = "W";
+EAST = "E";
+NORTHEAST = "NE";
+SOUTHEAST = "SE";
+NORTHWEST = "NW";
+SOUTHWEST = "SW";
