@@ -6,11 +6,18 @@
   
 */
 
-NORTH = "С";
-SOUTH = "Ю";
-WEST = "З";
-EAST = "В";
-NORTHEAST = "СВ";
-SOUTHEAST = "ЮВ";
-NORTHWEST = "СЗ";
-SOUTHWEST = "ЮЗ";
+"NORTH" = "С";
+"SOUTH" = "Ю";
+"WEST" = "З";
+"EAST" = "В";
+"NORTHEAST" = "СВ";
+"SOUTHEAST" = "ЮВ";
+"NORTHWEST" = "СЗ";
+"SOUTHWEST" = "ЮЗ";
+
+// Onboarding screen
+"USE_LOCATION" = "ИСПОЛЬЗОВАТЬ МЕСТОПОЛОЖЕНИЕ  УСТРОЙСТВА";
+"DENY_USING_LOCATION" = "НЕТ, Я БУДУ ДОБАВЛЯТЬ ЛОКАЦИИ";
+"LOCATION_ASK_DESC" = "Разрешить приложению  Weather использовать данные
+о местоположении вашего устройства";
+"LOCATION_ASK_EXPLANATION" = "Чтобы получить более точные прогнозы погоды во время движения или путешествия\n\n Вы можете изменить свой выбор в любое время в настройках";

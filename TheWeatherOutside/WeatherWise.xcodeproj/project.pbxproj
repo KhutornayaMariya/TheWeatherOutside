@@ -16,6 +16,17 @@
 		4C12B2422962EB7200887469 /* WindDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C12B2412962EB7200887469 /* WindDirectionManager.swift */; };
 		4C12B2462962F21000887469 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C12B2482962F21000887469 /* Localizable.strings */; };
 		4C12B24B2962F37700887469 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C12B24A2962F37700887469 /* String+Extension.swift */; };
+		4C17D09B296434F000132ACB /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17D09A296434F000132ACB /* MainCoordinator.swift */; };
+		4C17D09D2964439200132ACB /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17D09C2964439200132ACB /* OnboardingViewController.swift */; };
+		4C17D0A02964568D00132ACB /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17D09F2964568D00132ACB /* OnboardingView.swift */; };
+		4C17D0A32964586300132ACB /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17D0A22964586300132ACB /* Button.swift */; };
+		4C17D0A529645BC100132ACB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17D0A429645BC100132ACB /* Color.swift */; };
+		4C17D0A829645F9E00132ACB /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C17D0A729645F9E00132ACB /* Rubik-SemiBold.ttf */; };
+		4C17D0AA29645FB200132ACB /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C17D0A929645FB200132ACB /* Rubik-Regular.ttf */; };
+		4C17D0AC29645FD600132ACB /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C17D0AB29645FD600132ACB /* Rubik-Medium.ttf */; };
+		4C17D0AF2964611300132ACB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17D0AE2964611300132ACB /* Fonts.swift */; };
+		4C17D0B22964776B00132ACB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C17D0B42964776B00132ACB /* InfoPlist.strings */; };
+		4C17D0B82964836700132ACB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17D0B72964836700132ACB /* SettingsViewController.swift */; };
 		4CF2AD7E295F375A003DC0F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4CF2AD7D295F375A003DC0F3 /* Alamofire */; };
 		4CF2AD80295F38FE003DC0F3 /* ForecastApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2AD7F295F38FE003DC0F3 /* ForecastApiManager.swift */; };
 		4CF2AD82295F3BCC003DC0F3 /* ForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2AD81295F3BCC003DC0F3 /* ForecastResponse.swift */; };
@@ -39,6 +50,18 @@
 		4C12B2472962F21000887469 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C12B2492962F21300887469 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C12B24A2962F37700887469 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		4C17D09A296434F000132ACB /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		4C17D09C2964439200132ACB /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		4C17D09F2964568D00132ACB /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		4C17D0A22964586300132ACB /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		4C17D0A429645BC100132ACB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		4C17D0A729645F9E00132ACB /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
+		4C17D0A929645FB200132ACB /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		4C17D0AB29645FD600132ACB /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		4C17D0AE2964611300132ACB /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		4C17D0B32964776B00132ACB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4C17D0B52964776E00132ACB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4C17D0B72964836700132ACB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4CF2AD7F295F38FE003DC0F3 /* ForecastApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastApiManager.swift; sourceTree = "<group>"; };
 		4CF2AD81295F3BCC003DC0F3 /* ForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastResponse.swift; sourceTree = "<group>"; };
 		4CF2AD83295F58FD003DC0F3 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
@@ -78,18 +101,61 @@
 		4515FA49293F9A0F00A44C5E /* TheWeatherOutside */ = {
 			isa = PBXGroup;
 			children = (
+				4C17D0B62964834E00132ACB /* SettingsViewController */,
+				4C17D09E2964567300132ACB /* OnboardingViewController */,
+				4C17D0A12964584E00132ACB /* UIComponents */,
 				4CF2AD8D2962CCB1003DC0F3 /* Helpers */,
 				4CF2AD8C2962CC9C003DC0F3 /* CoreData */,
 				4CF2AD7B295F2F7D003DC0F3 /* Network */,
 				4515FA4A293F9A0F00A44C5E /* AppDelegate.swift */,
 				4515FA4C293F9A0F00A44C5E /* SceneDelegate.swift */,
+				4C17D09A296434F000132ACB /* MainCoordinator.swift */,
 				4515FA4E293F9A0F00A44C5E /* ViewController.swift */,
 				4515FA56293F9A1000A44C5E /* Assets.xcassets */,
 				4515FA58293F9A1000A44C5E /* LaunchScreen.storyboard */,
 				4515FA5B293F9A1000A44C5E /* Info.plist */,
 				4C12B2482962F21000887469 /* Localizable.strings */,
+				4C17D0B42964776B00132ACB /* InfoPlist.strings */,
 			);
 			path = TheWeatherOutside;
+			sourceTree = "<group>";
+		};
+		4C17D09E2964567300132ACB /* OnboardingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4C17D09C2964439200132ACB /* OnboardingViewController.swift */,
+				4C17D09F2964568D00132ACB /* OnboardingView.swift */,
+			);
+			path = OnboardingViewController;
+			sourceTree = "<group>";
+		};
+		4C17D0A12964584E00132ACB /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				4C17D0A629645F3600132ACB /* Rubik */,
+				4C17D0A22964586300132ACB /* Button.swift */,
+				4C17D0A429645BC100132ACB /* Color.swift */,
+				4C17D0AE2964611300132ACB /* Fonts.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		4C17D0A629645F3600132ACB /* Rubik */ = {
+			isa = PBXGroup;
+			children = (
+				4C17D0A929645FB200132ACB /* Rubik-Regular.ttf */,
+				4C17D0AB29645FD600132ACB /* Rubik-Medium.ttf */,
+				4C17D0A729645F9E00132ACB /* Rubik-SemiBold.ttf */,
+			);
+			path = Rubik;
+			sourceTree = "<group>";
+		};
+		4C17D0B62964834E00132ACB /* SettingsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4C17D0B72964836700132ACB /* SettingsViewController.swift */,
+			);
+			path = SettingsViewController;
 			sourceTree = "<group>";
 		};
 		4CF2AD7B295F2F7D003DC0F3 /* Network */ = {
@@ -196,8 +262,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4515FA5A293F9A1000A44C5E /* LaunchScreen.storyboard in Resources */,
+				4C17D0B22964776B00132ACB /* InfoPlist.strings in Resources */,
 				4C12B2462962F21000887469 /* Localizable.strings in Resources */,
 				4515FA57293F9A1000A44C5E /* Assets.xcassets in Resources */,
+				4C17D0AC29645FD600132ACB /* Rubik-Medium.ttf in Resources */,
+				4C17D0AA29645FB200132ACB /* Rubik-Regular.ttf in Resources */,
+				4C17D0A829645F9E00132ACB /* Rubik-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +280,10 @@
 			files = (
 				4CF2AD89295F7AEF003DC0F3 /* GeoCodeApiManager.swift in Sources */,
 				4CF2AD84295F58FD003DC0F3 /* DateManager.swift in Sources */,
+				4C17D0A02964568D00132ACB /* OnboardingView.swift in Sources */,
+				4C17D0A32964586300132ACB /* Button.swift in Sources */,
+				4C17D0A529645BC100132ACB /* Color.swift in Sources */,
+				4C17D0B82964836700132ACB /* SettingsViewController.swift in Sources */,
 				4515FA55293F9A0F00A44C5E /* TheWeatherOutside.xcdatamodeld in Sources */,
 				4515FA4F293F9A0F00A44C5E /* ViewController.swift in Sources */,
 				4C12B24B2962F37700887469 /* String+Extension.swift in Sources */,
@@ -218,7 +292,10 @@
 				4C12B2422962EB7200887469 /* WindDirectionManager.swift in Sources */,
 				4515FA4B293F9A0F00A44C5E /* AppDelegate.swift in Sources */,
 				4CF2AD82295F3BCC003DC0F3 /* ForecastResponse.swift in Sources */,
+				4C17D09B296434F000132ACB /* MainCoordinator.swift in Sources */,
+				4C17D09D2964439200132ACB /* OnboardingViewController.swift in Sources */,
 				4CF2AD8F2962DE0D003DC0F3 /* CoreDataManager.swift in Sources */,
+				4C17D0AF2964611300132ACB /* Fonts.swift in Sources */,
 				4515FA4D293F9A0F00A44C5E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +319,15 @@
 				4C12B2492962F21300887469 /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		4C17D0B42964776B00132ACB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C17D0B32964776B00132ACB /* en */,
+				4C17D0B52964776E00132ACB /* ru */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

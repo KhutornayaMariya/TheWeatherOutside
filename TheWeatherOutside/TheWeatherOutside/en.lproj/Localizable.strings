@@ -6,11 +6,17 @@
   
 */
 
-NORTH = "N";
-SOUTH = "S";
-WEST = "W";
-EAST = "E";
-NORTHEAST = "NE";
-SOUTHEAST = "SE";
-NORTHWEST = "NW";
-SOUTHWEST = "SW";
+"NORTH" = "N";
+"SOUTH" = "S";
+"WEST" = "W";
+"EAST" = "E";
+"NORTHEAST" = "NE";
+"SOUTHEAST" = "SE";
+"NORTHWEST" = "NW";
+"SOUTHWEST" = "SW";
+
+// Onboarding screen
+"USE_LOCATION" = "USE DEVICE LOCATION";
+"DENY_USING_LOCATION" = "I WILL ADD LOCATIONS";
+"LOCATION_ASK_DESC" = "Allow the WeatherWise app to use your device's location data";
+"LOCATION_ASK_EXPLANATION" = "To get more accurate weather forecasts while driving or traveling\n\n You can change your choice at any time from the settings";

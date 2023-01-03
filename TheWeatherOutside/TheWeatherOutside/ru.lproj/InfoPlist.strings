@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  WeatherWise
+
+  Created by Mariya Khutornaya on 03.01.23.
+  
+*/
+
+"NSLocationWhenInUseUsageDescription" = "Это нужно, чтобы показывать ваш прогноз";
