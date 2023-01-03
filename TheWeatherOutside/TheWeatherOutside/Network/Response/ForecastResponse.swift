@@ -106,7 +106,7 @@ extension ForecastResponse.CurrentWeatherParams {
             case level = "1h"
         }
     }
-
+    
     enum CodingKeys: String, CodingKey {
         case date = "dt"
         case currentTemp = "temp"

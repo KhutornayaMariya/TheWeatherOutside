@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22C65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Current" representedClassName="Current" parentEntity="Hourly" syncable="YES" codeGenerationType="class">
+    <entity name="Current" representedClassName="Current" syncable="YES" codeGenerationType="class">
+        <attribute name="cloudCover" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="feelsLike" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="humidity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pressure" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rain" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="snow" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="sunrise" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="sunset" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="temperature" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="uvi" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weatherDesc" attributeType="String"/>
+        <attribute name="windDirection" attributeType="String"/>
+        <attribute name="windSpeed" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="metaInfo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MetaInfo" inverseName="current" inverseEntity="MetaInfo"/>
     </entity>
     <entity name="Daily" representedClassName="Daily" syncable="YES" codeGenerationType="class">
         <attribute name="cloudCover" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -30,6 +43,7 @@
         <attribute name="weatherDesc" attributeType="String"/>
         <attribute name="windDirection" attributeType="String"/>
         <attribute name="windSpeed" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="metaInfo" maxCount="1" deletionRule="Nullify" destinationEntity="MetaInfo" inverseName="daily" inverseEntity="MetaInfo"/>
     </entity>
     <entity name="Hourly" representedClassName="Hourly" syncable="YES" codeGenerationType="class">
         <attribute name="cloudCover" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -44,10 +58,14 @@
         <attribute name="weatherDesc" attributeType="String"/>
         <attribute name="windDirection" attributeType="String"/>
         <attribute name="windSpeed" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="metaInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MetaInfo" inverseName="hourly" inverseEntity="MetaInfo"/>
     </entity>
     <entity name="MetaInfo" representedClassName="MetaInfo" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timeZone" attributeType="String"/>
+        <relationship name="current" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Current" inverseName="metaInfo" inverseEntity="Current"/>
+        <relationship name="daily" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Daily" inverseName="metaInfo" inverseEntity="Daily"/>
+        <relationship name="hourly" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Hourly" inverseName="metaInfo" inverseEntity="Hourly"/>
     </entity>
 </model>

@@ -22,8 +22,6 @@ extension GeoCodeApiManager: GeoCodeApiManagerProtocol {
     func geoCodeRequest(for city: String) {
         AF.request(geocodeApiUrl, parameters: parameters(city)).responseDecodable(of: GeoCodeResponse.self) {response in
             debugPrint("Response: \(response)")
-            print(response.value?.latitude())
-            print(response.value?.longitude())
         }
     }
     
