@@ -23,7 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = window
         window.makeKeyAndVisible()
-        window.rootViewController = ViewController()
+        let mainCoordinator = MainCoordinator()
+        window.rootViewController = mainCoordinator.startApplication()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -59,4 +60,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
 }
-

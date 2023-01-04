@@ -14,6 +14,7 @@
         <attribute name="uvi" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weatherDesc" attributeType="String"/>
         <attribute name="windDirection" attributeType="String"/>
+        <attribute name="windGust" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="windSpeed" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="metaInfo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MetaInfo" inverseName="current" inverseEntity="MetaInfo"/>
     </entity>
@@ -42,6 +43,7 @@
         <attribute name="uvi" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weatherDesc" attributeType="String"/>
         <attribute name="windDirection" attributeType="String"/>
+        <attribute name="windGust" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="windSpeed" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="metaInfo" maxCount="1" deletionRule="Nullify" destinationEntity="MetaInfo" inverseName="daily" inverseEntity="MetaInfo"/>
     </entity>
@@ -57,6 +59,7 @@
         <attribute name="uvi" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weatherDesc" attributeType="String"/>
         <attribute name="windDirection" attributeType="String"/>
+        <attribute name="windGust" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="windSpeed" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="metaInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MetaInfo" inverseName="hourly" inverseEntity="MetaInfo"/>
     </entity>
