@@ -4,6 +4,7 @@
         <attribute name="cloudCover" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="feelsLike" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="feelsLikeImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="humidity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="pressure" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="rain" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -11,20 +12,27 @@
         <attribute name="sunrise" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="sunset" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="temperature" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="temperatureImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uvi" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weatherDesc" attributeType="String"/>
         <attribute name="windDirection" attributeType="String"/>
         <attribute name="windGust" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="windGustImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="windSpeed" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="windSpeedImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="metaInfo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MetaInfo" inverseName="current" inverseEntity="MetaInfo"/>
     </entity>
     <entity name="Daily" representedClassName="Daily" syncable="YES" codeGenerationType="class">
         <attribute name="cloudCover" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="feelsLikeDay" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="feelsLikeDayImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="feelsLikeEve" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="feelsLikeEveImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="feelsLikeMorn" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="feelsLikeMornImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="feelsLikeNight" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="feelsLikeNightImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="humidity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="moonPhase" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="moonrise" attributeType="Date" usesScalarValueType="NO"/>
@@ -35,36 +43,49 @@
         <attribute name="sunrise" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="sunset" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="tempDay" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tempDayImp" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tempEve" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tempEveImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tempMax" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tempMaxImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tempMin" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tempMinImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tempMorn" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tempMornImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tempNight" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tempNightImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uvi" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weatherDesc" attributeType="String"/>
         <attribute name="windDirection" attributeType="String"/>
         <attribute name="windGust" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="windGustImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="windSpeed" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="windSpeedImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="metaInfo" maxCount="1" deletionRule="Nullify" destinationEntity="MetaInfo" inverseName="daily" inverseEntity="MetaInfo"/>
     </entity>
     <entity name="Hourly" representedClassName="Hourly" syncable="YES" codeGenerationType="class">
         <attribute name="cloudCover" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="feelsLike" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="feelsLikeImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="humidity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="pressure" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="rain" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="snow" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="temperature" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="temperatureImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="uvi" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weatherDesc" attributeType="String"/>
         <attribute name="windDirection" attributeType="String"/>
         <attribute name="windGust" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="windGustImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="windSpeed" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="windSpeedImp" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="metaInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MetaInfo" inverseName="hourly" inverseEntity="MetaInfo"/>
     </entity>
     <entity name="MetaInfo" representedClassName="MetaInfo" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="locationTitle" attributeType="String"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timeZone" attributeType="String"/>
         <relationship name="current" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Current" inverseName="metaInfo" inverseEntity="Current"/>

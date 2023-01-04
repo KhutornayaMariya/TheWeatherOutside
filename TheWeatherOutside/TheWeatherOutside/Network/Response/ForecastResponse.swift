@@ -24,7 +24,7 @@ extension ForecastResponse {
         let feelsLike: Double
         let humidity: Int
         let windSpeed: Double
-        let windGust: Double
+        let windGust: Double?
         let windDirection: Double
         let uvi: Double
         let clouds: Int
@@ -42,7 +42,7 @@ extension ForecastResponse {
         let dailyFeelsLikeTemp: DailyFeelsLikeTemp
         let humidity: Int
         let windSpeed: Double
-        let windGust: Double
+        let windGust: Double?
         let windDirection: Double
         let uvi: Double
         let clouds: Int

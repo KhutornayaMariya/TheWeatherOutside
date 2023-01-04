@@ -54,19 +54,24 @@ final class ViewController: UIViewController {
         alertController.addTextField { textField in
             textField.placeholder = "Введите название"
         }
-
+        
         let saveImageAction = UIAlertAction(title: "Сохранить", style: .default) { [weak self] action in
-            //Запрос на бекенд, обновление данных
-            guard self != nil
+            guard let self = self,
+                  let text = alertController.textFields?[0].text,
+                  text != ""
             else { return }
-//            guard let self = self,
-//                  let imageName = alertController.textFields?[0].text,
-//                  !imageName.isEmpty,
-//                  let data = image.pngData()
-//            else { return }
-//
-//            self.fileManagerService.addFile(url: self.url, name: imageName, data: data)
-//            self.tableView.reloadData()
+            
+            GeoCodeApiManager().geoCodeRequest(for: text) { response in
+                guard let coordinates = response.value,
+                      let lat = coordinates.latitude(),
+                      let lon = coordinates.longitude(),
+                      let title = coordinates.name()
+                else { return }
+//                проверить есть ли такая локация уже
+//                если нет запрос
+                // если есть -> открывать страницу с этой локацией
+                ForecastRepository().fetchDataForLocation(lat: lat, lon: lon, title: title)
+            }
         }
         
         let cancel = UIAlertAction(title: "Отменить", style: .cancel)

@@ -44,9 +44,11 @@ extension GeoCodeResponse.Response.GeoObjectCollection {
 extension GeoCodeResponse.Response.GeoObjectCollection.FeatureMember {
     struct GeoObject: Decodable {
         let point: Point
+        let name: String
         
         enum CodingKeys: String, CodingKey {
             case point = "Point"
+            case name
         }
     }
 }
@@ -74,11 +76,18 @@ extension GeoCodeResponse.Response.GeoObjectCollection.FeatureMember.GeoObject {
 
 extension GeoCodeResponse {
     
-    public func longitude() -> String {
-        response.object.member.first?.geoObject.point.lon ?? ""
+    public func longitude() -> Double? {
+        guard let member = response.object.member.first else { return nil }
+        return Double(member.geoObject.point.lon)
     }
     
-    public func latitude() -> String {
-        response.object.member.first?.geoObject.point.lat ?? ""
+    public func latitude() -> Double? {
+        guard let member = response.object.member.first else { return nil }
+        return Double(member.geoObject.point.lat)
+    }
+    
+    public func name() -> String? {
+        guard let member = response.object.member.first else { return nil }
+        return member.geoObject.name
     }
 }
