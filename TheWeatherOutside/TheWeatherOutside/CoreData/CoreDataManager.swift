@@ -84,6 +84,7 @@ extension CoreDataManager {
         newForecast.date = Date(timeIntervalSince1970: forecast.date)
         newForecast.weatherDesc = forecast.weather[0].description
         newForecast.windSpeed = Int16(forecast.windSpeed)
+        newForecast.windGust = Int16(forecast.windGust.rounded(.toNearestOrEven))
         newForecast.windDirection = WindDirectionManager().windDirection(from: forecast.windDirection)
         newForecast.rain = forecast.rain?.level ?? 0
         newForecast.snow = forecast.snow?.level ?? 0
@@ -107,6 +108,7 @@ extension CoreDataManager {
         newForecast.date = Date(timeIntervalSince1970: forecast.date)
         newForecast.weatherDesc = forecast.weather[0].description
         newForecast.windSpeed = Int16(forecast.windSpeed)
+        newForecast.windGust = Int16(forecast.windGust.rounded(.toNearestOrEven))
         newForecast.windDirection = WindDirectionManager().windDirection(from: forecast.windDirection)
         newForecast.rain = forecast.rain?.level ?? 0
         newForecast.snow = forecast.snow?.level ?? 0
@@ -127,7 +129,8 @@ extension CoreDataManager {
         
         newForecast.date = Date(timeIntervalSince1970: forecast.date)
         newForecast.weatherDesc = forecast.weather[0].description
-        newForecast.windSpeed = Int16(forecast.windSpeed)
+        newForecast.windSpeed = Int16(forecast.windSpeed.rounded(.toNearestOrEven))
+        newForecast.windGust = Int16(forecast.windGust.rounded(.toNearestOrEven))
         newForecast.windDirection = WindDirectionManager().windDirection(from: forecast.windDirection)
         newForecast.rain = forecast.rain ?? 0
         newForecast.snow = forecast.snow ?? 0

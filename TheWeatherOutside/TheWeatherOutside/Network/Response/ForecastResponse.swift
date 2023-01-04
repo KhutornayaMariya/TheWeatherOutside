@@ -24,6 +24,7 @@ extension ForecastResponse {
         let feelsLike: Double
         let humidity: Int
         let windSpeed: Double
+        let windGust: Double
         let windDirection: Double
         let uvi: Double
         let clouds: Int
@@ -41,6 +42,7 @@ extension ForecastResponse {
         let dailyFeelsLikeTemp: DailyFeelsLikeTemp
         let humidity: Int
         let windSpeed: Double
+        let windGust: Double
         let windDirection: Double
         let uvi: Double
         let clouds: Int
@@ -84,6 +86,7 @@ extension ForecastResponse.DailyWeatherParams {
         case humidity
         case windSpeed = "wind_speed"
         case windDirection = "wind_deg"
+        case windGust = "wind_gust"
         case uvi
         case clouds
         case rain
@@ -113,6 +116,7 @@ extension ForecastResponse.CurrentWeatherParams {
         case feelsLike = "feels_like"
         case humidity
         case windSpeed = "wind_speed"
+        case windGust = "wind_gust"
         case windDirection = "wind_deg"
         case uvi
         case clouds

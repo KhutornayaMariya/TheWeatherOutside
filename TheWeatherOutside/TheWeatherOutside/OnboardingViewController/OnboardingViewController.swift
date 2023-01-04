@@ -37,6 +37,8 @@ class OnboardingViewController: UIViewController {
     }
     
     private func setUp() {
+        navigationController?.navigationBar.isHidden = true
+        locationManager.delegate = self
         view.addSubview(onboardingView)
         
         NSLayoutConstraint.activate([
@@ -49,11 +51,68 @@ class OnboardingViewController: UIViewController {
     
     @objc
     func openMainViewController() {
+        UserDefaults.standard.set(true, forKey: "locationDenied")
         self.navigationController?.pushViewController(ViewController(), animated: true)
     }
     
     @objc
     func requestLocation() {
-        locationManager.requestWhenInUseAuthorization()
+        if locationManager.authorizationStatus == .denied {
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl)
+            }
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+}
+
+extension OnboardingViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            print("notDetermined")
+            break
+
+        case .restricted:
+            print("restricted")
+            break
+
+        case .denied:
+            print("deined")
+
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("authorized")
+            manager.requestLocation()
+            self.navigationController?.pushViewController(ViewController(), animated: true)
+        @unknown default:
+            fatalError()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
+        let coordinates = location.coordinate
+        DispatchQueue.main.async {
+            ForecastApiManager().forecastRequest(lat: coordinates.latitude, lon: coordinates.longitude, units: .metric)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        guard let error = error as? CLError else { return }
+        switch error.code {
+        case .denied:
+            print("denied")
+        case .locationUnknown:
+            print("locationUnknown")
+        case .headingFailure:
+            print("headingFailure")
+        default:
+            print("default error")
+        }
     }
 }
