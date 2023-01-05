@@ -10,18 +10,15 @@ import CoreData
 
 final class CoreDataManager {
     
+    private let unitsManager: UnitsManagerProtocol
+    
     static let defaultManager = CoreDataManager()
     
     var metaInfo: [MetaInfo] = []
-    var current: [Current] = []
-    var daily: [Daily] = []
-    var hourly: [Hourly] = []
     
     init() {
+        unitsManager = UnitsManager()
         reloadMetaInfo()
-        reloadDailyForecast()
-        reloadHourlyForecast()
-        reloadCurrentForecast()
     }
     
     private lazy var backgroundContext: NSManagedObjectContext = {
@@ -60,31 +57,13 @@ final class CoreDataManager {
         metaInfo = (try? self.persistentContainer.viewContext.fetch(request)) ?? []
     }
     
-    private func reloadCurrentForecast() {
-        let request = Current.fetchRequest()
-        current = (try? self.persistentContainer.viewContext.fetch(request)) ?? []
-    }
-    
-    private func reloadHourlyForecast() {
-        let request = Hourly.fetchRequest()
-        hourly = (try? self.persistentContainer.viewContext.fetch(request)) ?? []
-    }
-    
-    private func reloadDailyForecast() {
-        let request = Daily.fetchRequest()
-        daily = (try? self.persistentContainer.viewContext.fetch(request)) ?? []
-    }
-}
-
-extension CoreDataManager {
-    
-    func addCurrent(_ forecast: ForecastResponse.CurrentWeatherParams, for metaInfo: MetaInfo) {
+    private func currentForecast(_ forecast: ForecastResponse.CurrentWeatherParams) -> Current {
         let newForecast = Current(context: persistentContainer.viewContext)
         
         newForecast.date = Date(timeIntervalSince1970: forecast.date)
         newForecast.weatherDesc = forecast.weather[0].description
-        newForecast.windSpeed = Int16(forecast.windSpeed)
-        newForecast.windGust = Int16(forecast.windGust.rounded(.toNearestOrEven))
+        newForecast.windSpeed = Int16(forecast.windSpeed.rounded(.toNearestOrEven))
+        newForecast.windGust = Int16(forecast.windGust?.rounded(.toNearestOrEven) ?? 0)
         newForecast.windDirection = WindDirectionManager().windDirection(from: forecast.windDirection)
         newForecast.rain = forecast.rain?.level ?? 0
         newForecast.snow = forecast.snow?.level ?? 0
@@ -96,19 +75,21 @@ extension CoreDataManager {
         newForecast.uvi = Int16(forecast.uvi)
         newForecast.sunrise = Date(timeIntervalSince1970: forecast.sunrise!)
         newForecast.sunset = Date(timeIntervalSince1970: forecast.sunset!)
-        newForecast.metaInfo = metaInfo
+        newForecast.temperatureImp = unitsManager.convertTempToImperial(forecast.currentTemp)
+        newForecast.feelsLikeImp = unitsManager.convertTempToImperial(forecast.feelsLike)
+        newForecast.windSpeed = unitsManager.convertSpeedToImperial(forecast.windSpeed)
+        newForecast.windGust = unitsManager.convertSpeedToImperial(forecast.windGust ?? 0)
         
-        current.append(newForecast)
-        self.saveContext()
+        return newForecast
     }
     
-    func addHourly(_ forecast: ForecastResponse.CurrentWeatherParams, for metaInfo: MetaInfo) {
+    private func hourlyForecast(_ forecast: ForecastResponse.CurrentWeatherParams) -> Hourly {
         let newForecast = Hourly(context: persistentContainer.viewContext)
         
         newForecast.date = Date(timeIntervalSince1970: forecast.date)
         newForecast.weatherDesc = forecast.weather[0].description
-        newForecast.windSpeed = Int16(forecast.windSpeed)
-        newForecast.windGust = Int16(forecast.windGust.rounded(.toNearestOrEven))
+        newForecast.windSpeed = Int16(forecast.windSpeed.rounded(.toNearestOrEven))
+        newForecast.windGust = Int16(forecast.windGust?.rounded(.toNearestOrEven) ?? 0)
         newForecast.windDirection = WindDirectionManager().windDirection(from: forecast.windDirection)
         newForecast.rain = forecast.rain?.level ?? 0
         newForecast.snow = forecast.snow?.level ?? 0
@@ -118,19 +99,21 @@ extension CoreDataManager {
         newForecast.pressure = Int16(forecast.pressure)
         newForecast.temperature = Int16(forecast.currentTemp.rounded(.toNearestOrEven))
         newForecast.uvi = Int16(forecast.uvi)
-        newForecast.metaInfo = metaInfo
+        newForecast.temperatureImp = unitsManager.convertTempToImperial(forecast.currentTemp)
+        newForecast.feelsLikeImp = unitsManager.convertTempToImperial(forecast.feelsLike)
+        newForecast.windSpeed = unitsManager.convertSpeedToImperial(forecast.windSpeed)
+        newForecast.windGust = unitsManager.convertSpeedToImperial(forecast.windGust ?? 0)
         
-        hourly.append(newForecast)
-        self.saveContext()
+        return newForecast
     }
     
-    func addDaily(_ forecast: ForecastResponse.DailyWeatherParams, for metaInfo: MetaInfo) {
+    private func dailyForecast(_ forecast: ForecastResponse.DailyWeatherParams) -> Daily {
         let newForecast = Daily(context: persistentContainer.viewContext)
         
         newForecast.date = Date(timeIntervalSince1970: forecast.date)
         newForecast.weatherDesc = forecast.weather[0].description
         newForecast.windSpeed = Int16(forecast.windSpeed.rounded(.toNearestOrEven))
-        newForecast.windGust = Int16(forecast.windGust.rounded(.toNearestOrEven))
+        newForecast.windGust = Int16(forecast.windGust?.rounded(.toNearestOrEven) ?? 0)
         newForecast.windDirection = WindDirectionManager().windDirection(from: forecast.windDirection)
         newForecast.rain = forecast.rain ?? 0
         newForecast.snow = forecast.snow ?? 0
@@ -153,18 +136,50 @@ extension CoreDataManager {
         newForecast.moonrise = Date(timeIntervalSince1970: forecast.moonrise)
         newForecast.moonset = Date(timeIntervalSince1970: forecast.moonset)
         newForecast.moonPhase = forecast.moonPhase
-        newForecast.metaInfo = metaInfo
+        newForecast.feelsLikeDayImp = unitsManager.convertTempToImperial(forecast.dailyFeelsLikeTemp.day)
+        newForecast.feelsLikeMornImp = unitsManager.convertTempToImperial(forecast.dailyFeelsLikeTemp.morn)
+        newForecast.feelsLikeEveImp = unitsManager.convertTempToImperial(forecast.dailyFeelsLikeTemp.eve)
+        newForecast.feelsLikeNightImp = unitsManager.convertTempToImperial(forecast.dailyFeelsLikeTemp.night)
+        newForecast.tempDayImp = unitsManager.convertTempToImperial(forecast.dailyTemp.day)
+        newForecast.tempEveImp = unitsManager.convertTempToImperial(forecast.dailyTemp.eve)
+        newForecast.tempMornImp = unitsManager.convertTempToImperial(forecast.dailyTemp.morn)
+        newForecast.tempMinImp = unitsManager.convertTempToImperial(forecast.dailyTemp.min)
+        newForecast.tempNightImp = unitsManager.convertTempToImperial(forecast.dailyTemp.night)
+        newForecast.tempMaxImp = unitsManager.convertTempToImperial(forecast.dailyTemp.max)
+        newForecast.windSpeed = unitsManager.convertSpeedToImperial(forecast.windSpeed)
+        newForecast.windGust = unitsManager.convertSpeedToImperial(forecast.windGust ?? 0)
         
-        daily.append(newForecast)
-        self.saveContext()
+        return newForecast
+    }
+}
+
+extension CoreDataManager {
+    
+    func doesAlreadyExistMetaInfo(with title: String) -> Bool {
+        metaInfo.contains(where: { $0.locationTitle == title })
     }
     
-    func addMetaInfo(_ timeZone: String, _ lat: Double, _ lon: Double) {
+    func addMetaInfo(forecast: ForecastResponse, locationTitle: String) {
+        guard !doesAlreadyExistMetaInfo(with: locationTitle) else { return }
+        
         let newMetaInfo = MetaInfo(context: persistentContainer.viewContext)
         
-        newMetaInfo.timeZone = timeZone
-        newMetaInfo.latitude = lat
-        newMetaInfo.longitude = lon
+        newMetaInfo.locationTitle = locationTitle
+        newMetaInfo.timeZone = forecast.timezone
+        newMetaInfo.latitude = forecast.lat
+        newMetaInfo.longitude = forecast.lon
+        newMetaInfo.current = currentForecast(forecast.current)
+        var hourlyArray: [Hourly] = []
+        for forecast in forecast.hourly {
+            hourlyArray.append(hourlyForecast(forecast))
+        }
+        newMetaInfo.hourly = NSSet(array: hourlyArray)
+        
+        var dailyArray: [Daily] = []
+        for forecast in forecast.daily {
+            dailyArray.append(dailyForecast(forecast))
+        }
+        newMetaInfo.daily = NSSet(array: dailyArray)
         
         metaInfo.append(newMetaInfo)
         self.saveContext()

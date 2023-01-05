@@ -7,7 +7,11 @@
 
 import Foundation
 
-final class WindDirectionManager {
+protocol WindDirectionManagerProtocol {
+    func windDirection(from degrees : Double) -> String
+}
+
+final class WindDirectionManager: WindDirectionManagerProtocol {
     private let directions = ["NORTH".localized,
                               "NORTHEAST".localized,
                               "EAST".localized,

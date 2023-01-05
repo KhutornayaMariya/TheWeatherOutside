@@ -97,9 +97,6 @@ extension OnboardingViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else { return }
         let coordinates = location.coordinate
-        DispatchQueue.main.async {
-            ForecastApiManager().forecastRequest(lat: coordinates.latitude, lon: coordinates.longitude, units: .metric)
-        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
