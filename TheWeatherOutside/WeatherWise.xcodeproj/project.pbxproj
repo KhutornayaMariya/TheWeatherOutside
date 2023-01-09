@@ -34,6 +34,8 @@
 		4C244FE52965F40A0094CB67 /* Decryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C244FE42965F40A0094CB67 /* Decryptor.swift */; };
 		4C3EA10129685D0B003F5BC1 /* CurrentForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA10029685D0B003F5BC1 /* CurrentForecastView.swift */; };
 		4C3EA103296863C9003F5BC1 /* ForecastBriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA102296863C9003F5BC1 /* ForecastBriefView.swift */; };
+		4C3EA105296C113F003F5BC1 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA104296C113F003F5BC1 /* UserDefaultsKeys.swift */; };
+		4C3EA108296C12F9003F5BC1 /* CurrentForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA107296C12F9003F5BC1 /* CurrentForecastModel.swift */; };
 		4CF2AD7E295F375A003DC0F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4CF2AD7D295F375A003DC0F3 /* Alamofire */; };
 		4CF2AD80295F38FE003DC0F3 /* ForecastApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2AD7F295F38FE003DC0F3 /* ForecastApiManager.swift */; };
 		4CF2AD82295F3BCC003DC0F3 /* ForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2AD81295F3BCC003DC0F3 /* ForecastResponse.swift */; };
@@ -77,6 +79,8 @@
 		4C244FE42965F40A0094CB67 /* Decryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decryptor.swift; sourceTree = "<group>"; };
 		4C3EA10029685D0B003F5BC1 /* CurrentForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentForecastView.swift; sourceTree = "<group>"; };
 		4C3EA102296863C9003F5BC1 /* ForecastBriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastBriefView.swift; sourceTree = "<group>"; };
+		4C3EA104296C113F003F5BC1 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		4C3EA107296C12F9003F5BC1 /* CurrentForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentForecastModel.swift; sourceTree = "<group>"; };
 		4CF2AD7F295F38FE003DC0F3 /* ForecastApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastApiManager.swift; sourceTree = "<group>"; };
 		4CF2AD81295F3BCC003DC0F3 /* ForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastResponse.swift; sourceTree = "<group>"; };
 		4CF2AD83295F58FD003DC0F3 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
@@ -196,10 +200,19 @@
 		4C3EA0FF29685CDB003F5BC1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4C3EA10029685D0B003F5BC1 /* CurrentForecastView.swift */,
+				4C3EA106296C12D9003F5BC1 /* CurrentForecastView */,
 				4C3EA102296863C9003F5BC1 /* ForecastBriefView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4C3EA106296C12D9003F5BC1 /* CurrentForecastView */ = {
+			isa = PBXGroup;
+			children = (
+				4C3EA10029685D0B003F5BC1 /* CurrentForecastView.swift */,
+				4C3EA107296C12F9003F5BC1 /* CurrentForecastModel.swift */,
+			);
+			path = CurrentForecastView;
 			sourceTree = "<group>";
 		};
 		4CF2AD7B295F2F7D003DC0F3 /* Network */ = {
@@ -238,6 +251,7 @@
 				4C12B24A2962F37700887469 /* String+Extension.swift */,
 				4C244FE22965CE490094CB67 /* UnitsManager.swift */,
 				4C244FE42965F40A0094CB67 /* Decryptor.swift */,
+				4C3EA104296C113F003F5BC1 /* UserDefaultsKeys.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -328,6 +342,7 @@
 				4CF2AD84295F58FD003DC0F3 /* DateManager.swift in Sources */,
 				4C17D0C32965BB5800132ACB /* ForecastRepository.swift in Sources */,
 				4C17D0A02964568D00132ACB /* OnboardingView.swift in Sources */,
+				4C3EA105296C113F003F5BC1 /* UserDefaultsKeys.swift in Sources */,
 				4C1FA1DB29673212000A53F4 /* EmptyView.swift in Sources */,
 				4C17D0A32964586300132ACB /* Button.swift in Sources */,
 				4C17D0A529645BC100132ACB /* Color.swift in Sources */,
@@ -343,6 +358,7 @@
 				4C244FE52965F40A0094CB67 /* Decryptor.swift in Sources */,
 				4C3EA103296863C9003F5BC1 /* ForecastBriefView.swift in Sources */,
 				4CF2AD82295F3BCC003DC0F3 /* ForecastResponse.swift in Sources */,
+				4C3EA108296C12F9003F5BC1 /* CurrentForecastModel.swift in Sources */,
 				4C17D09B296434F000132ACB /* MainCoordinator.swift in Sources */,
 				4C1FA1DD29673753000A53F4 /* EmptyViewController.swift in Sources */,
 				4C17D09D2964439200132ACB /* OnboardingViewController.swift in Sources */,

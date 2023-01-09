@@ -51,7 +51,7 @@ class OnboardingViewController: UIViewController {
     
     @objc
     func openMainViewController() {
-        UserDefaults.standard.set(true, forKey: "locationDenied")
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.locationDenied.rawValue)
         self.navigationController?.pushViewController(ViewController(), animated: true)
     }
     

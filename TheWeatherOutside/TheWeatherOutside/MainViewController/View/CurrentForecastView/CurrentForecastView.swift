@@ -195,31 +195,25 @@ final class CurrentForecastView: UIView {
         ])
     }
     
-    private func forecastBriefView(wind: Int16, cloud: Int16, precipitation: Double) -> [ForecastBriefView] {
-        let windView = ForecastBriefView(text: String(wind), imageName: "wind")
-        let cloudView = ForecastBriefView(text: "\(String(cloud)) %", imageName: "cloudy")
-        let precipitationView = ForecastBriefView(text: "\(String(precipitation)) \("PRECIPITATION".localized)", imageName: "humidity")
-                
+    private func forecastBriefView(wind: String, cloud: String, precipitation: String) -> [ForecastBriefView] {
+        let windView = ForecastBriefView(text: wind, imageName: "wind")
+        let cloudView = ForecastBriefView(text: "\(cloud) %", imageName: "cloudy")
+        let precipitationView = ForecastBriefView(text: "\(precipitation) \("PRECIPITATION".localized)", imageName: "humidity")
+        
         return [cloudView, windView, precipitationView]
     }
 }
 
 extension CurrentForecastView {
-    func setUpView(with forecast: Current, timeZone: String) {
-        feelsLikeTemp.text = "\("FEELS_LIKE".localized) \(String(forecast.temperature))°"
-        currentTemp.text = "\(String(forecast.temperature))°"
-        summary.text = forecast.weatherDesc?.lowercased()
-        if let date = forecast.date {
-            self.date.text = dateManager.convert(date, to: timeZone, with: "dd MMMM")
-        }
-        if let sunrise = forecast.sunrise {
-            self.sunrise.text = dateManager.convert(sunrise, to: timeZone, with: "HH:MM")
-        }
-        if let sunset = forecast.sunset {
-            self.sunset.text = dateManager.convert(sunset, to: timeZone, with: "HH:MM")
-        }
+    func configue(with model: CurrentForecastModel) {
+        feelsLikeTemp.text = "\("FEELS_LIKE".localized) \(model.feelsLikeTemp)°"
+        currentTemp.text = "\(model.currentTemp)°"
+        summary.text = model.description.lowercased()
+        date.text = model.date
+        sunrise.text = model.sunriseTime
+        sunset.text = model.sunsetTime
         
-        let stackSubviews = forecastBriefView(wind: forecast.windSpeed, cloud: forecast.cloudCover, precipitation: forecast.rain)
+        let stackSubviews = forecastBriefView(wind: model.windSpeed, cloud: model.cloudCover, precipitation: model.precipitation)
         stackSubviews.forEach { briefStackView.addArrangedSubview($0) }
     }
 }
