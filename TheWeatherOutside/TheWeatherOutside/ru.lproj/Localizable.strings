@@ -31,3 +31,7 @@
 "ALERT_PLACEHOLDER" = "Название города";
 "DONE" = "Добавить";
 "CANCEL" = "Отменить";
+
+// Current forecast
+"FEELS_LIKE" = "Ощущается как";
+"PRECIPITATION" = "мм";

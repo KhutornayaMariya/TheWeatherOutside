@@ -30,3 +30,7 @@
 "ALERT_PLACEHOLDER" = "City name";
 "DONE" = "Add";
 "CANCEL" = "Cancel";
+
+// Current forecast
+"FEELS_LIKE" = "Feels like";
+"PRECIPITATION" = "mm";
