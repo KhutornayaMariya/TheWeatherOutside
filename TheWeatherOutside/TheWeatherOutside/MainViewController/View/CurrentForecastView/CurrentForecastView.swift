@@ -216,6 +216,18 @@ extension CurrentForecastView {
         let stackSubviews = forecastBriefView(wind: model.windSpeed, cloud: model.cloudCover, precipitation: model.precipitation)
         stackSubviews.forEach { briefStackView.addArrangedSubview($0) }
     }
+    
+    func setUpView() {
+        feelsLikeTemp.text = "\("FEELS_LIKE".localized) 10°"
+        currentTemp.text = "13°"
+        summary.text = "forecast.weatherDesc"
+        date.text = "6 January"
+        sunrise.text = "06:59"
+        sunset.text = "16:59"
+        
+        let stackSubviews = forecastBriefView(wind: "115", cloud: "20", precipitation: "5")
+        stackSubviews.forEach { briefStackView.addArrangedSubview($0) }
+    }
 }
 
 private extension CGFloat {

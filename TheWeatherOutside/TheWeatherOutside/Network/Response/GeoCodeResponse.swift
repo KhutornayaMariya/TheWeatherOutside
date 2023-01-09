@@ -5,7 +5,7 @@
 //  Created by Mariya Khutornaya on 30.12.22.
 //
 
-import Foundation
+import CoreLocation
 
 struct GeoCodeResponse: Decodable {
     let response: Response
@@ -76,14 +76,12 @@ extension GeoCodeResponse.Response.GeoObjectCollection.FeatureMember.GeoObject {
 
 extension GeoCodeResponse {
     
-    public func longitude() -> Double? {
-        guard let member = response.object.member.first else { return nil }
-        return Double(member.geoObject.point.lon)
-    }
-    
-    public func latitude() -> Double? {
-        guard let member = response.object.member.first else { return nil }
-        return Double(member.geoObject.point.lat)
+    public func coordinates() -> CLLocationCoordinate2D? {
+        guard let member = response.object.member.first,
+              let lat = CLLocationDegrees(member.geoObject.point.lat),
+              let lon = CLLocationDegrees(member.geoObject.point.lon)
+        else { return nil }
+        return CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
     
     public func name() -> String? {

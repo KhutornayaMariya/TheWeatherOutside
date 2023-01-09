@@ -48,8 +48,8 @@ final class EmptyView: UIView {
         subviews.forEach { addSubview($0) }
 
         NSLayoutConstraint.activate([
-            image.widthAnchor.constraint(equalToConstant: 180),
-            image.heightAnchor.constraint(equalToConstant: 196),
+            image.widthAnchor.constraint(equalToConstant: .imageWidth),
+            image.heightAnchor.constraint(equalToConstant: .imageHigh),
             image.centerYAnchor.constraint(equalTo: centerYAnchor),
             image.centerXAnchor.constraint(equalTo: centerXAnchor),
             

@@ -9,41 +9,22 @@ import UIKit
 
 final class ViewController: UIViewController {
     
-    //    private let pageController: UIPageViewController = {
-    //        let pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-    ////        pageController.dataSource = self
-    //        pageController.delegate = self
-    //        pageController.view.backgroundColor = .clear
-    //        pageController.didMove(toParent: self)
-    //
-    //        return pageController
-    //    }()
-    
     private var pageController: UIPageViewController?
     private var currentIndex: Int = 0
     
-    private func setupPageController() {
-        pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        pageController?.dataSource = self
-        self.pageController?.delegate = self
-        self.pageController?.view.backgroundColor = .clear
-        self.pageController?.view.frame = CGRect(x: 0,y: 0,width: self.view.frame.width,height: self.view.frame.height)
-        
-        addChild(pageController!)
-        view.addSubview(pageController!.view)
-        self.pageController?.setViewControllers([EmptyViewController()], direction: .forward, animated: true, completion: nil)
-        self.pageController?.didMove(toParent: self)
-    }
+    private let repository = ForecastRepository()
+    private let dataManager: CoreDataManager = CoreDataManager.defaultManager
+    
+    private var data: [MetaInfo]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
+        repository.fetchData {
+            self.data = self.dataManager.metaInfo
+        }
         setUpNavigationBar()
         setupPageController()
-        //        ForecastApiManager().forecastRequest(lat: 50.119469, lon: 8.599217, units: .metric)
-        //        ForecastApiManager().forecastRequest(lat: 43.271008, lon: 5.372398, units: .metric)
-        //        ForecastApiManager().forecastRequest(lat: 55.755864, lon: 37.617698, units: .metric)
-        //        GeoCodeApiManager().geoCodeRequest(for: "Москва")43.271008, 5.372398
     }
     
     private func setUpNavigationBar() {
@@ -70,13 +51,26 @@ final class ViewController: UIViewController {
         navigationItem.leftBarButtonItem = menuButtonItem
     }
     
+    private func setupPageController() {
+        pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        pageController?.dataSource = self
+        pageController?.delegate = self
+        pageController?.view.backgroundColor = .clear
+        pageController?.view.frame = CGRect(x: 0,y: 0,width: self.view.frame.width,height: self.view.frame.height)
+        
+        addChild(pageController!)
+        view.addSubview(pageController!.view)
+        pageController?.setViewControllers([EmptyViewController()], direction: .forward, animated: true, completion: nil)
+        pageController?.didMove(toParent: self)
+    }
+    
     @objc
-    func openAppSettings() {
+    private func openAppSettings() {
         self.navigationController?.pushViewController(SettingsViewController(), animated: true)
     }
     
     @objc
-    func addLocation() {
+    private func addLocation() {
         let alertController = UIAlertController(title: "ALERT_TITLE".localized, message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.placeholder = "ALERT_PLACEHOLDER".localized
@@ -86,18 +80,13 @@ final class ViewController: UIViewController {
             guard let text = alertController.textFields?[0].text,
                   text != ""
             else { return }
-            
-            GeoCodeApiManager().geoCodeRequest(for: text) { response in
-                guard let coordinates = response.value,
-                      let lat = coordinates.latitude(),
-                      let lon = coordinates.longitude(),
-                      let title = coordinates.name()
-                else { return }
-                //                проверить есть ли такая локация уже
-                //                если нет запрос
-                // если есть -> открывать страницу с этой локацией
-                ForecastRepository().fetchDataForLocation(lat: lat, lon: lon, title: title)
-            }
+                ForecastRepository().fetchDataForLocation(title: text) { result in
+                    if !result {
+                        print("error error error")
+                    } else {
+                        print(self.dataManager.metaInfo)
+                    }
+                }
         }
         
         let cancel = UIAlertAction(title: "CANCEL".localized, style: .cancel)

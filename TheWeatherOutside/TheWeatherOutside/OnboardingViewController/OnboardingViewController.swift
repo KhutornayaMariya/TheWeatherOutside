@@ -77,14 +77,12 @@ extension OnboardingViewController: CLLocationManagerDelegate {
         case .notDetermined:
             print("notDetermined")
             break
-
         case .restricted:
             print("restricted")
             break
-
         case .denied:
             print("deined")
-
+            break
         case .authorizedAlways, .authorizedWhenInUse:
             print("authorized")
             manager.requestLocation()
@@ -92,11 +90,6 @@ extension OnboardingViewController: CLLocationManagerDelegate {
         @unknown default:
             fatalError()
         }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else { return }
-        let coordinates = location.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
