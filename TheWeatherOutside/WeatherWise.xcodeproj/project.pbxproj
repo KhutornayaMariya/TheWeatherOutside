@@ -37,7 +37,6 @@
 		4C3EA105296C113F003F5BC1 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA104296C113F003F5BC1 /* UserDefaultsKeys.swift */; };
 		4C3EA108296C12F9003F5BC1 /* CurrentForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA107296C12F9003F5BC1 /* CurrentForecastModel.swift */; };
 		4C3EA10A296C5FCC003F5BC1 /* MainForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA109296C5FCC003F5BC1 /* MainForecastViewController.swift */; };
-		4C3EA10C296DAC66003F5BC1 /* MainForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA10B296DAC66003F5BC1 /* MainForecastModel.swift */; };
 		4CF2AD7E295F375A003DC0F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4CF2AD7D295F375A003DC0F3 /* Alamofire */; };
 		4CF2AD80295F38FE003DC0F3 /* ForecastApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2AD7F295F38FE003DC0F3 /* ForecastApiManager.swift */; };
 		4CF2AD82295F3BCC003DC0F3 /* ForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2AD81295F3BCC003DC0F3 /* ForecastResponse.swift */; };
@@ -84,7 +83,6 @@
 		4C3EA104296C113F003F5BC1 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		4C3EA107296C12F9003F5BC1 /* CurrentForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentForecastModel.swift; sourceTree = "<group>"; };
 		4C3EA109296C5FCC003F5BC1 /* MainForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainForecastViewController.swift; sourceTree = "<group>"; };
-		4C3EA10B296DAC66003F5BC1 /* MainForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainForecastModel.swift; sourceTree = "<group>"; };
 		4CF2AD7F295F38FE003DC0F3 /* ForecastApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastApiManager.swift; sourceTree = "<group>"; };
 		4CF2AD81295F3BCC003DC0F3 /* ForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastResponse.swift; sourceTree = "<group>"; };
 		4CF2AD83295F58FD003DC0F3 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
@@ -198,7 +196,6 @@
 				4C3EA0FF29685CDB003F5BC1 /* View */,
 				4C1FA1DA29673212000A53F4 /* EmptyView.swift */,
 				4C1FA1DC29673753000A53F4 /* EmptyViewController.swift */,
-				4C3EA10B296DAC66003F5BC1 /* MainForecastModel.swift */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -363,7 +360,6 @@
 				4C12B2422962EB7200887469 /* WindDirectionManager.swift in Sources */,
 				4515FA4B293F9A0F00A44C5E /* AppDelegate.swift in Sources */,
 				4C244FE52965F40A0094CB67 /* Decryptor.swift in Sources */,
-				4C3EA10C296DAC66003F5BC1 /* MainForecastModel.swift in Sources */,
 				4C3EA103296863C9003F5BC1 /* ForecastBriefView.swift in Sources */,
 				4CF2AD82295F3BCC003DC0F3 /* ForecastResponse.swift in Sources */,
 				4C3EA108296C12F9003F5BC1 /* CurrentForecastModel.swift in Sources */,
