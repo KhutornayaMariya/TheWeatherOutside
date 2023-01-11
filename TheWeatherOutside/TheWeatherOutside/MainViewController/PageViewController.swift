@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PageViewController.swift
 //  TheWeatherOutside
 //
 //  Created by m.khutornaya on 06.12.2022.
@@ -7,24 +7,38 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class PageViewController: UIViewController {
     
     private var pageController: UIPageViewController?
-    private var currentIndex: Int = 0
     
     private let repository = ForecastRepository()
-    private let dataManager: CoreDataManager = CoreDataManager.defaultManager
     
-    private var data: [MetaInfo]!
+    private var dataItems: [MetaInfo] {
+        CoreDataManager.defaultManager.metaInfo
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
-        repository.fetchData {
-            self.data = self.dataManager.metaInfo
-        }
         setUpNavigationBar()
         setupPageController()
+        fetchForecast()
+    }
+    
+    private func fetchForecast() {
+        repository.fetchData {
+            self.updateViewControllers()
+        }
+    }
+    
+    private func updateViewControllers() {
+        var viewControllers: [UIViewController]
+        if self.dataItems.isEmpty {
+            viewControllers = [EmptyViewController()]
+        } else {
+            viewControllers = [MainForecastViewController(dataItems: self.dataItems[0], index: 0)]
+        }
+        self.pageController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
     }
     
     private func setUpNavigationBar() {
@@ -53,15 +67,13 @@ final class ViewController: UIViewController {
     
     private func setupPageController() {
         pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        pageController?.dataSource = self
-        pageController?.delegate = self
-        pageController?.view.backgroundColor = .clear
-        pageController?.view.frame = CGRect(x: 0,y: 0,width: self.view.frame.width,height: self.view.frame.height)
-        
-        addChild(pageController!)
-        view.addSubview(pageController!.view)
-        pageController?.setViewControllers([EmptyViewController()], direction: .forward, animated: true, completion: nil)
-        pageController?.didMove(toParent: self)
+        guard let pageController = pageController else { return }
+        pageController.dataSource = self
+        pageController.view.backgroundColor = .clear
+        pageController.view.frame = CGRect(x: 0,y: 0,width: self.view.frame.width,height: self.view.frame.height)
+        addChild(pageController)
+        view.addSubview(pageController.view)
+        pageController.didMove(toParent: self)
     }
     
     @objc
@@ -80,13 +92,20 @@ final class ViewController: UIViewController {
             guard let text = alertController.textFields?[0].text,
                   text != ""
             else { return }
-                ForecastRepository().fetchDataForLocation(title: text) { result in
-                    if !result {
-                        print("error error error")
+            ForecastRepository().fetchDataForLocation(title: text) { result in
+                if !result {
+                    print("error error error")
+                } else {
+                    var viewControllers: [UIViewController]
+                    if self.dataItems.isEmpty {
+                        viewControllers = [EmptyViewController()]
                     } else {
-                        print(self.dataManager.metaInfo)
+                        let index = self.dataItems.endIndex - 1
+                        viewControllers = [MainForecastViewController(dataItems: self.dataItems[index], index: index)]
                     }
+                    self.pageController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
                 }
+            }
         }
         
         let cancel = UIAlertAction(title: "CANCEL".localized, style: .cancel)
@@ -97,25 +116,31 @@ final class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UIPageViewControllerDelegate {
+extension PageViewController: UIPageViewControllerDataSource {
+    
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        return UIViewController()
+        
+        guard let currentVC = viewController as? MainForecastViewController,
+              currentVC.index != 0
+        else { return nil }
+        
+        let index = currentVC.index - 1
+        return MainForecastViewController(dataItems: dataItems[index], index: index)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        return UIViewController()
+        
+        guard let currentVC = viewController as? MainForecastViewController,
+              currentVC.index < dataItems.count - 1
+        else { return nil }
+        
+        let index = currentVC.index + 1
+        return MainForecastViewController(dataItems: dataItems[index], index: index)
     }
-}
-
-extension ViewController: UIPageViewControllerDataSource {
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return 4
-    }
-    
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return currentIndex
+        return dataItems.count
     }
 }

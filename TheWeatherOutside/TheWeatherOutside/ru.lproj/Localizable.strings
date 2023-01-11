@@ -35,3 +35,5 @@
 // Current forecast
 "FEELS_LIKE" = "Ощущается как";
 "PRECIPITATION" = "мм";
+"SPEED_METRIC" = "м/с";
+"SPEED_IMP" = "миля/ч";

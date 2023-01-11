@@ -34,3 +34,5 @@
 // Current forecast
 "FEELS_LIKE" = "Feels like";
 "PRECIPITATION" = "mm";
+"SPEED_METRIC" = "m/s";
+"SPEED_IMP" = "mi/h";

@@ -26,7 +26,7 @@ extension MainCoordinator: MainCoordinatorProtocol {
             && UserDefaults.standard.bool(forKey: UserDefaultsKeys.locationDenied.rawValue) != true {
             return  UINavigationController(rootViewController: OnboardingViewController(locationManager: locationManager))
         } else {
-            return  UINavigationController(rootViewController: ViewController())
+            return  UINavigationController(rootViewController: PageViewController())
         }
     }
 }

@@ -66,17 +66,26 @@ final class ForecastRepository {
 extension ForecastRepository {
     
     func fetchData(completionHandler: @escaping () -> Void) {
-        if cachedData().isEmpty {
-            guard let userCoordinates = userLocation() else { return }
+        guard cachedData().isEmpty,
+              let userCoordinates = userLocation()
+        else {
+            completionHandler()
+            return
+        }
+        
+        fetchLocationTitle(by: userCoordinates) { result in
+            guard let locationTitle = result else {
+                completionHandler()
+                return
+            }
             
-            fetchLocationTitle(by: userCoordinates) { result in
-                guard let locationTitle = result else { return }
-                
-                self.forecastApiManager.forecastRequest(lat: userCoordinates.latitude, lon: userCoordinates.longitude) { response in
-                    guard let forecast = response else { return }
-                    self.saveData(forecast, for: locationTitle)
+            self.forecastApiManager.forecastRequest(lat: userCoordinates.latitude, lon: userCoordinates.longitude) { response in
+                guard let forecast = response else {
                     completionHandler()
+                    return
                 }
+                self.saveData(forecast, for: locationTitle)
+                completionHandler()
             }
         }
     }

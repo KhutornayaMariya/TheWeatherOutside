@@ -8,26 +8,10 @@
 import UIKit
 
 final class ForecastBriefView: UIView {
-    
-    private let imageName: String
-    private let text: String
-    
-    init(text: String, imageName: String) {
-        self.text = text
-        self.imageName = imageName
-        super.init(frame: .zero)
         
-        setUp()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private lazy var label: UILabel = {
         let view = UILabel()
         
-        view.text = text
         view.textColor = .white
         view.font = .rubikRegular(size: 14)
         view.numberOfLines = 0
@@ -39,12 +23,20 @@ final class ForecastBriefView: UIView {
     private lazy var image: UIImageView = {
         let view = UIImageView()
         
-        view.image = UIImage(named: imageName)
         view.contentMode = .scaleAspectFit
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private func setUp() {
         let subviews = [label, image]
@@ -61,5 +53,12 @@ final class ForecastBriefView: UIView {
             label.trailingAnchor.constraint(equalTo: trailingAnchor),
             label.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
+    }
+}
+
+extension ForecastBriefView {
+    func configure(text: String, imageName: String) {
+        label.text = text
+        image.image = UIImage(named: imageName)
     }
 }

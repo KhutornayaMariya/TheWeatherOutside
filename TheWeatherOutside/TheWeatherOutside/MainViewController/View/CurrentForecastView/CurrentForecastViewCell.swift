@@ -1,5 +1,5 @@
 //
-//  CurrentForecastView.swift
+//  CurrentForecastViewCell.swift
 //  WeatherWise
 //
 //  Created by Mariya Khutornaya on 06.01.23.
@@ -7,9 +7,15 @@
 
 import UIKit
 
-final class CurrentForecastView: UIView {
+final class CurrentForecastViewCell : UICollectionViewCell {
+    static let reuseIdentifier = "CurrentForecastViewCell"
+    
+    private var stackSubviews: [UIView]!
     
     private let dateManager: DateManagerProtocol = DateManager()
+    private let windView = ForecastBriefView()
+    private let cloudView = ForecastBriefView()
+    private let precipitationView = ForecastBriefView()
     
     private var screenWidth: CGFloat {
         UIScreen.main.bounds.width
@@ -159,6 +165,8 @@ final class CurrentForecastView: UIView {
                         date, sunrise, sunset, sunrisePic, sunsetPic]
         subviews.forEach { addSubview($0) }
         
+        [cloudView, windView, precipitationView].forEach { briefStackView.addArrangedSubview($0) }
+        
         NSLayoutConstraint.activate([
             heightAnchor.constraint(equalToConstant: viewHeightAnchor),
             
@@ -195,38 +203,43 @@ final class CurrentForecastView: UIView {
         ])
     }
     
-    private func forecastBriefView(wind: String, cloud: String, precipitation: String) -> [ForecastBriefView] {
-        let windView = ForecastBriefView(text: wind, imageName: "wind")
-        let cloudView = ForecastBriefView(text: "\(cloud) %", imageName: "cloudy")
-        let precipitationView = ForecastBriefView(text: "\(precipitation) \("PRECIPITATION".localized)", imageName: "humidity")
+    private func forecastBriefView(wind: String, cloud: String, precipitation: CurrentForecastModel.Precipitation) -> [ForecastBriefView] {
+        let windView = ForecastBriefView()
+        let cloudView = ForecastBriefView()
+        let precipitationView = ForecastBriefView()
+        
+
         
         return [cloudView, windView, precipitationView]
     }
+    
+    private func precipitationImage(for type: CurrentForecastModel.Precipitation.precipitationType) -> String {
+        switch type {
+        case .snow:
+            return "snow"
+        case .rain, .rainless:
+            return "humidity"
+        }
+    }
 }
 
-extension CurrentForecastView {
+extension CurrentForecastViewCell {
+    
+    func viewHeight() -> CGFloat {
+        viewHeightAnchor
+    }
+    
     func configue(with model: CurrentForecastModel) {
         feelsLikeTemp.text = "\("FEELS_LIKE".localized) \(model.feelsLikeTemp)°"
         currentTemp.text = "\(model.currentTemp)°"
-        summary.text = model.description.lowercased()
+        summary.text = model.description
         date.text = model.date
         sunrise.text = model.sunriseTime
         sunset.text = model.sunsetTime
         
-        let stackSubviews = forecastBriefView(wind: model.windSpeed, cloud: model.cloudCover, precipitation: model.precipitation)
-        stackSubviews.forEach { briefStackView.addArrangedSubview($0) }
-    }
-    
-    func setUpView() {
-        feelsLikeTemp.text = "\("FEELS_LIKE".localized) 10°"
-        currentTemp.text = "13°"
-        summary.text = "forecast.weatherDesc"
-        date.text = "6 January"
-        sunrise.text = "06:59"
-        sunset.text = "16:59"
-        
-        let stackSubviews = forecastBriefView(wind: "115", cloud: "20", precipitation: "5")
-        stackSubviews.forEach { briefStackView.addArrangedSubview($0) }
+        windView.configure(text: model.windSpeed, imageName: "wind")
+        cloudView.configure(text: "\(model.cloudCover) %", imageName: "cloudy")
+        precipitationView.configure(text: "\(model.precipitation.amount) \("PRECIPITATION".localized)", imageName: precipitationImage(for: model.precipitation.type))
     }
 }
 
