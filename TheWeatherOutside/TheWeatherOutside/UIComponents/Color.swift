@@ -10,8 +10,7 @@ import UIKit
 public extension UIColor {
     static let button: UIColor = UIColor(named: "button") ?? .systemOrange
     static let accent: UIColor = UIColor(named: "accent") ?? .systemBlue
-//    static let indigo: UIColor = UIColor(named: "indigo") ?? .systemIndigo
-//    static let lightGray: UIColor = UIColor(named: "light gray") ?? .systemGray
-//    static let orange: UIColor = UIColor(named: "orange") ?? .systemOrange
-//    static let purple: UIColor = UIColor(named: "purple") ?? .systemPurple
+    static let background: UIColor = UIColor(named: "background") ?? .systemFill
+    static let icon: UIColor = UIColor(named: "icon") ?? .systemGray5
+    static let calibry: UIColor = UIColor(named: "calibry") ?? .systemYellow
 }

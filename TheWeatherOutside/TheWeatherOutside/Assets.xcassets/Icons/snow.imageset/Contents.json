@@ -1,15 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "бургер.png",
+      "filename" : "52917-O7B70T.png",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }

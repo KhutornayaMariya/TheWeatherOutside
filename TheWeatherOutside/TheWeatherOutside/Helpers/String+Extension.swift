@@ -11,4 +11,10 @@ extension String {
     var localized: String  {
         NSLocalizedString(self, comment: "")
     }
+    
+    var capitalizedSentence: String {
+        let firstLetter = self.prefix(1).capitalized
+        let remainingLetters = self.dropFirst().lowercased()
+        return firstLetter + remainingLetters
+    }
 }

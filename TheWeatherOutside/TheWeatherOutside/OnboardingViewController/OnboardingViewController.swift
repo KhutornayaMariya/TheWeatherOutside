@@ -51,8 +51,8 @@ class OnboardingViewController: UIViewController {
     
     @objc
     func openMainViewController() {
-        UserDefaults.standard.set(true, forKey: "locationDenied")
-        self.navigationController?.pushViewController(ViewController(), animated: true)
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.locationDenied.rawValue)
+        self.navigationController?.pushViewController(PageViewController(), animated: true)
     }
     
     @objc
@@ -77,26 +77,23 @@ extension OnboardingViewController: CLLocationManagerDelegate {
         case .notDetermined:
             print("notDetermined")
             break
-
         case .restricted:
             print("restricted")
             break
-
         case .denied:
             print("deined")
-
+            break
         case .authorizedAlways, .authorizedWhenInUse:
             print("authorized")
             manager.requestLocation()
-            self.navigationController?.pushViewController(ViewController(), animated: true)
+            self.navigationController?.pushViewController(PageViewController(), animated: true)
         @unknown default:
             fatalError()
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else { return }
-        let coordinates = location.coordinate
+//        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

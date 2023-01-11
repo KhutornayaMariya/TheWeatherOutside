@@ -9,8 +9,8 @@ import Foundation
 import Alamofire
 
 protocol GeoCodeApiManagerProtocol {
-    func geoCodeRequest(for string: String , completionHandler: @escaping (AFDataResponse<GeoCodeResponse>) -> Void)
-    func geoCodeRequest(lat: Double, lon: Double, completionHandler: @escaping (AFDataResponse<GeoCodeResponse>) -> Void)
+    func geoCodeRequest(for string: String , completionHandler: @escaping (GeoCodeResponse?) -> Void)
+    func geoCodeRequest(lat: Double, lon: Double, completionHandler: @escaping (GeoCodeResponse?) -> Void)
 }
 
 final class GeoCodeApiManager {
@@ -30,13 +30,13 @@ final class GeoCodeApiManager {
 
 extension GeoCodeApiManager: GeoCodeApiManagerProtocol {
     
-    func geoCodeRequest(lat: Double, lon: Double, completionHandler: @escaping (AFDataResponse<GeoCodeResponse>) -> Void) {
-        geoCodeRequest(for: String(lat) + "," + String(lon), completionHandler: completionHandler)
+    func geoCodeRequest(lat: Double, lon: Double, completionHandler: @escaping (GeoCodeResponse?) -> Void) {
+        geoCodeRequest(for: String(lon) + "," + String(lat), completionHandler: completionHandler)
     }
     
-    func geoCodeRequest(for string: String, completionHandler: @escaping (AFDataResponse<GeoCodeResponse>) -> Void) {
+    func geoCodeRequest(for string: String, completionHandler: @escaping (GeoCodeResponse?) -> Void) {
         AF.request(geocodeApiUrl, parameters: parameters(string)).responseDecodable(of: GeoCodeResponse.self) { response in
-            completionHandler(response)
+            completionHandler(response.value)
         }
     }
 }

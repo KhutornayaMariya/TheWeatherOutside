@@ -22,10 +22,11 @@ final class MainCoordinator {
 
 extension MainCoordinator: MainCoordinatorProtocol {
     func startApplication() -> UIViewController {
-        if locationManager.authorizationStatus == .notDetermined && UserDefaults.standard.bool(forKey: "locationDenied") != true {
+        if locationManager.authorizationStatus == .notDetermined
+            && UserDefaults.standard.bool(forKey: UserDefaultsKeys.locationDenied.rawValue) != true {
             return  UINavigationController(rootViewController: OnboardingViewController(locationManager: locationManager))
         } else {
-            return  UINavigationController(rootViewController: ViewController())
+            return  UINavigationController(rootViewController: PageViewController())
         }
     }
 }

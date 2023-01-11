@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 protocol ForecastApiManagerProtocol {
-    func forecastRequest(lat: Double, lon: Double, completionHandler: @escaping (AFDataResponse<ForecastResponse>) -> Void)
+    func forecastRequest(lat: Double, lon: Double, completionHandler: @escaping (ForecastResponse?) -> Void)
 }
 
 final class ForecastApiManager {
@@ -32,11 +32,11 @@ final class ForecastApiManager {
 
 extension ForecastApiManager: ForecastApiManagerProtocol {
     
-    func forecastRequest(lat: Double, lon: Double, completionHandler: @escaping (AFDataResponse<ForecastResponse>) -> Void) {
+    func forecastRequest(lat: Double, lon: Double, completionHandler: @escaping (ForecastResponse?) -> Void) {
         let parameters = parameters(lat: lat, lon: lon)
         
         AF.request(forecastApiUrl, parameters: parameters).responseDecodable(of: ForecastResponse.self) { response in
-            completionHandler(response)
+            completionHandler(response.value)
         }
     }
 }
