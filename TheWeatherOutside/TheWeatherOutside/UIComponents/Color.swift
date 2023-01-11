@@ -13,4 +13,5 @@ public extension UIColor {
     static let background: UIColor = UIColor(named: "background") ?? .systemFill
     static let icon: UIColor = UIColor(named: "icon") ?? .systemGray5
     static let calibry: UIColor = UIColor(named: "calibry") ?? .systemYellow
+    static let lightBlue: UIColor = UIColor(named: "sky") ?? .systemBlue
 }

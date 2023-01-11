@@ -229,7 +229,7 @@ extension CurrentForecastViewCell {
         viewHeightAnchor
     }
     
-    func configue(with model: CurrentForecastModel) {
+    func configure(with model: CurrentForecastModel) {
         feelsLikeTemp.text = "\("FEELS_LIKE".localized) \(model.feelsLikeTemp)°"
         currentTemp.text = "\(model.currentTemp)°"
         summary.text = model.description
