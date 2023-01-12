@@ -12,6 +12,8 @@ class OnboardingViewController: UIViewController {
     
     private var locationManager: CLLocationManager
     
+    private let pagesBuilder: PagesBuilderProtocol
+    
     private lazy var onboardingView: OnboardingView = {
         let view = OnboardingView()
         
@@ -29,6 +31,7 @@ class OnboardingViewController: UIViewController {
     
     init(locationManager: CLLocationManager) {
         self.locationManager = locationManager
+        self.pagesBuilder = PagesBuilder()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -52,7 +55,7 @@ class OnboardingViewController: UIViewController {
     @objc
     func openMainViewController() {
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.locationDenied.rawValue)
-        self.navigationController?.pushViewController(PageViewController(), animated: true)
+        self.navigationController?.pushViewController(pagesBuilder.build(), animated: true)
     }
     
     @objc
@@ -86,7 +89,7 @@ extension OnboardingViewController: CLLocationManagerDelegate {
         case .authorizedAlways, .authorizedWhenInUse:
             print("authorized")
             manager.requestLocation()
-            self.navigationController?.pushViewController(PageViewController(), animated: true)
+            self.navigationController?.pushViewController(pagesBuilder.build(), animated: true)
         @unknown default:
             fatalError()
         }

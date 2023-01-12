@@ -1,5 +1,5 @@
 //
-//  PageViewController.swift
+//  PagesViewController.swift
 //  TheWeatherOutside
 //
 //  Created by m.khutornaya on 06.12.2022.
@@ -7,38 +7,24 @@
 
 import UIKit
 
-final class PageViewController: UIViewController {
+final class PagesViewController: UIViewController {
+    
+    var interactor: PagesInteractorProtocol?
     
     private var pageController: UIPageViewController?
     
-    private let repository = ForecastRepository()
-    
-    private var dataItems: [MetaInfo] {
-        CoreDataManager.defaultManager.metaInfo
-    }
+    private var dataItems: [MainViewModel]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
         setUpNavigationBar()
         setupPageController()
-        fetchForecast()
     }
     
-    private func fetchForecast() {
-        repository.fetchData {
-            self.updateViewControllers()
-        }
-    }
-    
-    private func updateViewControllers() {
-        var viewControllers: [UIViewController]
-        if self.dataItems.isEmpty {
-            viewControllers = [EmptyViewController()]
-        } else {
-            viewControllers = [MainForecastViewController(dataItems: self.dataItems[0], index: 0)]
-        }
-        self.pageController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        interactor?.updateData()
     }
     
     private func setUpNavigationBar() {
@@ -88,24 +74,14 @@ final class PageViewController: UIViewController {
             textField.placeholder = "ALERT_PLACEHOLDER".localized
         }
         
-        let saveImageAction = UIAlertAction(title: "DONE".localized, style: .default) { action in
+        let saveImageAction = UIAlertAction(title: "DONE".localized, style: .default) { [weak self] action in
             guard let text = alertController.textFields?[0].text,
                   text != ""
             else { return }
-            ForecastRepository().fetchDataForLocation(title: text) { result in
-                if !result {
-                    print("error error error")
-                } else {
-                    var viewControllers: [UIViewController]
-                    if self.dataItems.isEmpty {
-                        viewControllers = [EmptyViewController()]
-                    } else {
-                        let index = self.dataItems.endIndex - 1
-                        viewControllers = [MainForecastViewController(dataItems: self.dataItems[index], index: index)]
-                    }
-                    self.pageController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
-                }
-            }
+            
+            self?.interactor?.updateData(with: text, completionHandler: { result in
+                print("Location error")
+            })
         }
         
         let cancel = UIAlertAction(title: "CANCEL".localized, style: .cancel)
@@ -116,31 +92,52 @@ final class PageViewController: UIViewController {
     }
 }
 
-extension PageViewController: UIPageViewControllerDataSource {
+extension PagesViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        guard let currentVC = viewController as? MainForecastViewController,
+        guard let currentVC = viewController as? MainViewController,
+              let dataItems = dataItems,
               currentVC.index != 0
         else { return nil }
         
         let index = currentVC.index - 1
-        return MainForecastViewController(dataItems: dataItems[index], index: index)
+        return MainViewController(viewModel: dataItems[index], index: index)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        guard let currentVC = viewController as? MainForecastViewController,
+        guard let currentVC = viewController as? MainViewController,
+              let dataItems = dataItems,
               currentVC.index < dataItems.count - 1
         else { return nil }
         
         let index = currentVC.index + 1
-        return MainForecastViewController(dataItems: dataItems[index], index: index)
+        return MainViewController(viewModel: dataItems[index], index: index)
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return dataItems.count
+        return dataItems?.count ?? 0
+    }
+    
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        return 0
+    }
+}
+
+extension PagesViewController: PageViewControllerProtocol {
+    func show(with dataItems: [MainViewModel]) {
+        self.dataItems = dataItems
+        
+        var viewControllers: [UIViewController]
+        if dataItems.isEmpty {
+            viewControllers = [EmptyViewController()]
+        } else {
+            let index = dataItems.count > 1 ? dataItems.endIndex - 1 : 0
+            viewControllers = [MainViewController(viewModel: dataItems[index], index: index)]
+        }
+        self.pageController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
     }
 }

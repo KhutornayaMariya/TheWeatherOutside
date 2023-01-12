@@ -32,7 +32,12 @@
 "CANCEL" = "Cancel";
 
 // Current forecast
-"FEELS_LIKE" = "Feels like";
+"FEELS_LIKE" = "Real feel";
 "PRECIPITATION" = "mm";
 "SPEED_METRIC" = "m/s";
 "SPEED_IMP" = "mi/h";
+
+// Hourly forecast
+"DAY" = "Read more for 24 hours";
+"DAILY" = "8 days";
+"DAILY_TITLE" = "Daily forecast";
