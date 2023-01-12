@@ -14,4 +14,5 @@ public extension UIColor {
     static let icon: UIColor = UIColor(named: "icon") ?? .systemGray5
     static let calibry: UIColor = UIColor(named: "calibry") ?? .systemYellow
     static let lightBlue: UIColor = UIColor(named: "sky") ?? .systemBlue
+    static let extraLightBlue: UIColor =  UIColor(named: "prettySky") ?? .systemBlue
 }

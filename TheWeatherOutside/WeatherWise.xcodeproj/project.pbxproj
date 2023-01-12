@@ -41,6 +41,8 @@
 		4C3EA113296EDB6F003F5BC1 /* WeatherConditionImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA112296EDB6F003F5BC1 /* WeatherConditionImageManager.swift */; };
 		4C3EA116296EFB57003F5BC1 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA115296EFB57003F5BC1 /* HeaderCell.swift */; };
 		4C3EA119296F0E93003F5BC1 /* HourlyForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA118296F0E93003F5BC1 /* HourlyForecastModel.swift */; };
+		4C3EA11C296F0F36003F5BC1 /* DailyForecastViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA11B296F0F36003F5BC1 /* DailyForecastViewCell.swift */; };
+		4C3EA11E296F0F60003F5BC1 /* DailyForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA11D296F0F60003F5BC1 /* DailyForecastModel.swift */; };
 		4CF2AD7E295F375A003DC0F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4CF2AD7D295F375A003DC0F3 /* Alamofire */; };
 		4CF2AD80295F38FE003DC0F3 /* ForecastApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2AD7F295F38FE003DC0F3 /* ForecastApiManager.swift */; };
 		4CF2AD82295F3BCC003DC0F3 /* ForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2AD81295F3BCC003DC0F3 /* ForecastResponse.swift */; };
@@ -91,6 +93,8 @@
 		4C3EA112296EDB6F003F5BC1 /* WeatherConditionImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditionImageManager.swift; sourceTree = "<group>"; };
 		4C3EA115296EFB57003F5BC1 /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		4C3EA118296F0E93003F5BC1 /* HourlyForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastModel.swift; sourceTree = "<group>"; };
+		4C3EA11B296F0F36003F5BC1 /* DailyForecastViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastViewCell.swift; sourceTree = "<group>"; };
+		4C3EA11D296F0F60003F5BC1 /* DailyForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastModel.swift; sourceTree = "<group>"; };
 		4CF2AD7F295F38FE003DC0F3 /* ForecastApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastApiManager.swift; sourceTree = "<group>"; };
 		4CF2AD81295F3BCC003DC0F3 /* ForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastResponse.swift; sourceTree = "<group>"; };
 		4CF2AD83295F58FD003DC0F3 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
@@ -208,6 +212,7 @@
 		4C3EA0FF29685CDB003F5BC1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				4C3EA11A296F0F0F003F5BC1 /* DailyForecastViewCell */,
 				4C3EA114296EFB3F003F5BC1 /* HeaderCell */,
 				4C3EA111296ED195003F5BC1 /* HourlyForecastViewCell */,
 				4C3EA106296C12D9003F5BC1 /* CurrentForecastViewCell */,
@@ -267,6 +272,15 @@
 				4C1FA1D9296731C3000A53F4 /* MainViewController */,
 			);
 			path = Flow;
+			sourceTree = "<group>";
+		};
+		4C3EA11A296F0F0F003F5BC1 /* DailyForecastViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				4C3EA11B296F0F36003F5BC1 /* DailyForecastViewCell.swift */,
+				4C3EA11D296F0F60003F5BC1 /* DailyForecastModel.swift */,
+			);
+			path = DailyForecastViewCell;
 			sourceTree = "<group>";
 		};
 		4CF2AD7B295F2F7D003DC0F3 /* Network */ = {
@@ -408,9 +422,11 @@
 				4C12B24B2962F37700887469 /* String+Extension.swift in Sources */,
 				4C3EA10129685D0B003F5BC1 /* CurrentForecastViewCell.swift in Sources */,
 				4CF2AD8B295F7D82003DC0F3 /* GeoCodeResponse.swift in Sources */,
+				4C3EA11C296F0F36003F5BC1 /* DailyForecastViewCell.swift in Sources */,
 				4CF2AD80295F38FE003DC0F3 /* ForecastApiManager.swift in Sources */,
 				4C12B2422962EB7200887469 /* WindDirectionManager.swift in Sources */,
 				4515FA4B293F9A0F00A44C5E /* AppDelegate.swift in Sources */,
+				4C3EA11E296F0F60003F5BC1 /* DailyForecastModel.swift in Sources */,
 				4C3EA119296F0E93003F5BC1 /* HourlyForecastModel.swift in Sources */,
 				4C244FE52965F40A0094CB67 /* Decryptor.swift in Sources */,
 				4C3EA116296EFB57003F5BC1 /* HeaderCell.swift in Sources */,

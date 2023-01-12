@@ -12,6 +12,7 @@ class MainForecastViewController: UIViewController {
     private enum Constants {
         static let currentForecastSectionIndex: Int = 0
         static let hourlyForecastSectionIndex: Int = 1
+        static let dailyForecastSectionIndex: Int = 2
         static let headerIdentifier = "header"
     }
     
@@ -32,12 +33,13 @@ class MainForecastViewController: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         
         view.dataSource = self
-        view.delegate = self
         view.showsVerticalScrollIndicator = false
         view.translatesAutoresizingMaskIntoConstraints = false
         
         view.register(CurrentForecastViewCell.self, forCellWithReuseIdentifier: "CurrentForecastViewCell")
         view.register(HourlyForecastViewCell.self, forCellWithReuseIdentifier: "HourlyForecastViewCell")
+        view.register(DailyForecastViewCell.self, forCellWithReuseIdentifier: "DailyForecastViewCell")
+
         view.register(HeaderCell.self, forSupplementaryViewOfKind: Constants.headerIdentifier, withReuseIdentifier: HeaderCell.reuseIdentifier)
 
         return view
@@ -76,7 +78,7 @@ class MainForecastViewController: UIViewController {
             case Constants.hourlyForecastSectionIndex:
                 return .hourlyForecastSection
             default:
-                return nil
+                return .dailyForecastSection
             }
         }
     }
@@ -97,15 +99,17 @@ class MainForecastViewController: UIViewController {
 extension MainForecastViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case Constants.currentForecastSectionIndex:
             return 1
-        default:
+        case Constants.hourlyForecastSectionIndex:
             return dataItems.hourly?.count ?? 0
+        default:
+            return dataItems.daily?.count ?? 0
         }
     }
     
@@ -119,14 +123,25 @@ extension MainForecastViewController: UICollectionViewDataSource {
             else { return UICollectionViewCell() }
             cell.configure(with: CurrentForecastModel(currentForecast: currentWeather, timeZone: timeZone))
             return cell
-        default:
+        case Constants.hourlyForecastSectionIndex:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "HourlyForecastViewCell", for: indexPath) as! HourlyForecastViewCell
             guard let forecast = dataItems.hourly,
                   let timeZone = dataItems.timeZone
             else { return UICollectionViewCell() }
-            let data = Array(forecast)[indexPath.row]
-            cell.configure(with: HourlyForecastModel(data: data as! Hourly, timeZone: timeZone))
+            let data = Array(forecast) as! [Hourly]
+            let sortedData = data.sorted { $1.date! > $0.date! }
+            cell.configure(with: HourlyForecastModel(data: sortedData[indexPath.row], timeZone: timeZone))
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "DailyForecastViewCell", for: indexPath) as! DailyForecastViewCell
+            guard let forecast = dataItems.daily,
+                  let timeZone = dataItems.timeZone
+            else { return UICollectionViewCell() }
+            let data = Array(forecast) as! [Daily]
+            let sortedData = data.sorted { $1.date! > $0.date! }
+            cell.configure(with: DailyForecastModel(data: sortedData[indexPath.row], timeZone: timeZone))
             return cell
         }
     }
@@ -143,10 +158,10 @@ extension MainForecastViewController: UICollectionViewDataSource {
             }
 
             switch indexPath.section {
-            case 1:
+            case Constants.hourlyForecastSectionIndex:
                 header.configure(with: HeaderCellModel(title: nil, link: "DAY".localized))
                 header.onLinkTapHandler = openHourlyForecast
-            case 2:
+            case Constants.dailyForecastSectionIndex:
                 header.configure(with: HeaderCellModel(title: "DAILY_TITLE".localized, link: "DAILY".localized))
                 header.onLinkTapHandler = openDailyForecast
             default:
@@ -173,7 +188,7 @@ private extension NSCollectionLayoutSection {
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 22, leading: safeArea, bottom: 20, trailing: safeArea)
+        section.contentInsets = NSDirectionalEdgeInsets(top: safeArea, leading: safeArea, bottom: safeArea, trailing: safeArea)
         
         return section
     }()
@@ -201,15 +216,35 @@ private extension NSCollectionLayoutSection {
             elementKind: "header",
             alignment: .topTrailing
         )
-        header.contentInsets = .init(top: 20, leading: 0, bottom: 0, trailing: 0)
         section.boundarySupplementaryItems = [header]
         
         return section
     }()
-}
+    
+    static let dailyForecastSection: NSCollectionLayoutSection = {
 
-extension MainForecastViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //
-    }
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 0, leading: 0, bottom: safeArea, trailing: 0)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(70))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: safeArea, leading: safeArea, bottom: safeArea, trailing: safeArea)
+        
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(20)
+        )
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: "header",
+            alignment: .topTrailing
+        )
+        section.boundarySupplementaryItems = [header]
+        
+        return section
+    }()
 }
