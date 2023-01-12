@@ -1,5 +1,5 @@
 //
-//  MainForecastViewController.swift
+//  MainViewController.swift
 //  WeatherWise
 //
 //  Created by Mariya Khutornaya on 09.01.23.
@@ -7,8 +7,7 @@
 
 import UIKit
 
-class MainForecastViewController: UIViewController {
-    
+class MainViewController: UIViewController {
     private enum Constants {
         static let currentForecastSectionIndex: Int = 0
         static let hourlyForecastSectionIndex: Int = 1
@@ -16,12 +15,12 @@ class MainForecastViewController: UIViewController {
         static let headerIdentifier = "header"
     }
     
-    private var dataItems: MetaInfo
+    private var viewModel: MainViewModel
     let index: Int
     
-    init(dataItems: MetaInfo, index: Int) {
+    init(viewModel: MainViewModel, index: Int) {
         self.index = index
-        self.dataItems = dataItems
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,9 +38,8 @@ class MainForecastViewController: UIViewController {
         view.register(CurrentForecastViewCell.self, forCellWithReuseIdentifier: "CurrentForecastViewCell")
         view.register(HourlyForecastViewCell.self, forCellWithReuseIdentifier: "HourlyForecastViewCell")
         view.register(DailyForecastViewCell.self, forCellWithReuseIdentifier: "DailyForecastViewCell")
-
         view.register(HeaderCell.self, forSupplementaryViewOfKind: Constants.headerIdentifier, withReuseIdentifier: HeaderCell.reuseIdentifier)
-
+        
         return view
     }()
     
@@ -52,9 +50,8 @@ class MainForecastViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.reloadData()
         let navBar: UINavigationBar? = navigationController?.navigationBar
-        navBar?.topItem?.title = dataItems.locationTitle
+        navBar?.topItem?.title = viewModel.locationTitle
     }
     
     private func setUp() {
@@ -94,90 +91,11 @@ class MainForecastViewController: UIViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource
-
-extension MainForecastViewController: UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case Constants.currentForecastSectionIndex:
-            return 1
-        case Constants.hourlyForecastSectionIndex:
-            return dataItems.hourly?.count ?? 0
-        default:
-            return dataItems.daily?.count ?? 0
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.section {
-        case Constants.currentForecastSectionIndex:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "CurrentForecastViewCell", for: indexPath) as! CurrentForecastViewCell
-            guard let currentWeather = dataItems.current,
-                  let timeZone = dataItems.timeZone
-            else { return UICollectionViewCell() }
-            cell.configure(with: CurrentForecastModel(currentForecast: currentWeather, timeZone: timeZone))
-            return cell
-        case Constants.hourlyForecastSectionIndex:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "HourlyForecastViewCell", for: indexPath) as! HourlyForecastViewCell
-            guard let forecast = dataItems.hourly,
-                  let timeZone = dataItems.timeZone
-            else { return UICollectionViewCell() }
-            let data = Array(forecast) as! [Hourly]
-            let sortedData = data.sorted { $1.date! > $0.date! }
-            cell.configure(with: HourlyForecastModel(data: sortedData[indexPath.row], timeZone: timeZone))
-            return cell
-        default:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "DailyForecastViewCell", for: indexPath) as! DailyForecastViewCell
-            guard let forecast = dataItems.daily,
-                  let timeZone = dataItems.timeZone
-            else { return UICollectionViewCell() }
-            let data = Array(forecast) as! [Daily]
-            let sortedData = data.sorted { $1.date! > $0.date! }
-            cell.configure(with: DailyForecastModel(data: sortedData[indexPath.row], timeZone: timeZone))
-            return cell
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case Constants.headerIdentifier:
-            guard let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: Constants.headerIdentifier,
-                withReuseIdentifier: HeaderCell.reuseIdentifier,
-                for: indexPath
-            ) as? HeaderCell else {
-                return UICollectionReusableView()
-            }
-
-            switch indexPath.section {
-            case Constants.hourlyForecastSectionIndex:
-                header.configure(with: HeaderCellModel(title: nil, link: "DAY".localized))
-                header.onLinkTapHandler = openHourlyForecast
-            case Constants.dailyForecastSectionIndex:
-                header.configure(with: HeaderCellModel(title: "DAILY_TITLE".localized, link: "DAILY".localized))
-                header.onLinkTapHandler = openDailyForecast
-            default:
-                break
-            }
-            return header
-        default:
-            return UICollectionReusableView()
-        }
-    }
-}
-
 // MARK: - NSCollectionLayoutSection
 
 private extension NSCollectionLayoutSection {
     static let safeArea: CGFloat = 16
+    static let headerIdentifier = "header"
     
     static let currentForecastSection: NSCollectionLayoutSection = {
         
@@ -194,14 +112,14 @@ private extension NSCollectionLayoutSection {
     }()
     
     static let hourlyForecastSection: NSCollectionLayoutSection = {
-
+        
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: safeArea, bottom: 0, trailing: 0)
-
+        
         let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(70), heightDimension: .absolute(84))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
+        
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: safeArea, leading: 0, bottom: safeArea, trailing: safeArea)
         section.orthogonalScrollingBehavior = .continuous
@@ -213,7 +131,7 @@ private extension NSCollectionLayoutSection {
         
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
-            elementKind: "header",
+            elementKind: headerIdentifier,
             alignment: .topTrailing
         )
         section.boundarySupplementaryItems = [header]
@@ -222,14 +140,14 @@ private extension NSCollectionLayoutSection {
     }()
     
     static let dailyForecastSection: NSCollectionLayoutSection = {
-
+        
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 0, leading: 0, bottom: safeArea, trailing: 0)
-
+        
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(70))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-
+        
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: safeArea, leading: safeArea, bottom: safeArea, trailing: safeArea)
         
@@ -240,11 +158,78 @@ private extension NSCollectionLayoutSection {
         
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
-            elementKind: "header",
+            elementKind: headerIdentifier,
             alignment: .topTrailing
         )
         section.boundarySupplementaryItems = [header]
         
         return section
     }()
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension MainViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch section {
+        case Constants.currentForecastSectionIndex:
+            return 1
+        case Constants.hourlyForecastSectionIndex:
+            return viewModel.hourlyForecast.count
+        default:
+            return viewModel.dailyForecast.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.section {
+        case Constants.currentForecastSectionIndex:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "CurrentForecastViewCell", for: indexPath) as! CurrentForecastViewCell
+            cell.configure(with: viewModel.currentForecast)
+            return cell
+        case Constants.hourlyForecastSectionIndex:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "HourlyForecastViewCell", for: indexPath) as! HourlyForecastViewCell
+            cell.configure(with: viewModel.hourlyForecast[indexPath.row])
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "DailyForecastViewCell", for: indexPath) as! DailyForecastViewCell
+            cell.configure(with: viewModel.dailyForecast[indexPath.row])
+            return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case Constants.headerIdentifier:
+            guard let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: Constants.headerIdentifier,
+                withReuseIdentifier: HeaderCell.reuseIdentifier,
+                for: indexPath
+            ) as? HeaderCell else {
+                return UICollectionReusableView()
+            }
+            
+            switch indexPath.section {
+            case Constants.hourlyForecastSectionIndex:
+                header.configure(with: viewModel.hourlySectionTitle)
+                header.onLinkTapHandler = openHourlyForecast
+            case Constants.dailyForecastSectionIndex:
+                header.configure(with: viewModel.dailySectionTitle)
+                header.onLinkTapHandler = openDailyForecast
+            default:
+                break
+            }
+            return header
+        default:
+            return UICollectionReusableView()
+        }
+    }
 }
