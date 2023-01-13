@@ -22,7 +22,6 @@
 "LOCATION_ASK_EXPLANATION" = "To get more accurate weather forecasts while driving or traveling\n\n You can change your choice at any time from the settings";
 
 // Empty view
-
 "EMPTY_LOCATION_DESCRIPTION" = "Click on the pin  in the upper right corner\nto add a location to display the forecast";
 
 // Alert
@@ -41,3 +40,10 @@
 "DAY" = "Read more for 24 hours";
 "DAILY" = "8 days";
 "DAILY_TITLE" = "Daily forecast";
+
+// Settings
+"SETTINGS" = "Settings";
+"UNITS" = "Units";
+"APPLY_SETTINGS" = "Apply";
+"IMPERIAL" = "F°,mi/h";
+"METRIC" = "С°,m/s";

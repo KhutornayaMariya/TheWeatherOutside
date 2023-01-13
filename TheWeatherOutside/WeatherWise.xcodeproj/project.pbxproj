@@ -19,7 +19,6 @@
 		4C17D09B296434F000132ACB /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17D09A296434F000132ACB /* MainCoordinator.swift */; };
 		4C17D09D2964439200132ACB /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17D09C2964439200132ACB /* OnboardingViewController.swift */; };
 		4C17D0A02964568D00132ACB /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17D09F2964568D00132ACB /* OnboardingView.swift */; };
-		4C17D0A32964586300132ACB /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17D0A22964586300132ACB /* Button.swift */; };
 		4C17D0A529645BC100132ACB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C17D0A429645BC100132ACB /* Color.swift */; };
 		4C17D0A829645F9E00132ACB /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C17D0A729645F9E00132ACB /* Rubik-SemiBold.ttf */; };
 		4C17D0AA29645FB200132ACB /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C17D0A929645FB200132ACB /* Rubik-Regular.ttf */; };
@@ -51,6 +50,8 @@
 		4C3EA13429706C6E003F5BC1 /* PagesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA13329706C6E003F5BC1 /* PagesInteractor.swift */; };
 		4C3EA13629707689003F5BC1 /* ForecastRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA13529707689003F5BC1 /* ForecastRepositoryProtocol.swift */; };
 		4C3EA13929707EE6003F5BC1 /* PagesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA13829707EE6003F5BC1 /* PagesBuilder.swift */; };
+		4C6D87852971820C006E2749 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D87842971820C006E2749 /* Button.swift */; };
+		4C9340912971738600D6217F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9340902971738600D6217F /* SettingsView.swift */; };
 		4CF2AD7E295F375A003DC0F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4CF2AD7D295F375A003DC0F3 /* Alamofire */; };
 		4CF2AD80295F38FE003DC0F3 /* ForecastApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2AD7F295F38FE003DC0F3 /* ForecastApiManager.swift */; };
 		4CF2AD82295F3BCC003DC0F3 /* ForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2AD81295F3BCC003DC0F3 /* ForecastResponse.swift */; };
@@ -75,7 +76,6 @@
 		4C17D09A296434F000132ACB /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		4C17D09C2964439200132ACB /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		4C17D09F2964568D00132ACB /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		4C17D0A22964586300132ACB /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		4C17D0A429645BC100132ACB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		4C17D0A729645F9E00132ACB /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
 		4C17D0A929645FB200132ACB /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
@@ -111,6 +111,8 @@
 		4C3EA13329706C6E003F5BC1 /* PagesInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesInteractor.swift; sourceTree = "<group>"; };
 		4C3EA13529707689003F5BC1 /* ForecastRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastRepositoryProtocol.swift; sourceTree = "<group>"; };
 		4C3EA13829707EE6003F5BC1 /* PagesBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesBuilder.swift; sourceTree = "<group>"; };
+		4C6D87842971820C006E2749 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		4C9340902971738600D6217F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4CF2AD7F295F38FE003DC0F3 /* ForecastApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastApiManager.swift; sourceTree = "<group>"; };
 		4CF2AD81295F3BCC003DC0F3 /* ForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastResponse.swift; sourceTree = "<group>"; };
 		4CF2AD83295F58FD003DC0F3 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
@@ -181,8 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				4C17D0A629645F3600132ACB /* Rubik */,
-				4C17D0A22964586300132ACB /* Button.swift */,
 				4C17D0A429645BC100132ACB /* Color.swift */,
+				4C6D87842971820C006E2749 /* Button.swift */,
 				4C17D0AE2964611300132ACB /* Fonts.swift */,
 			);
 			path = UIComponents;
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				4C17D0B72964836700132ACB /* SettingsViewController.swift */,
+				4C9340902971738600D6217F /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -505,7 +508,6 @@
 				4C3EA10A296C5FCC003F5BC1 /* ForecastViewController.swift in Sources */,
 				4C3EA105296C113F003F5BC1 /* UserDefaultsKeys.swift in Sources */,
 				4C1FA1DB29673212000A53F4 /* EmptyView.swift in Sources */,
-				4C17D0A32964586300132ACB /* Button.swift in Sources */,
 				4C17D0A529645BC100132ACB /* Color.swift in Sources */,
 				4C17D0B82964836700132ACB /* SettingsViewController.swift in Sources */,
 				4515FA55293F9A0F00A44C5E /* TheWeatherOutside.xcdatamodeld in Sources */,
@@ -516,6 +518,7 @@
 				4C3EA12929706106003F5BC1 /* PagesInteractorProtocol.swift in Sources */,
 				4CF2AD8B295F7D82003DC0F3 /* GeoCodeResponse.swift in Sources */,
 				4C3EA11C296F0F36003F5BC1 /* DailyForecastViewCell.swift in Sources */,
+				4C9340912971738600D6217F /* SettingsView.swift in Sources */,
 				4C3EA12B297062C3003F5BC1 /* PageViewControllerProtocol.swift in Sources */,
 				4CF2AD80295F38FE003DC0F3 /* ForecastApiManager.swift in Sources */,
 				4C12B2422962EB7200887469 /* WindDirectionManager.swift in Sources */,
@@ -538,6 +541,7 @@
 				4515FA4D293F9A0F00A44C5E /* SceneDelegate.swift in Sources */,
 				4C3EA110296ED192003F5BC1 /* HourlyForecastViewCell.swift in Sources */,
 				4C244FE32965CE490094CB67 /* UnitsManager.swift in Sources */,
+				4C6D87852971820C006E2749 /* Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

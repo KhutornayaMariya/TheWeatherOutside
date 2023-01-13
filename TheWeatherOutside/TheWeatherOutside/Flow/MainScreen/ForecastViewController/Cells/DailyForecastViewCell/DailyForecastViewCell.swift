@@ -58,7 +58,8 @@ final class DailyForecastViewCell: UICollectionViewCell {
         
         view.textColor = .label
         view.font = .rubikRegular(size: 16)
-        view.numberOfLines = 1
+        view.textAlignment = .center
+        view.lineBreakMode = .byTruncatingTail
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -92,23 +93,23 @@ final class DailyForecastViewCell: UICollectionViewCell {
         subviews.forEach { addSubview($0) }
         
         NSLayoutConstraint.activate([
-            date.topAnchor.constraint(equalTo: topAnchor, constant: 6),
+            date.topAnchor.constraint(equalTo: topAnchor, constant: .margin),
             date.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             
-            image.heightAnchor.constraint(equalToConstant: 17),
-            image.widthAnchor.constraint(equalToConstant: 17),
-            image.topAnchor.constraint(equalTo: date.bottomAnchor, constant: 5),
+            image.heightAnchor.constraint(equalToConstant: .imageSize),
+            image.widthAnchor.constraint(equalToConstant: .imageSize),
+            image.topAnchor.constraint(equalTo: date.bottomAnchor, constant: .margin),
             image.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             
             precipitation.centerYAnchor.constraint(equalTo: image.centerYAnchor),
-            precipitation.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 5),
-            
+            precipitation.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: .margin),
+
             weatherDescription.centerYAnchor.constraint(equalTo: centerYAnchor),
-            weatherDescription.centerXAnchor.constraint(equalTo: centerXAnchor),
-            weatherDescription.leadingAnchor.constraint(equalTo: precipitation.trailingAnchor, constant: -3),
-            
+            weatherDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 90),
+
             temperature.centerYAnchor.constraint(equalTo: centerYAnchor),
-            temperature.trailingAnchor.constraint(equalTo: arrow.leadingAnchor, constant: -5),
+            temperature.trailingAnchor.constraint(equalTo: arrow.leadingAnchor, constant: -.margin),
+            temperature.leadingAnchor.constraint(greaterThanOrEqualTo: weatherDescription.trailingAnchor, constant: .margin),
             
             arrow.centerYAnchor.constraint(equalTo: centerYAnchor),
             arrow.heightAnchor.constraint(equalToConstant: 10),
@@ -126,4 +127,9 @@ extension DailyForecastViewCell {
         weatherDescription.text = model.description
         temperature.text = model.temperature
     }
+}
+
+private extension CGFloat {
+    static let margin: CGFloat = 5
+    static let imageSize: CGFloat = 17
 }
