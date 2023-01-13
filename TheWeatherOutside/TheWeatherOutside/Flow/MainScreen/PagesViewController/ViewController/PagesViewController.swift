@@ -13,7 +13,7 @@ final class PagesViewController: UIViewController {
     
     private var pageController: UIPageViewController?
     
-    private var dataItems: [MainViewModel]?
+    private var dataItems: [ForecastViewModel]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,25 +97,25 @@ extension PagesViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        guard let currentVC = viewController as? MainViewController,
+        guard let currentVC = viewController as? ForecastViewController,
               let dataItems = dataItems,
               currentVC.index != 0
         else { return nil }
         
         let index = currentVC.index - 1
-        return MainViewController(viewModel: dataItems[index], index: index)
+        return ForecastViewController(viewModel: dataItems[index], index: index)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        guard let currentVC = viewController as? MainViewController,
+        guard let currentVC = viewController as? ForecastViewController,
               let dataItems = dataItems,
               currentVC.index < dataItems.count - 1
         else { return nil }
         
         let index = currentVC.index + 1
-        return MainViewController(viewModel: dataItems[index], index: index)
+        return ForecastViewController(viewModel: dataItems[index], index: index)
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
@@ -128,7 +128,7 @@ extension PagesViewController: UIPageViewControllerDataSource {
 }
 
 extension PagesViewController: PageViewControllerProtocol {
-    func show(with dataItems: [MainViewModel]) {
+    func show(with dataItems: [ForecastViewModel]) {
         self.dataItems = dataItems
         
         var viewControllers: [UIViewController]
@@ -136,7 +136,7 @@ extension PagesViewController: PageViewControllerProtocol {
             viewControllers = [EmptyViewController()]
         } else {
             let index = dataItems.count > 1 ? dataItems.endIndex - 1 : 0
-            viewControllers = [MainViewController(viewModel: dataItems[index], index: index)]
+            viewControllers = [ForecastViewController(viewModel: dataItems[index], index: index)]
         }
         self.pageController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
     }

@@ -36,7 +36,7 @@
 "FEELS_LIKE" = "Ощущается как";
 "PRECIPITATION" = "мм";
 "SPEED_METRIC" = "м/с";
-"SPEED_IMP" = "миля/ч";
+"SPEED_IMP" = "ми/ч";
 
 // Hourly forecast
 "DAY" = "Подробнее на 24 часа";

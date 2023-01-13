@@ -18,14 +18,14 @@ final class PagesPresenter {
         self.dateManager = DateManager()
     }
     
-    private func createViewModels(data: [MetaInfo]) -> [MainViewModel] {
-        var viewModels: [MainViewModel] = []
+    private func createViewModels(data: [MetaInfo]) -> [ForecastViewModel] {
+        var viewModels: [ForecastViewModel] = []
         
         for dataItem in data {
             guard let currentForecast = createCurrentForecastModel(data: dataItem) else {
                 return []
             }
-            let viewModel = MainViewModel(
+            let viewModel = ForecastViewModel(
                 locationTitle: dataItem.locationTitle ?? "",
                 currentForecast: currentForecast,
                 hourlySectionTitle: HeaderCellModel(title: nil, link: "DAY".localized),
@@ -48,7 +48,7 @@ final class PagesPresenter {
         else { return nil }
         
         let isImpericUnits = isImpericUnits()
-        let windSpeed = isImpericUnits ? String(forecast.windSpeedImp) + "SPEED_IMP".localized : String(forecast.windSpeed) + "SPEED_METRIC".localized
+        let windSpeed = isImpericUnits ? "\(String(forecast.windSpeedImp)) \("SPEED_IMP".localized)" : "\(String(forecast.windSpeed)) \("SPEED_METRIC".localized)"
         
         let model = CurrentForecastModel(
             feelsLikeTemp: isImpericUnits ? String(forecast.feelsLikeImp) : String(forecast.feelsLike),
@@ -72,7 +72,7 @@ final class PagesPresenter {
         
         var models: [HourlyForecastModel] = []
         let isImpericUnits = isImpericUnits()
-                
+        
         guard var oneHourForecastArray = Array(forecast) as? [Hourly]  else { return [] }
         oneHourForecastArray.sort(by: {
             guard let beforeDate = $0.date,
@@ -108,6 +108,8 @@ final class PagesPresenter {
             guard let forecast = oneDayForecast as? Daily,
                   let date = forecast.date
             else { return [] }
+
+            if Calendar.current.isDateInToday(date) { continue }
             
             let temp = isImpericUnits ? "\(String(forecast.tempMinImp))/\(String(forecast.tempMaxImp))°" : "\(String(forecast.tempMin))/\(String(forecast.tempMax))°"
             

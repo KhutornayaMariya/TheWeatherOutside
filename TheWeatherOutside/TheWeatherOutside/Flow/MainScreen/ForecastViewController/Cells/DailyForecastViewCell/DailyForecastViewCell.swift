@@ -45,7 +45,7 @@ final class DailyForecastViewCell: UICollectionViewCell {
     private lazy var precipitation: UILabel = {
         let view = UILabel()
         
-        view.textColor = .accent
+        view.textColor = .label
         view.font = .rubikRegular(size: 12)
         view.numberOfLines = 1
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +68,7 @@ final class DailyForecastViewCell: UICollectionViewCell {
         let view = UIImageView()
         
         view.image = UIImage(named: "next")
+        view.tintColor = .label
         view.contentMode = .scaleAspectFit
         view.translatesAutoresizingMaskIntoConstraints = false
         
