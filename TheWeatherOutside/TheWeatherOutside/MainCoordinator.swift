@@ -22,6 +22,10 @@ final class MainCoordinator {
 
 extension MainCoordinator: MainCoordinatorProtocol {
     func startApplication() -> UIViewController {
+        if UserDefaults.standard.value(forKey: UserDefaultsKeys.units.rawValue) == nil {
+            UserDefaults.standard.set(Units.metric.rawValue, forKey: UserDefaultsKeys.units.rawValue)
+        }
+        
         if locationManager.authorizationStatus == .notDetermined
             && UserDefaults.standard.bool(forKey: UserDefaultsKeys.locationDenied.rawValue) != true {
             return  UINavigationController(rootViewController: OnboardingViewController(locationManager: locationManager))

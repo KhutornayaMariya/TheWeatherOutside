@@ -49,6 +49,7 @@ final class PagesViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = locationButtonItem
         navigationItem.leftBarButtonItem = menuButtonItem
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     private func setupPageController() {
