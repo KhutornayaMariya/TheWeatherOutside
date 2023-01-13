@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  ForecastViewController.swift
 //  WeatherWise
 //
 //  Created by Mariya Khutornaya on 09.01.23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class ForecastViewController: UIViewController {
     private enum Constants {
         static let currentForecastSectionIndex: Int = 0
         static let hourlyForecastSectionIndex: Int = 1
@@ -15,10 +15,10 @@ class MainViewController: UIViewController {
         static let headerIdentifier = "header"
     }
     
-    private var viewModel: MainViewModel
+    private var viewModel: ForecastViewModel
     let index: Int
     
-    init(viewModel: MainViewModel, index: Int) {
+    init(viewModel: ForecastViewModel, index: Int) {
         self.index = index
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -31,6 +31,7 @@ class MainViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         
+        view.backgroundColor = .background
         view.dataSource = self
         view.showsVerticalScrollIndicator = false
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +56,7 @@ class MainViewController: UIViewController {
     }
     
     private func setUp() {
-        view.backgroundColor = .white
+        view.backgroundColor = .background
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
@@ -169,7 +170,7 @@ private extension NSCollectionLayoutSection {
 
 // MARK: - UICollectionViewDataSource
 
-extension MainViewController: UICollectionViewDataSource {
+extension ForecastViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3

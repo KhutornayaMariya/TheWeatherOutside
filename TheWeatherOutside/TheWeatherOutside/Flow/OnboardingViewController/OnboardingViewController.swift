@@ -18,7 +18,7 @@ class OnboardingViewController: UIViewController {
         let view = OnboardingView()
         
         view.setConfirmButtonTapAction(action: requestLocation)
-        view.onTapDenyButtonHandler = openMainViewController
+        view.onTapDenyButtonHandler = openForecastViewController
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -53,7 +53,7 @@ class OnboardingViewController: UIViewController {
     }
     
     @objc
-    func openMainViewController() {
+    func openForecastViewController() {
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.locationDenied.rawValue)
         self.navigationController?.pushViewController(pagesBuilder.build(), animated: true)
     }
