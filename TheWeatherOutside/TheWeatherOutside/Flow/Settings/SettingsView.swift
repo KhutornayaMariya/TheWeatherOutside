@@ -85,6 +85,7 @@ final class SettingsView: UIView {
         let view = Button(title: "APPLY_SETTINGS".localized)
         
         view.titleLabel?.font = UIFont.rubikRegular(size: 16)
+        view.isEnabled = false
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -174,10 +175,12 @@ final class SettingsView: UIView {
     
     @objc private func metricButtonTapped() {
         setupUnitsButtons(isMetric: true)
+        applyButton.isEnabled = true
     }
     
     @objc private func imperialButtonTapped() {
         setupUnitsButtons(isMetric: false)
+        applyButton.isEnabled = true
     }
     
     private func setupUnitsButtons(isMetric: Bool) {
