@@ -10,4 +10,5 @@ import Foundation
 protocol ForecastRepositoryProtocol: AnyObject {
     func fetchData(completionHandler: @escaping ([MetaInfo]) -> Void)
     func fetchDataForLocation(title: String, completionHandler: @escaping (Bool, [MetaInfo]) -> Void)
+    func fetchHourlyForecast(location: String) -> MetaInfo?
 }

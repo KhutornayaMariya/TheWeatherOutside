@@ -83,7 +83,8 @@ class ForecastViewController: UIViewController {
     
     @objc
     private func openHourlyForecast() {
-        self.navigationController?.pushViewController(SettingsViewController(), animated: true)
+        let viewController = HourlyForecastBuilder().build(with: viewModel.locationTitle)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     @objc

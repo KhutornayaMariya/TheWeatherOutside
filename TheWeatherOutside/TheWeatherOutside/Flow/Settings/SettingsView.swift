@@ -140,7 +140,7 @@ final class SettingsView: UIView {
             
             cloudThreeImage.heightAnchor.constraint(equalToConstant: 58),
             cloudThreeImage.topAnchor.constraint(equalTo: topAnchor, constant: 40),
-            cloudThreeImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -130),
+            cloudThreeImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             
             cloudTwoImage.heightAnchor.constraint(equalToConstant: 95),
             cloudTwoImage.topAnchor.constraint(equalTo: topAnchor, constant: 120),

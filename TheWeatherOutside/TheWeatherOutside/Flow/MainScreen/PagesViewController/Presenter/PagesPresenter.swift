@@ -9,7 +9,7 @@ import Foundation
 
 final class PagesPresenter {
     private let dateManager: DateManagerProtocol
-    private let imageManager = WeatherConditionImageManager()
+    private let imageManager = WeatherConditionManager()
     
     weak var viewController: PageViewControllerProtocol?
     
