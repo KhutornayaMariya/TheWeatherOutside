@@ -65,8 +65,8 @@ final class CoreDataManager {
         newForecast.windSpeed = Int16(forecast.windSpeed.rounded(.toNearestOrEven))
         newForecast.windGust = Int16(forecast.windGust?.rounded(.toNearestOrEven) ?? 0)
         newForecast.windDirection = WindDirectionManager().windDirection(from: forecast.windDirection)
-        newForecast.rain = forecast.rain?.level ?? 0
-        newForecast.snow = forecast.snow?.level ?? 0
+        newForecast.rain = forecast.rain?.level.rounded(.toNearestOrEven) ?? 0
+        newForecast.snow = forecast.snow?.level.rounded(.toNearestOrEven) ?? 0
         newForecast.cloudCover = Int16(forecast.clouds)
         newForecast.feelsLike = Int16(forecast.feelsLike.rounded(.toNearestOrEven))
         newForecast.humidity = Int16(forecast.humidity)
@@ -77,8 +77,8 @@ final class CoreDataManager {
         newForecast.sunset = Date(timeIntervalSince1970: forecast.sunset!)
         newForecast.temperatureImp = unitsManager.convertTempToImperial(forecast.currentTemp)
         newForecast.feelsLikeImp = unitsManager.convertTempToImperial(forecast.feelsLike)
-        newForecast.windSpeed = unitsManager.convertSpeedToImperial(forecast.windSpeed)
-        newForecast.windGust = unitsManager.convertSpeedToImperial(forecast.windGust ?? 0)
+        newForecast.windSpeedImp = unitsManager.convertSpeedToImperial(forecast.windSpeed)
+        newForecast.windGustImp = unitsManager.convertSpeedToImperial(forecast.windGust ?? 0)
         
         return newForecast
     }
@@ -91,8 +91,8 @@ final class CoreDataManager {
         newForecast.windSpeed = Int16(forecast.windSpeed.rounded(.toNearestOrEven))
         newForecast.windGust = Int16(forecast.windGust?.rounded(.toNearestOrEven) ?? 0)
         newForecast.windDirection = WindDirectionManager().windDirection(from: forecast.windDirection)
-        newForecast.rain = forecast.rain?.level ?? 0
-        newForecast.snow = forecast.snow?.level ?? 0
+        newForecast.rain = forecast.rain?.level.rounded(.toNearestOrEven) ?? 0
+        newForecast.snow = forecast.snow?.level.rounded(.toNearestOrEven) ?? 0
         newForecast.cloudCover = Int16(forecast.clouds)
         newForecast.feelsLike = Int16(forecast.feelsLike.rounded(.toNearestOrEven))
         newForecast.humidity = Int16(forecast.humidity)
@@ -101,8 +101,8 @@ final class CoreDataManager {
         newForecast.uvi = Int16(forecast.uvi)
         newForecast.temperatureImp = unitsManager.convertTempToImperial(forecast.currentTemp)
         newForecast.feelsLikeImp = unitsManager.convertTempToImperial(forecast.feelsLike)
-        newForecast.windSpeed = unitsManager.convertSpeedToImperial(forecast.windSpeed)
-        newForecast.windGust = unitsManager.convertSpeedToImperial(forecast.windGust ?? 0)
+        newForecast.windSpeedImp = unitsManager.convertSpeedToImperial(forecast.windSpeed)
+        newForecast.windGustImp = unitsManager.convertSpeedToImperial(forecast.windGust ?? 0)
         
         return newForecast
     }
@@ -115,8 +115,8 @@ final class CoreDataManager {
         newForecast.windSpeed = Int16(forecast.windSpeed.rounded(.toNearestOrEven))
         newForecast.windGust = Int16(forecast.windGust?.rounded(.toNearestOrEven) ?? 0)
         newForecast.windDirection = WindDirectionManager().windDirection(from: forecast.windDirection)
-        newForecast.rain = forecast.rain ?? 0
-        newForecast.snow = forecast.snow ?? 0
+        newForecast.rain = forecast.rain?.rounded(.toNearestOrEven) ?? 0
+        newForecast.snow = forecast.snow?.rounded(.toNearestOrEven) ?? 0
         newForecast.cloudCover = Int16(forecast.clouds)
         newForecast.feelsLikeDay = Int16(forecast.dailyFeelsLikeTemp.day.rounded(.toNearestOrEven))
         newForecast.feelsLikeMorn = Int16(forecast.dailyFeelsLikeTemp.morn.rounded(.toNearestOrEven))
@@ -146,8 +146,8 @@ final class CoreDataManager {
         newForecast.tempMinImp = unitsManager.convertTempToImperial(forecast.dailyTemp.min)
         newForecast.tempNightImp = unitsManager.convertTempToImperial(forecast.dailyTemp.night)
         newForecast.tempMaxImp = unitsManager.convertTempToImperial(forecast.dailyTemp.max)
-        newForecast.windSpeed = unitsManager.convertSpeedToImperial(forecast.windSpeed)
-        newForecast.windGust = unitsManager.convertSpeedToImperial(forecast.windGust ?? 0)
+        newForecast.windSpeedImp = unitsManager.convertSpeedToImperial(forecast.windSpeed)
+        newForecast.windGustImp = unitsManager.convertSpeedToImperial(forecast.windGust ?? 0)
         
         return newForecast
     }

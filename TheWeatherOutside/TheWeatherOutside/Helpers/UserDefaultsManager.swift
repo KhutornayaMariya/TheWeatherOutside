@@ -1,5 +1,5 @@
 //
-//  UserDefaultsKeys.swift
+//  UserDefaultsManager.swift
 //  WeatherWise
 //
 //  Created by Mariya Khutornaya on 09.01.23.
@@ -15,4 +15,13 @@ enum UserDefaultsKeys: String {
 enum Units: String {
     case metric = "metric"
     case imperial = "imperial"
+}
+
+final class UserDefaultsManager {
+    
+    static let defaultManager = UserDefaultsManager()
+
+    func isImpericUnits() -> Bool {
+        UserDefaults.standard.string(forKey: UserDefaultsKeys.units.rawValue) == Units.imperial.rawValue
+    }
 }

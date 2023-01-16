@@ -37,13 +37,21 @@
 "SPEED_IMP" = "mi/h";
 
 // Hourly forecast
-"DAY" = "Read more for 24 hours";
+"DAY" = "24 hours forecast";
 "DAILY" = "8 days";
 "DAILY_TITLE" = "Daily forecast";
 
 // Settings
 "SETTINGS" = "Settings";
-"UNITS" = "Units";
+"UNITS" = "Measure\nunits";
 "APPLY_SETTINGS" = "Apply";
 "IMPERIAL" = "F°,mi/h";
 "METRIC" = "С°,m/s";
+
+// Hourly forecast screen
+"WIND" = "Wind speed";
+"WIND_GUST" = "Wind gust";
+"HUMIDITY" = "HUMIDITY";
+"PRESSURE" = "PRESSURE";
+"PRECIPITATION_TITLE" = "PRECIPITATION";
+"PRESSURE_UNITS" = "hPa";

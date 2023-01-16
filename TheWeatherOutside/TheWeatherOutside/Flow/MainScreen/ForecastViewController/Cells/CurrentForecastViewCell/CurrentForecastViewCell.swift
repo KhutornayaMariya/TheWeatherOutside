@@ -9,9 +9,7 @@ import UIKit
 
 final class CurrentForecastViewCell : UICollectionViewCell {
     static let reuseIdentifier = "CurrentForecastViewCell"
-    
-    private var stackSubviews: [UIView]!
-    
+        
     private let dateManager: DateManagerProtocol = DateManager()
     private let windView = ForecastBriefView()
     private let cloudView = ForecastBriefView()
@@ -201,16 +199,6 @@ final class CurrentForecastViewCell : UICollectionViewCell {
             sunsetPic.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.imageAnchor),
             sunsetPic.bottomAnchor.constraint(equalTo: sunset.topAnchor, constant: -.verticalMergin)
         ])
-    }
-    
-    private func forecastBriefView(wind: String, cloud: String, precipitation: CurrentForecastModel.Precipitation) -> [ForecastBriefView] {
-        let windView = ForecastBriefView()
-        let cloudView = ForecastBriefView()
-        let precipitationView = ForecastBriefView()
-        
-
-        
-        return [cloudView, windView, precipitationView]
     }
     
     private func precipitationImage(for type: CurrentForecastModel.Precipitation.precipitationType) -> String {

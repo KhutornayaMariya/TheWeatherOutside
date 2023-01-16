@@ -39,7 +39,7 @@
 "SPEED_IMP" = "ми/ч";
 
 // Hourly forecast
-"DAY" = "Подробнее на 24 часа";
+"DAY" = "Прогноз на 24 часа";
 "DAILY" = "8 дней";
 "DAILY_TITLE" = "Ежедневный прогноз";
 
@@ -50,3 +50,10 @@
 "IMPERIAL" = "F°,ми/ч";
 "METRIC" = "С°,м/с";
 
+// Hourly forecast screen
+"WIND" = "Скорость ветра";
+"WIND_GUST" = "порывы ветра";
+"HUMIDITY" = "влажность";
+"PRESSURE" = "атмосферное давление";
+"PRECIPITATION_TITLE" = "осадки";
+"PRESSURE_UNITS" = "гПа";
