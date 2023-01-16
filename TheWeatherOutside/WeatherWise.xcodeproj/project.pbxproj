@@ -13,6 +13,7 @@
 		4515FA55293F9A0F00A44C5E /* TheWeatherOutside.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4515FA53293F9A0F00A44C5E /* TheWeatherOutside.xcdatamodeld */; };
 		4515FA57293F9A1000A44C5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4515FA56293F9A1000A44C5E /* Assets.xcassets */; };
 		4515FA5A293F9A1000A44C5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4515FA58293F9A1000A44C5E /* LaunchScreen.storyboard */; };
+		4C01C8E4297486E7001D42C1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4C01C8E3297486E7001D42C1 /* SnapKit */; };
 		4C12B2422962EB7200887469 /* WindDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C12B2412962EB7200887469 /* WindDirectionManager.swift */; };
 		4C12B2462962F21000887469 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C12B2482962F21000887469 /* Localizable.strings */; };
 		4C12B24B2962F37700887469 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C12B24A2962F37700887469 /* String+Extension.swift */; };
@@ -64,6 +65,8 @@
 		4C6D87A429741513006E2749 /* HourlyForecastPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D87A329741513006E2749 /* HourlyForecastPresenterProtocol.swift */; };
 		4C6D87A629741533006E2749 /* HourlyForecastPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D87A529741533006E2749 /* HourlyForecastPresenter.swift */; };
 		4C6D87A82974157B006E2749 /* HourlyForecastViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D87A72974157B006E2749 /* HourlyForecastViewControllerProtocol.swift */; };
+		4C6D87B229747B30006E2749 /* WeatherDiagramFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D87B129747B30006E2749 /* WeatherDiagramFactory.swift */; };
+		4C6D87B429747B8E006E2749 /* WeatherDiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D87B329747B8E006E2749 /* WeatherDiagramView.swift */; };
 		4C9340912971738600D6217F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9340902971738600D6217F /* SettingsView.swift */; };
 		4CF2AD7E295F375A003DC0F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4CF2AD7D295F375A003DC0F3 /* Alamofire */; };
 		4CF2AD80295F38FE003DC0F3 /* ForecastApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF2AD7F295F38FE003DC0F3 /* ForecastApiManager.swift */; };
@@ -138,6 +141,8 @@
 		4C6D87A329741513006E2749 /* HourlyForecastPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastPresenterProtocol.swift; sourceTree = "<group>"; };
 		4C6D87A529741533006E2749 /* HourlyForecastPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastPresenter.swift; sourceTree = "<group>"; };
 		4C6D87A72974157B006E2749 /* HourlyForecastViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewControllerProtocol.swift; sourceTree = "<group>"; };
+		4C6D87B129747B30006E2749 /* WeatherDiagramFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDiagramFactory.swift; sourceTree = "<group>"; };
+		4C6D87B329747B8E006E2749 /* WeatherDiagramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDiagramView.swift; sourceTree = "<group>"; };
 		4C9340902971738600D6217F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4CF2AD7F295F38FE003DC0F3 /* ForecastApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastApiManager.swift; sourceTree = "<group>"; };
 		4CF2AD81295F3BCC003DC0F3 /* ForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastResponse.swift; sourceTree = "<group>"; };
@@ -153,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CF2AD7E295F375A003DC0F3 /* Alamofire in Frameworks */,
+				4C01C8E4297486E7001D42C1 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +444,8 @@
 			children = (
 				4C6D879229740CEB006E2749 /* WeatherDiagramCell.swift */,
 				4C6D8794297411CF006E2749 /* WeatherDiagramViewModel.swift */,
+				4C6D87B129747B30006E2749 /* WeatherDiagramFactory.swift */,
+				4C6D87B329747B8E006E2749 /* WeatherDiagramView.swift */,
 			);
 			path = WeatherDiagramCell;
 			sourceTree = "<group>";
@@ -470,8 +478,8 @@
 		4C6D879D2974149D006E2749 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				4C6D879F297414C3006E2749 /* HourlyForecastInteractorProtocol.swift */,
 				4C6D87A1297414DA006E2749 /* HourlyForecastInteractor.swift */,
+				4C6D879F297414C3006E2749 /* HourlyForecastInteractorProtocol.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -545,6 +553,7 @@
 			name = WeatherWise;
 			packageProductDependencies = (
 				4CF2AD7D295F375A003DC0F3 /* Alamofire */,
+				4C01C8E3297486E7001D42C1 /* SnapKit */,
 			);
 			productName = TheWeatherOutside;
 			productReference = 4515FA47293F9A0F00A44C5E /* WeatherWise.app */;
@@ -577,6 +586,7 @@
 			mainGroup = 4515FA3E293F9A0F00A44C5E;
 			packageReferences = (
 				4CF2AD7C295F375A003DC0F3 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				4C01C8E2297486E7001D42C1 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 4515FA48293F9A0F00A44C5E /* Products */;
 			projectDirPath = "";
@@ -612,6 +622,7 @@
 				4C3EA13929707EE6003F5BC1 /* PagesBuilder.swift in Sources */,
 				4CF2AD89295F7AEF003DC0F3 /* GeoCodeApiManager.swift in Sources */,
 				4C6D87A629741533006E2749 /* HourlyForecastPresenter.swift in Sources */,
+				4C6D87B229747B30006E2749 /* WeatherDiagramFactory.swift in Sources */,
 				4CF2AD84295F58FD003DC0F3 /* DateManager.swift in Sources */,
 				4C17D0C32965BB5800132ACB /* ForecastRepository.swift in Sources */,
 				4C6D879329740CEB006E2749 /* WeatherDiagramCell.swift in Sources */,
@@ -660,6 +671,7 @@
 				4C3EA13629707689003F5BC1 /* ForecastRepositoryProtocol.swift in Sources */,
 				4C6D8795297411CF006E2749 /* WeatherDiagramViewModel.swift in Sources */,
 				4C17D09D2964439200132ACB /* OnboardingViewController.swift in Sources */,
+				4C6D87B429747B8E006E2749 /* WeatherDiagramView.swift in Sources */,
 				4CF2AD8F2962DE0D003DC0F3 /* CoreDataManager.swift in Sources */,
 				4C17D0AF2964611300132ACB /* Fonts.swift in Sources */,
 				4515FA4D293F9A0F00A44C5E /* SceneDelegate.swift in Sources */,
@@ -899,6 +911,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4C01C8E2297486E7001D42C1 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		4CF2AD7C295F375A003DC0F3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -910,6 +930,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4C01C8E3297486E7001D42C1 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C01C8E2297486E7001D42C1 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		4CF2AD7D295F375A003DC0F3 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4CF2AD7C295F375A003DC0F3 /* XCRemoteSwiftPackageReference "Alamofire" */;

@@ -5,39 +5,15 @@
 //  Created by Mariya Khutornaya on 15.01.23.
 //
 
+import SnapKit
 import UIKit
 
 final class WeatherDiagramCell: UITableViewCell {
     
-    private lazy var title: UILabel = {
-        let view = UILabel()
+    private let diagramView: WeatherDiagramView = {
+        let diagram = WeatherDiagramFactory().weatherDiagramView()
         
-        view.textColor = .label
-        view.font = .rubikMedium(size: 18)
-        view.numberOfLines = 0
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
-    
-    private lazy var label: UILabel = {
-        let view = UILabel()
-        
-        view.textColor = .white
-        view.font = .rubikRegular(size: 14)
-        view.numberOfLines = 0
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
-    
-    private lazy var image: UIImageView = {
-        let view = UIImageView()
-        
-        view.contentMode = .scaleAspectFit
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
+        return diagram
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -50,28 +26,24 @@ final class WeatherDiagramCell: UITableViewCell {
     }
     
     private func setUp() {
-        backgroundColor = .extraLightBlue
-        let subviews = [label, image]
-        subviews.forEach { addSubview($0) }
+        contentView.backgroundColor = .extraLightBlue
+        addSubview(diagramView)
+        
+        diagramView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 152),
-            
-            image.heightAnchor.constraint(equalToConstant: 18),
-            image.widthAnchor.constraint(equalToConstant: 20),
-            image.leadingAnchor.constraint(equalTo: leadingAnchor),
-            image.topAnchor.constraint(equalTo: topAnchor),
-            
-            label.topAnchor.constraint(equalTo: topAnchor),
-            label.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 5),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor),
-            label.centerYAnchor.constraint(equalTo: centerYAnchor)
+            heightAnchor.constraint(equalToConstant: 150)
         ])
     }
-}
-
-extension WeatherDiagramCell {
+    
     func configure(with model: WeatherDiagramViewModel) {
-        //
+        diagramView.setup(data: model.temperature,
+                          dataLabels: model.temperatureString,
+                          xAxisInfoImages: model.image,
+                          xAxisInfoTexts: model.precipitation,
+                          xAxisLabelTexts: model.time)
+        
     }
 }

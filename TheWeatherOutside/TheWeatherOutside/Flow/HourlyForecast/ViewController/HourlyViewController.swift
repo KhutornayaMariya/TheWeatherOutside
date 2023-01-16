@@ -40,7 +40,7 @@ final class HourlyViewController: UIViewController {
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
@@ -66,9 +66,8 @@ extension HourlyViewController: UITableViewDataSource {
         
         switch indexPath.section {
         case .diagram:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: WeatherDiagramCell.self), for: indexPath) as! WeatherDiagramCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherDiagramCell",for: indexPath) as! WeatherDiagramCell
             cell.configure(with: viewModel.diagramData)
-            cell.selectionStyle = .none
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: HourOverviewCell.self), for: indexPath) as! HourOverviewCell

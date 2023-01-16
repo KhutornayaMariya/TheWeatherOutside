@@ -5,15 +5,12 @@
 //  Created by Mariya Khutornaya on 15.01.23.
 //
 
-import Foundation
+import UIKit
 
 struct WeatherDiagramViewModel {
-    struct Parameters {
-        let time: String
-        let temperature: String
-        let precipitation: String
-        let imageName: String
-    }
-    
-    let parametrs: [Parameters]
+    let temperature: [Int]
+    let temperatureString: [String]
+    let time: [String]
+    let precipitation: [String]
+    let image: [UIImage]
 }

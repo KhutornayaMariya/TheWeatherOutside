@@ -108,26 +108,38 @@ final class HourlyForecastPresenter {
     private func createWeatherDiagramModel(data: MetaInfo) -> WeatherDiagramViewModel {
         guard let forecast = data.hourly,
               let timeZone = data.timeZone
-        else { return WeatherDiagramViewModel(parametrs: []) }
+        else { return WeatherDiagramViewModel(temperature: [], temperatureString: [], time: [], precipitation: [], image: []) }
         
         let oneHourForecastArray = hourlyForecastFilter(forecast: forecast)
-        let twentyFourHoursForecast = Array(oneHourForecastArray[0...24])
+        let sevenHoursForecast = Array(oneHourForecastArray[0...7])
         
-        var parameters: [WeatherDiagramViewModel.Parameters] = []
+        var temperature: [Int] = []
+        var temperatureString: [String] = []
+        var time: [String] = []
+        var precipitation: [String] = []
+        var image: [UIImage] = []
         
-        for forecast in twentyFourHoursForecast {
-            guard let date = forecast.date else { return WeatherDiagramViewModel(parametrs: []) }
-             
-            let model = WeatherDiagramViewModel.Parameters(
-                time: dateManager.convert(date, to: timeZone, with: "HH:mm"),
-                temperature: isImpericUnits ? "\(String(forecast.temperatureImp))°" : "\(String(forecast.temperature))°",
-                precipitation: weatherConditionManager.precipitationAmount(rain: forecast.rain, snow: forecast.snow),
-                imageName: weatherConditionManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover))
+        for forecast in sevenHoursForecast {
+            guard let date = forecast.date else
+            {
+                return WeatherDiagramViewModel(temperature: [], temperatureString: [], time: [], precipitation: [], image: [])
+            }
             
-            parameters.append(model)
+            let temp = isImpericUnits ? forecast.temperatureImp : forecast.temperature
+            temperature.append(Int(temp))
+            temperatureString.append("\(String(temp))°")
+            time.append(dateManager.convert(date, to: timeZone, with: "HH:mm"))
+            precipitation.append(weatherConditionManager.precipitationAmount(rain: forecast.rain, snow: forecast.snow))
+            
+            let imageName = weatherConditionManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover)
+            image.append(UIImage(named: imageName) ?? UIImage())
         }
         
-        return WeatherDiagramViewModel(parametrs: parameters)
+        return WeatherDiagramViewModel(temperature: temperature,
+                                       temperatureString: temperatureString,
+                                       time: time,
+                                       precipitation: precipitation,
+                                       image: image)
     }
     
     private func precipitation(rain: Double, snow: Double, cloudCover: Int16) -> WeatherParameterViewModel {
