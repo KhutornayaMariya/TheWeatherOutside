@@ -89,7 +89,8 @@ class ForecastViewController: UIViewController {
     
     @objc
     private func openDailyForecast() {
-        self.navigationController?.pushViewController(SettingsViewController(), animated: true)
+        let viewController = DailyForecastBuilder().build(with: viewModel.locationTitle)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

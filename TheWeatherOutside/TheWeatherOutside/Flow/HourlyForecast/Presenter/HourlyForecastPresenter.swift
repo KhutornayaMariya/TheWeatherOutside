@@ -14,6 +14,8 @@ final class HourlyForecastPresenter {
     
     weak var viewController: HourlyForecastViewControllerProtocol?
     
+    private var currentForecast: Current?
+    
     init(viewController: HourlyForecastViewControllerProtocol) {
         self.viewController = viewController
         self.dateManager = DateManager()
@@ -39,6 +41,7 @@ final class HourlyForecastPresenter {
               let timeZone = data.timeZone
         else { return [] }
         
+        self.currentForecast = data.current
         var models: [HourOverviewModel] = []
         
         let oneHourForecastArray = hourlyForecastFilter(forecast: forecast)
@@ -100,13 +103,23 @@ final class HourlyForecastPresenter {
             imageName: "thermometer"
         )
         
-        let precipitation = precipitation(rain: data.rain, snow: data.snow, cloudCover: data.cloudCover)
+        var isDay = true
+        if let date = data.date,
+           let sunset = currentForecast?.sunset,
+           let sunrise = currentForecast?.sunrise,
+           date > sunset,
+           let nextSunrise = Calendar.current.date(byAdding: .day, value: 1, to: sunrise),
+           date < nextSunrise
+        { isDay = false }
+        
+        let precipitation = weatherConditionManager.precipitation(rain: data.rain, snow: data.snow, cloudCover: data.cloudCover, isDay: isDay)
         
         return [wind, windGust, humidity, pressure, precipitation]
     }
     
     private func createWeatherDiagramModel(data: MetaInfo) -> WeatherDiagramViewModel {
         guard let forecast = data.hourly,
+              let currentForecast = data.current,
               let timeZone = data.timeZone
         else { return WeatherDiagramViewModel(temperature: [], temperatureString: [], time: [], precipitation: [], image: []) }
         
@@ -131,7 +144,15 @@ final class HourlyForecastPresenter {
             time.append(dateManager.convert(date, to: timeZone, with: "HH:mm"))
             precipitation.append(weatherConditionManager.precipitationAmount(rain: forecast.rain, snow: forecast.snow))
             
-            let imageName = weatherConditionManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover)
+            var isDay = true
+            if let sunset = currentForecast.sunset,
+               let sunrise = currentForecast.sunrise,
+               date > sunset,
+               let nextSunrise = Calendar.current.date(byAdding: .day, value: 1, to: sunrise),
+               date < nextSunrise
+            { isDay = false }
+            
+            let imageName = weatherConditionManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: isDay)
             image.append(UIImage(named: imageName) ?? UIImage())
         }
         
@@ -140,15 +161,6 @@ final class HourlyForecastPresenter {
                                        time: time,
                                        precipitation: precipitation,
                                        image: image)
-    }
-    
-    private func precipitation(rain: Double, snow: Double, cloudCover: Int16) -> WeatherParameterViewModel {
-        let parameterName = "PRECIPITATION_TITLE".localized.capitalizedSentence
-        let value = weatherConditionManager.precipitationAmount(rain: rain, snow: snow)
-        let image = weatherConditionManager.skyConditionImage(rain: rain, snow: snow, cloudCover: cloudCover)
-        return .init(parameterName: parameterName,
-                     value: value,
-                     imageName: image)
     }
 }
 

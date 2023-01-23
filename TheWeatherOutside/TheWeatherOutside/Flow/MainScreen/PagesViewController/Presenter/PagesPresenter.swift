@@ -67,6 +67,7 @@ final class PagesPresenter {
     
     private func createHourlyForecastModel(data: MetaInfo) -> [HourlyForecastModel] {
         guard let forecast = data.hourly,
+              let currentForecast = data.current,
               let timeZone = data.timeZone
         else { return [] }
         
@@ -84,10 +85,23 @@ final class PagesPresenter {
         for forecast in twelveFourHoursForecast {
             guard let date = forecast.date else { return [] }
             
+            var isDay: Bool
+            if let sunset = currentForecast.sunset,
+               let sunrise = currentForecast.sunrise,
+               date > sunset,
+               let nextSunrise = Calendar.current.date(byAdding: .day, value: 1, to: sunrise),
+               date < nextSunrise
+            {
+                isDay = false
+            } else {
+                isDay = true
+            }
+
+            
             let model = HourlyForecastModel(
                 time: dateManager.convert(date, to: timeZone, with: "HH:mm"),
                 temperature: isImpericUnits ? "\(String(forecast.temperatureImp))°" : "\(String(forecast.temperature))°",
-                imageName: imageManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover)
+                imageName: imageManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: isDay)
             )
             
             models.append(model)
@@ -108,7 +122,7 @@ final class PagesPresenter {
             guard let forecast = oneDayForecast as? Daily,
                   let date = forecast.date
             else { return [] }
-
+            
             if Calendar.current.isDateInToday(date) { continue }
             
             let temp = isImpericUnits ? "\(String(forecast.tempMinImp))/\(String(forecast.tempMaxImp))°" : "\(String(forecast.tempMin))/\(String(forecast.tempMax))°"
@@ -126,7 +140,7 @@ final class PagesPresenter {
                 date: dateManager.convert(date, to: timeZone, with: "dd/MM") ,
                 temperature: temp,
                 description: forecast.weatherDesc?.capitalizedSentence ?? "",
-                imageName: imageManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover),
+                imageName: imageManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: true),
                 amountOfPrecipitation: precipitation
             )
             

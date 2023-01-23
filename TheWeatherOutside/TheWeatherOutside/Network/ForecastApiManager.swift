@@ -14,8 +14,8 @@ protocol ForecastApiManagerProtocol {
 
 final class ForecastApiManager {
     private let forecastApiUrl = "https://api.openweathermap.org/data/3.0/onecall"
-    private let encryptedApiKey: [UInt8] = [97, 101, 50, 56, 101, 56, 57, 50, 55, 101, 101, 49, 98, 48, 48, 57,
-                                            97, 50, 51, 102, 51, 56, 97, 57, 54, 51, 52, 99, 98, 101, 55, 97]
+    private let encryptedApiKey: [UInt8] = [57, 56, 97, 48, 54, 99, 57, 51, 100, 56, 97, 49, 53, 101, 97, 57, 102,
+                                            53, 49, 56, 52, 100, 99, 101, 57, 51, 97, 50, 99, 53, 56, 55]
     
     private func parameters(lat: Double, lon: Double) -> [String : Any] {
         let language = Locale.preferredLanguages[0].contains("ru") ? "ru" : "en"

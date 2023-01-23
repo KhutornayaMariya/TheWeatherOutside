@@ -112,7 +112,7 @@ extension ForecastRepository: ForecastRepositoryProtocol {
         }
     }
     
-    func fetchHourlyForecast(location: String) -> MetaInfo? {
+    func fetchCachedForecast(for location: String) -> MetaInfo? {
         return cachedData.first { metaInfo in
             metaInfo.locationTitle == location
         }

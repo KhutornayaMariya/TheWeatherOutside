@@ -34,7 +34,7 @@ final class WeatherDiagramCell: UITableViewCell {
         }
         
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 150)
+            heightAnchor.constraint(greaterThanOrEqualToConstant: 150)
         ])
     }
     
