@@ -5,22 +5,18 @@
 //  Created by Mariya Khutornaya on 16.01.23.
 //
 
-import Foundation
 import UIKit
 
-public protocol DailyForecastBuilderProtocol: AnyObject {
+protocol DailyForecastBuilderProtocol: AnyObject {
     func build(with location: String) -> UIViewController
 }
 
 final class DailyForecastBuilder: DailyForecastBuilderProtocol {
-    private typealias Interactor = DailyForecastInteractor
-    private typealias Presenter = DailyForecastPresenter
-    private typealias ViewController = DailyViewController
     
     func build(with location: String) -> UIViewController {
-        let viewController = ViewController()
-        let presenter = Presenter(viewController: viewController)
-        let interactor = Interactor(
+        let viewController = DailyViewController()
+        let presenter = DailyForecastPresenter(viewController: viewController)
+        let interactor = DailyForecastInteractor(
             input: location,
             repository: ForecastRepository(),
             presenter: presenter)

@@ -20,7 +20,7 @@ enum Units: String {
 final class UserDefaultsManager {
     
     static let defaultManager = UserDefaultsManager()
-
+    
     func isImpericUnits() -> Bool {
         UserDefaults.standard.string(forKey: UserDefaultsKeys.units.rawValue) == Units.imperial.rawValue
     }

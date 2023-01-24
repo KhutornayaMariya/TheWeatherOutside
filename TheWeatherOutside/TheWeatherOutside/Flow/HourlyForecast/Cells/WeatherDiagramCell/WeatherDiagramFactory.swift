@@ -9,16 +9,17 @@ import UIKit
 
 struct WeatherDiagramFactory {
     enum Constants {
-        static let margin: CGFloat = 16
+        static let safeArea: CGFloat = 16
+        static let margin: CGFloat = 10
     }
     
     func weatherDiagramView() -> WeatherDiagramView {
         let view = WeatherDiagramView()
         view.backgroundColor = .extraLightBlue
-        view.contentInset = UIEdgeInsets(top: 11,
-                                         left: Constants.margin,
-                                         bottom: 8,
-                                         right: Constants.margin + 34)
+        view.contentInset = UIEdgeInsets(top: Constants.margin,
+                                         left: Constants.safeArea,
+                                         bottom: Constants.margin,
+                                         right: Constants.safeArea + 34)
         
         view.gradientColors = [UIColor(red: 61 / 255, green: 105 / 255, blue: 220 / 225, alpha: 0.3),
                                UIColor(red: 32 / 255, green: 78 / 255, blue: 199 / 225, alpha: 0.3),
@@ -33,7 +34,6 @@ struct WeatherDiagramFactory {
         view.bottomBorder = 47
         view.graphPointRadius = 2
         
-        view.pointColor = .white
         view.xAxisColor = .accent
         view.xAxisPointColor = .accent
         view.xAxisWidth = 0.5
@@ -44,14 +44,14 @@ struct WeatherDiagramFactory {
         view.xAxisPointLabelSize = .init(width: 4, height: 8)
         
         view.pointLabelFont = .systemFont(ofSize: 14)
-        view.pointLabelColor = .black
+        view.pointLabelColor = .label
         view.pointLabelOffset = .init(x: -2, y: -8)
         
         view.xAxisInfoLabelFont = .systemFont(ofSize: 12)
-        view.xAxisInfoLabelColor = .black
+        view.xAxisInfoLabelColor = .label
         
-        view.xAxisPointLabelFont = .systemFont(ofSize: 14)
-        view.xAxisPointLabelColor = .black
+        view.xAxisPointLabelFont = .systemFont(ofSize: 12)
+        view.xAxisPointLabelColor = .label
         
         return view
     }

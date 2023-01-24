@@ -5,12 +5,13 @@
 //  Created by Mariya Khutornaya on 16.01.23.
 //
 
-import Foundation
 import UIKit
 
+protocol DailyForecastInteractorProtocol: AnyObject {
+    func updateData()
+}
+
 final class DailyForecastInteractor {
-    
-    private typealias ViewController = HourlyViewController
     
     private let repository: ForecastRepositoryProtocol
     private let presenter: DailyForecastPresenterProtocol

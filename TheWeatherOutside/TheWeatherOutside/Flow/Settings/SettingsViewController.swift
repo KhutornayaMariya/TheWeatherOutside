@@ -28,6 +28,7 @@ final class SettingsViewController: UIViewController {
     private func setUpNavigationBar() {
         let navBar = self.navigationController?.navigationBar
         navBar?.backgroundColor = .clear
+        parent?.title = nil
     }
     
     private func setUp() {

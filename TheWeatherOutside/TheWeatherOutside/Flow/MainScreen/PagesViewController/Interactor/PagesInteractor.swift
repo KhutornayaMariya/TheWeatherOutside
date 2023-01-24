@@ -5,12 +5,14 @@
 //  Created by Mariya Khutornaya on 12.01.23.
 //
 
-import Foundation
 import UIKit
 
+protocol PagesInteractorProtocol {
+    func updateData()
+    func updateData(with newLocation: String, completionHandler: @escaping (Bool) -> Void)
+}
+
 final class PagesInteractor {
-    
-    private typealias ViewController = PagesViewController
     
     private let repository: ForecastRepositoryProtocol
     private let presenter: PagesPresenterProtocol
@@ -33,6 +35,7 @@ extension PagesInteractor: PagesInteractorProtocol {
             if !result {
                 completionHandler(false)
             } else {
+                completionHandler(true)
                 self?.presenter.showData(metaInfo)
             }
         }

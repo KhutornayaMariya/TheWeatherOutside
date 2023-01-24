@@ -29,8 +29,8 @@ extension MainCoordinator: MainCoordinatorProtocol {
         if locationManager.authorizationStatus == .notDetermined
             && UserDefaults.standard.bool(forKey: UserDefaultsKeys.locationDenied.rawValue) != true {
             return  UINavigationController(rootViewController: OnboardingViewController(locationManager: locationManager))
-        } else {
-            return  UINavigationController(rootViewController: PagesBuilder().build())
         }
+        
+        return  UINavigationController(rootViewController: PagesBuilder().build())
     }
 }

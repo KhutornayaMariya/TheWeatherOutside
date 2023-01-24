@@ -38,7 +38,7 @@
 
 // Hourly forecast
 "DAY" = "24 hours forecast";
-"DAILY" = "8 days";
+"DAILY" = "7 days";
 "DAILY_TITLE" = "Daily forecast";
 
 // Settings
@@ -57,7 +57,7 @@
 "PRESSURE_UNITS" = "hPa";
 
 // Daily forecast
-"DAILY_TITLE" = "8-day forecast";
+"DAILY_TITLE" = "7-day forecast";
 "SUN_AND_MOON" = "Sun and moon";
 "DAY_TITLE" = "day";
 "EVE_TITLE" = "evening";
@@ -66,5 +66,5 @@
 "UV_INDEX" = "UV index";
 "CLOUD_COVER" = "Cloud cover";
 
-"SUNRISE" = "Sunrise";
-"SUNSET" = "Sunset";
+"SUNRISE" = "Rise";
+"SUNSET" = "Set";

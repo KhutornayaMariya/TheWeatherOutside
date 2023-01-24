@@ -15,10 +15,10 @@ struct HeaderCellModel {
 final class HeaderCell: UICollectionReusableView {
     static let reuseIdentifier = "HeaderCell"
     
-    public var onLinkTapHandler: (() -> Void)?
-
+    var onLinkTapHandler: (() -> Void)?
+    
     // MARK: - Private properties
-
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         
@@ -28,10 +28,10 @@ final class HeaderCell: UICollectionReusableView {
         
         return label
     }()
-
+    
     private lazy var link: UIButton = {
         let view = UIButton()
-                
+        
         view.titleLabel?.font = .rubikRegular(size: 16)
         view.titleLabel?.textColor = .label
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -39,20 +39,20 @@ final class HeaderCell: UICollectionReusableView {
         
         return view
     }()
-
+    
     // MARK: - Initializers
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         setUp()
     }
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     func configure(with viewModel: HeaderCellModel) {
         if let linkText = viewModel.link {
             let attributedString = NSMutableAttributedString(string: linkText)
@@ -64,17 +64,17 @@ final class HeaderCell: UICollectionReusableView {
         
         titleLabel.text = viewModel.title
     }
-
+    
     // MARK: - Private properties
-
+    
     private func setUp() {
         backgroundColor = .clear
         [titleLabel, link].forEach { addSubview($0) }
-
+        
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-
+            
             link.topAnchor.constraint(equalTo: topAnchor),
             link.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol DailyForecastPresenterProtocol: AnyObject {
+    func showData(_ data: MetaInfo)
+}
+
 final class DailyForecastPresenter {
     private let dateManager: DateManagerProtocol
     private let weatherConditionManager = WeatherConditionManager()
@@ -40,6 +44,8 @@ final class DailyForecastPresenter {
         
         for forecast in oneDayForecastArray {
             guard let date = forecast.date else { return [] }
+            
+            if Calendar.current.isDateInToday(date) { continue }
             
             let dayAndNightModel = createDayAndNightModels(data: forecast, timeZone)
             let timeOfDayModel = createTimeOfDayModel(data: forecast)
@@ -126,7 +132,7 @@ final class DailyForecastPresenter {
     
     private func createDayAndNightModels(data: Daily, _ timeZone: String) -> [DayAndNight] {
         let dayLength = data.sunset! - data.sunrise!
-        let nightLength = data.moonset! - data.moonrise!
+        let nightLength = abs(data.moonset! - data.moonrise!)
         
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .abbreviated

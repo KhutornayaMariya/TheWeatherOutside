@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol DailyViewControllerProtocol: AnyObject {
+    func show(with dataItems: DailyViewModel)
+}
+
 final class DailyViewController: UIViewController {
     private enum Constants {
         static let bubblesSectionIndex: Int = 0
@@ -54,7 +58,6 @@ final class DailyViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.collectionView.selectItem(at: IndexPath(row: selectedIndex, section: Constants.bubblesSectionIndex), animated: true, scrollPosition: .centeredVertically)
         self.collectionView(self.collectionView, didSelectItemAt: IndexPath(item: selectedIndex, section: Constants.bubblesSectionIndex))
     }
     
@@ -187,7 +190,7 @@ private extension NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .zero
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(88), heightDimension: .absolute(36))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(95), heightDimension: .absolute(36))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
@@ -277,10 +280,9 @@ extension DailyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case Constants.bubblesSectionIndex:
-            guard let selectedCell = collectionView.cellForItem(at: indexPath) as? DateBubbleCell else { return }
-            selectedCell.setColor(.accent)
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
             forecastItems = viewModel?.dailyForecast[indexPath.row]
-            collectionView.reloadSections([Constants.forecastSectionIndex, Constants.forecastSectionIndex])
+            collectionView.reloadSections([Constants.forecastSectionIndex, Constants.dayAndNightSectionIndex])
         default:
             break
         }
@@ -289,8 +291,7 @@ extension DailyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case Constants.bubblesSectionIndex:
-            guard let selectedCell = collectionView.cellForItem(at: indexPath) as? DateBubbleCell else { return }
-            selectedCell.setColor(.clear)
+            collectionView.deselectItem(at: indexPath, animated: true)
         default:
             break
         }

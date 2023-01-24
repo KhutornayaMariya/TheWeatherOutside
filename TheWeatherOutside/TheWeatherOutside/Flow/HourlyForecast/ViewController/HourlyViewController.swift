@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol HourlyForecastViewControllerProtocol: AnyObject {
+    func show(with dataItems: HourViewModel)
+}
+
 final class HourlyViewController: UIViewController {
     
     var interactor: HourlyForecastInteractor?
@@ -23,7 +27,7 @@ final class HourlyViewController: UIViewController {
         view.backgroundColor = .clear
         view.register(HourOverviewCell.self, forCellReuseIdentifier: String(describing: HourOverviewCell.self))
         view.register(WeatherDiagramCell.self, forCellReuseIdentifier: String(describing: WeatherDiagramCell.self))
-
+        
         return view
     }()
     

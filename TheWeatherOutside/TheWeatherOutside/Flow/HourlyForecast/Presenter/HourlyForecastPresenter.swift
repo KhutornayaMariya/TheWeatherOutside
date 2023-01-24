@@ -5,14 +5,17 @@
 //  Created by Mariya Khutornaya on 15.01.23.
 //
 
-import Foundation
 import UIKit
+
+protocol HourlyForecastPresenterProtocol: AnyObject {
+    func showData(_ data: MetaInfo)
+}
 
 final class HourlyForecastPresenter {
     private let dateManager: DateManagerProtocol
     private let weatherConditionManager = WeatherConditionManager()
     
-    weak var viewController: HourlyForecastViewControllerProtocol?
+    private weak var viewController: HourlyForecastViewControllerProtocol?
     
     private var currentForecast: Current?
     

@@ -95,9 +95,7 @@ extension OnboardingViewController: CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        
-    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {}
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         guard let error = error as? CLError else { return }

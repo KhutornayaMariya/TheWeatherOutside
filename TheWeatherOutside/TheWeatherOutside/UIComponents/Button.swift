@@ -8,22 +8,22 @@
 import UIKit
 
 final class Button: UIButton {
-
+    
     private let title: String
-
+    
     var tapAction: (() -> Void)?
-
+    
     init(title: String) {
         self.title = title
         super.init(frame: .zero)
-
+        
         setup()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     private func setup() {
         backgroundColor = .button
         layer.cornerRadius = 10
@@ -32,7 +32,7 @@ final class Button: UIButton {
         setTitle(title, for: .normal)
         addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
-
+    
     @objc private func buttonTapped() {
         tapAction?()
     }

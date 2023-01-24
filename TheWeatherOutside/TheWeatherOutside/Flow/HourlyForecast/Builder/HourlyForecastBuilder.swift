@@ -7,19 +7,16 @@
 
 import UIKit
 
-public protocol HourlyForecastBuilderProtocol: AnyObject {
+protocol HourlyForecastBuilderProtocol: AnyObject {
     func build(with location: String) -> UIViewController
 }
 
 final class HourlyForecastBuilder: HourlyForecastBuilderProtocol {
-    private typealias Interactor = HourlyForecastInteractor
-    private typealias Presenter = HourlyForecastPresenter
-    private typealias ViewController = HourlyViewController
     
     func build(with location: String) -> UIViewController {
-        let viewController = ViewController()
-        let presenter = Presenter(viewController: viewController)
-        let interactor = Interactor(
+        let viewController = HourlyViewController()
+        let presenter = HourlyForecastPresenter(viewController: viewController)
+        let interactor = HourlyForecastInteractor(
             input: location,
             repository: ForecastRepository(),
             presenter: presenter)

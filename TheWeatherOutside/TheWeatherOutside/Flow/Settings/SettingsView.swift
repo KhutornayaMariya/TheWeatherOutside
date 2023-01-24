@@ -9,7 +9,7 @@ import UIKit
 
 final class SettingsView: UIView {
     
-    public var onApplyButtonTapHandler: (() -> Void)?
+    var onApplyButtonTapHandler: (() -> Void)?
     
     private lazy var cloudOneImage: UIImageView = {
         let view = UIImageView()
