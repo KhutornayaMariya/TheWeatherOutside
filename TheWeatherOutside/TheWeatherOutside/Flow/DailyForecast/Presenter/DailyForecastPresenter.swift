@@ -132,7 +132,7 @@ final class DailyForecastPresenter {
     
     private func createDayAndNightModels(data: Daily, _ timeZone: String) -> [DayAndNight] {
         let dayLength = data.sunset! - data.sunrise!
-        let nightLength = data.moonset! - data.moonrise!
+        let nightLength = abs(data.moonset! - data.moonrise!)
         
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .abbreviated
