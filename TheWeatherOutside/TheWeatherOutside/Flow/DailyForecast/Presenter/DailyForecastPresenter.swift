@@ -45,6 +45,8 @@ final class DailyForecastPresenter {
         for forecast in oneDayForecastArray {
             guard let date = forecast.date else { return [] }
             
+            if Calendar.current.isDateInToday(date) { continue }
+            
             let dayAndNightModel = createDayAndNightModels(data: forecast, timeZone)
             let timeOfDayModel = createTimeOfDayModel(data: forecast)
             

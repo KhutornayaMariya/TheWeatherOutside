@@ -14,6 +14,20 @@ struct DateBubbleModel {
 final class DateBubbleCell: UICollectionViewCell {
     static let reuseIdentifier = "DateBubbleCell"
     
+    override var isSelected: Bool{
+        willSet{
+            super.isSelected = newValue
+            if newValue
+            {
+                backgroundColor = .accent
+            }
+            else
+            {
+                backgroundColor = .clear
+            }
+        }
+    }
+    
     // MARK: - Private properties
     
     private lazy var label: UILabel = {

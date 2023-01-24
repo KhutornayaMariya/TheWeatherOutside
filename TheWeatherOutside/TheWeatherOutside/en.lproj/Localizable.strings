@@ -57,7 +57,7 @@
 "PRESSURE_UNITS" = "hPa";
 
 // Daily forecast
-"DAILY_TITLE" = "8-day forecast";
+"DAILY_TITLE" = "7-day forecast";
 "SUN_AND_MOON" = "Sun and moon";
 "DAY_TITLE" = "day";
 "EVE_TITLE" = "evening";

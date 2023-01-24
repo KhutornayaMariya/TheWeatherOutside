@@ -59,7 +59,7 @@
 "PRESSURE_UNITS" = "гПа";
 
 // Daily forecast
-"DAILY_TITLE" = "Прогноз на 8 дней";
+"DAILY_TITLE" = "Прогноз на 7 дней";
 "SUN_AND_MOON" = "Солнце и луна";
 "DAY_TITLE" = "День";
 "EVE_TITLE" = "вечер";
