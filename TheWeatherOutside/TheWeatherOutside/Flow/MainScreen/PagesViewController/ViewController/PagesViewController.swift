@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PageViewControllerProtocol: AnyObject {
+    func show(with dataItems: [ForecastViewModel])
+}
+
 final class PagesViewController: UIViewController {
     
     var interactor: PagesInteractorProtocol?
@@ -14,6 +18,7 @@ final class PagesViewController: UIViewController {
     private var pageController: UIPageViewController?
     
     private var dataItems: [ForecastViewModel]?
+    private var selectedIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +59,10 @@ final class PagesViewController: UIViewController {
     
     private func setupPageController() {
         pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        
         guard let pageController = pageController else { return }
         pageController.dataSource = self
+        pageController.delegate = self
         pageController.view.backgroundColor = .clear
         pageController.view.frame = CGRect(x: 0,y: 0,width: self.view.frame.width,height: self.view.frame.height)
         addChild(pageController)
@@ -81,7 +88,9 @@ final class PagesViewController: UIViewController {
             else { return }
             
             self?.interactor?.updateData(with: text, completionHandler: { result in
-                print("Location error")
+                if result {
+                    self?.selectedIndex = self?.dataItems?.count ?? 0
+                } else { print("Location error") }
             })
         }
         
@@ -93,8 +102,18 @@ final class PagesViewController: UIViewController {
     }
 }
 
+extension PagesViewController: UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if completed {
+            guard let currentVC = pageViewController.viewControllers?.first as? ForecastViewController
+            else { return }
+            selectedIndex = currentVC.index
+        }
+    }
+}
+
 extension PagesViewController: UIPageViewControllerDataSource {
-    
+        
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
@@ -124,7 +143,7 @@ extension PagesViewController: UIPageViewControllerDataSource {
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return 0
+        return selectedIndex
     }
 }
 
@@ -132,13 +151,11 @@ extension PagesViewController: PageViewControllerProtocol {
     func show(with dataItems: [ForecastViewModel]) {
         self.dataItems = dataItems
         
-        var viewControllers: [UIViewController]
-        if dataItems.isEmpty {
-            viewControllers = [EmptyViewController()]
-        } else {
-            let index = dataItems.count > 1 ? dataItems.endIndex - 1 : 0
-            viewControllers = [ForecastViewController(viewModel: dataItems[index], index: index)]
+        var viewControllers: [UIViewController] = [EmptyViewController()]
+        if !dataItems.isEmpty {
+            viewControllers = [ForecastViewController(viewModel: dataItems[selectedIndex], index: selectedIndex)]
         }
-        self.pageController?.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+        
+        self.pageController?.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
     }
 }

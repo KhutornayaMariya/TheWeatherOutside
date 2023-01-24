@@ -8,6 +8,12 @@
 import Foundation
 import CoreLocation
 
+protocol ForecastRepositoryProtocol: AnyObject {
+    func fetchData(completionHandler: @escaping ([MetaInfo]) -> Void)
+    func fetchDataForLocation(title: String, completionHandler: @escaping (Bool, [MetaInfo]) -> Void)
+    func fetchCachedForecast(for location: String) -> MetaInfo?
+}
+
 final class ForecastRepository {
     
     private let forecastApiManager: ForecastApiManagerProtocol
@@ -96,7 +102,7 @@ extension ForecastRepository: ForecastRepositoryProtocol {
                   let title = title,
                   !self.dataManager.doesAlreadyExistMetaInfo(with: title)
             else {
-                completionHandler(false, self.cachedData) // add custom error
+                completionHandler(false, self.cachedData) // TODO: add custom error
                 return
             }
             

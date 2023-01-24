@@ -8,7 +8,7 @@
 import UIKit
 
 final class ForecastBriefView: UIView {
-        
+    
     private lazy var label: UILabel = {
         let view = UILabel()
         

@@ -123,7 +123,7 @@ final class DayAndNightCell: UICollectionViewCell {
         shapeLayer.strokeColor = UIColor.accent.cgColor
         shapeLayer.lineWidth = 0.3
         shapeLayer.lineDashPattern = [7, 3] // 7 is the length of dash, 3 is length of the gap.
-
+        
         let path = CGMutablePath()
         path.addLines(between: [p0, p1])
         shapeLayer.path = path

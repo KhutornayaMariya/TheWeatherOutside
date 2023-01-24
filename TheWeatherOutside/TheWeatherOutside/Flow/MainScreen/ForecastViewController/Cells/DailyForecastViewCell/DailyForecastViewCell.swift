@@ -5,12 +5,11 @@
 //  Created by Mariya Khutornaya on 11.01.23.
 //
 
-import Foundation
 import UIKit
 
 final class DailyForecastViewCell: UICollectionViewCell {
     static let reuseIdentifier = "DailyForecastViewCell"
-
+    
     private lazy var date: UILabel = {
         let view = UILabel()
         
@@ -103,10 +102,10 @@ final class DailyForecastViewCell: UICollectionViewCell {
             
             precipitation.centerYAnchor.constraint(equalTo: image.centerYAnchor),
             precipitation.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: .margin),
-
+            
             weatherDescription.centerYAnchor.constraint(equalTo: centerYAnchor),
             weatherDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 90),
-
+            
             temperature.centerYAnchor.constraint(equalTo: centerYAnchor),
             temperature.trailingAnchor.constraint(equalTo: arrow.leadingAnchor, constant: -.margin),
             temperature.leadingAnchor.constraint(greaterThanOrEqualTo: weatherDescription.trailingAnchor, constant: .margin),

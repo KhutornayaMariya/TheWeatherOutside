@@ -53,6 +53,7 @@ class ForecastViewController: UIViewController {
         super.viewWillAppear(animated)
         let navBar: UINavigationBar? = navigationController?.navigationBar
         navBar?.topItem?.title = viewModel.locationTitle
+        collectionView.reloadData()
     }
     
     private func setUp() {

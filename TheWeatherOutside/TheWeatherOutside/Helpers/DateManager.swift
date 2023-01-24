@@ -17,7 +17,7 @@ final class DateManager: DateManagerProtocol {
         formatter.locale = .current
         formatter.timeZone = TimeZone(identifier: timeZone)
         formatter.dateFormat = dateFormat
-                
+        
         return formatter.string(from: date)
     }
 }

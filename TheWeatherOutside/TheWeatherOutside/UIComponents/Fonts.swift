@@ -7,11 +7,11 @@
 
 import UIKit
 
-public extension UIFont {
+extension UIFont {
     static func rubikRegular(size: CGFloat) -> UIFont {
         return UIFont(name: "Rubik-Regular", size: size) ?? UIFont.systemFont(ofSize: size)
     }
-
+    
     static func rubikSemibold(size: CGFloat) -> UIFont {
         return UIFont(name: "Rubik-Semibold", size: size) ?? UIFont.systemFont(ofSize: size)
     }

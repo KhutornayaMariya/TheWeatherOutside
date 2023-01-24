@@ -76,7 +76,7 @@ extension GeoCodeResponse.Response.GeoObjectCollection.FeatureMember.GeoObject {
 
 extension GeoCodeResponse {
     
-    public func coordinates() -> CLLocationCoordinate2D? {
+    func coordinates() -> CLLocationCoordinate2D? {
         guard let member = response.object.member.first,
               let lat = CLLocationDegrees(member.geoObject.point.lat),
               let lon = CLLocationDegrees(member.geoObject.point.lon)
@@ -84,7 +84,7 @@ extension GeoCodeResponse {
         return CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
     
-    public func name() -> String? {
+    func name() -> String? {
         guard let member = response.object.member.first else { return nil }
         return member.geoObject.name
     }

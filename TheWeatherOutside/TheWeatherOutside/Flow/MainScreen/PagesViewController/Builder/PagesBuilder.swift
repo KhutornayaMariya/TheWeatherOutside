@@ -7,19 +7,15 @@
 
 import UIKit
 
-public protocol PagesBuilderProtocol: AnyObject {
+protocol PagesBuilderProtocol: AnyObject {
     func build() -> UIViewController
 }
 
 final class PagesBuilder: PagesBuilderProtocol {
-    private typealias Interactor = PagesInteractor
-    private typealias Presenter = PagesPresenter
-    private typealias ViewController = PagesViewController
-    
     func build() -> UIViewController {
-        let viewController = ViewController()
-        let presenter = Presenter(viewController: viewController)
-        let interactor = Interactor(
+        let viewController = PagesViewController()
+        let presenter = PagesPresenter(viewController: viewController)
+        let interactor = PagesInteractor(
             repository: ForecastRepository(),
             presenter: presenter)
         

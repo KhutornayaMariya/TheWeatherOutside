@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol DailyForecastPresenterProtocol: AnyObject {
+    func showData(_ data: MetaInfo)
+}
+
 final class DailyForecastPresenter {
     private let dateManager: DateManagerProtocol
     private let weatherConditionManager = WeatherConditionManager()

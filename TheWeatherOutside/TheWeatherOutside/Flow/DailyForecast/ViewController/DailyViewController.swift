@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol DailyViewControllerProtocol: AnyObject {
+    func show(with dataItems: DailyViewModel)
+}
+
 final class DailyViewController: UIViewController {
     private enum Constants {
         static let bubblesSectionIndex: Int = 0

@@ -11,9 +11,7 @@ import UIKit
 final class WeatherDiagramCell: UITableViewCell {
     
     private let diagramView: WeatherDiagramView = {
-        let diagram = WeatherDiagramFactory().weatherDiagramView()
-        
-        return diagram
+        WeatherDiagramFactory().weatherDiagramView()
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -31,11 +29,8 @@ final class WeatherDiagramCell: UITableViewCell {
         
         diagramView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+            make.edges.height.equalTo(150)
         }
-        
-        NSLayoutConstraint.activate([
-            heightAnchor.constraint(greaterThanOrEqualToConstant: 150)
-        ])
     }
     
     func configure(with model: WeatherDiagramViewModel) {
@@ -44,6 +39,5 @@ final class WeatherDiagramCell: UITableViewCell {
                           xAxisInfoImages: model.image,
                           xAxisInfoTexts: model.precipitation,
                           xAxisLabelTexts: model.time)
-        
     }
 }

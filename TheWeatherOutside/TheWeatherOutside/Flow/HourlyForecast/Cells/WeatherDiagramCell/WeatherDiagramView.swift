@@ -5,40 +5,36 @@
 //  Created by Mariya Khutornaya on 15.01.23.
 //
 
-import Foundation
 import UIKit
 
 final class WeatherDiagramView: UIView {
-    typealias Offset = CGPoint
-    
     // MARK: - Properties
     
     var contentInset: UIEdgeInsets = .zero
     
     var gradientColors: [UIColor] = []
     var gradientColorLocations: [CGFloat] = []
-    var gradientBorderColor: UIColor = .black
+    var gradientBorderColor: UIColor = .label
     var gradientBorderWidth: CGFloat = 1
     
-    var pointColor: UIColor = .white
-    var lineColor: UIColor = .black
+    var lineColor: UIColor = .label
     
     var lineWidth: CGFloat = 1
     var graphPointRadius: CGFloat = 2
     
-    var xAxisColor: UIColor = .black
-    var xAxisPointColor: UIColor = .black
+    var xAxisColor: UIColor = .label
+    var xAxisPointColor: UIColor = .label
     var xAxisWidth: CGFloat = 1
     
     var pointLabelFont: UIFont = .preferredFont(forTextStyle: .body)
-    var pointLabelColor: UIColor = .black
-    var pointLabelOffset: Offset = .zero
+    var pointLabelColor: UIColor = .label
+    var pointLabelOffset: CGPoint = .zero
     
     var xAxisInfoLabelFont: UIFont = .preferredFont(forTextStyle: .body)
-    var xAxisInfoLabelColor: UIColor = .black
+    var xAxisInfoLabelColor: UIColor = .label
     
     var xAxisPointLabelFont: UIFont = .preferredFont(forTextStyle: .body)
-    var xAxisPointLabelColor: UIColor = .black
+    var xAxisPointLabelColor: UIColor = .label
     var xAxisPointLabelSize: CGSize = .zero
     
     var data: [Int] = []
@@ -48,9 +44,9 @@ final class WeatherDiagramView: UIView {
     var xAxisLabelTexts: [String] = []
     var bottomBorder: CGFloat = 0
     var xAxisYPosition:CGFloat = 0
-    var xAxisInfoImagesOffset: Offset = .zero
-    var xAxisInfoOffset: Offset = .zero
-    var xAxisLabelOffset: Offset = .zero
+    var xAxisInfoImagesOffset: CGPoint = .zero
+    var xAxisInfoOffset: CGPoint = .zero
+    var xAxisLabelOffset: CGPoint = .zero
     
     // MARK: - LifeCicle
     
@@ -268,7 +264,7 @@ final class WeatherDiagramView: UIView {
             
             for (diagramPoint, image) in zip(diagramPoints, xAxisInfoImages) {
                 point.x = diagramPoint.x
-                let rect = CGRect(x: point.x, y: point.y, width: 30, height: 25)
+                let rect = CGRect(x: point.x, y: point.y, width: 25, height: 20)
                 image.draw(in: rect)
             }
         }

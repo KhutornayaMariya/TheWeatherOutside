@@ -9,7 +9,7 @@ import UIKit
 
 final class HourlyForecastViewCell: UICollectionViewCell {
     static let reuseIdentifier = "HourlyForecastViewCell"
-
+    
     private lazy var time: UILabel = {
         let view = UILabel()
         

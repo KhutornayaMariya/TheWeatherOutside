@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol PagesPresenterProtocol: AnyObject {
+    func showData(_ data: [MetaInfo])
+}
+
 final class PagesPresenter {
     private let dateManager: DateManagerProtocol
     private let imageManager = WeatherConditionManager()

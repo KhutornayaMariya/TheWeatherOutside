@@ -11,9 +11,7 @@ final class EmptyViewController: UIViewController {
     
     private lazy var emptyView: EmptyView = {
         let view = EmptyView()
-        
         view.translatesAutoresizingMaskIntoConstraints = false
-        
         return view
     }()
     

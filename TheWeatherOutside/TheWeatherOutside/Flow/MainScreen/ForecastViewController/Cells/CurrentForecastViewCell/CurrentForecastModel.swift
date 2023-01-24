@@ -8,7 +8,7 @@
 import Foundation
 
 struct CurrentForecastModel {
-
+    
     struct Precipitation {
         enum precipitationType {
             case rain

@@ -9,7 +9,7 @@ import UIKit
 
 final class CurrentForecastViewCell : UICollectionViewCell {
     static let reuseIdentifier = "CurrentForecastViewCell"
-        
+    
     private let dateManager: DateManagerProtocol = DateManager()
     private let windView = ForecastBriefView()
     private let cloudView = ForecastBriefView()
@@ -234,6 +234,5 @@ extension CurrentForecastViewCell {
 private extension CGFloat {
     static let imageSize: CGFloat = 17
     static let imageAnchor: CGFloat = 25
-    
     static let verticalMergin: CGFloat = 5
 }

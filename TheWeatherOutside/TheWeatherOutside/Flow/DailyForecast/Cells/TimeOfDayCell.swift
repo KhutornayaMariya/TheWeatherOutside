@@ -13,7 +13,7 @@ final class TimeOfDayCell: UICollectionViewCell {
     private let stackArrangedViews = [WeatherParameterView(), WeatherParameterView(), WeatherParameterView(), WeatherParameterView(), WeatherParameterView()]
     
     // MARK: - Private properties
-
+    
     private lazy var timeOfDayLabel: UILabel = {
         let label = UILabel()
         
@@ -53,21 +53,21 @@ final class TimeOfDayCell: UICollectionViewCell {
         
         return view
     }()
-
+    
     // MARK: - Initializers
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
     }
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Private properties
-
+    
     private func setUp() {
         layer.cornerRadius = 5
         backgroundColor = .extraLightBlue
@@ -99,7 +99,7 @@ extension TimeOfDayCell {
         temp.text = model.temperature
         image.image = UIImage(named: model.imageName)
         timeOfDayLabel.text = model.title
-
+        
         for index in 0...model.weatherParameters.count - 1 {
             if index > stackArrangedViews.endIndex { continue }
             stackArrangedViews[index].configure(with: model.weatherParameters[index])
