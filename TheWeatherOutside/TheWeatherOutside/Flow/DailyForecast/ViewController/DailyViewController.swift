@@ -190,7 +190,7 @@ private extension NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .zero
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(88), heightDimension: .absolute(36))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(95), heightDimension: .absolute(36))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)

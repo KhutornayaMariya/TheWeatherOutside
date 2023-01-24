@@ -40,7 +40,7 @@
 
 // Hourly forecast
 "DAY" = "Прогноз на 24 часа";
-"DAILY" = "8 дней";
+"DAILY" = "7 дней";
 "DAILY_TITLE" = "Ежедневный прогноз";
 
 // Settings
