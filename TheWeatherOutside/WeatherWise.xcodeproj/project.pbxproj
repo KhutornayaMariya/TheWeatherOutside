@@ -61,6 +61,8 @@
 		4C3EA13629707689003F5BC1 /* ForecastRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA13529707689003F5BC1 /* ForecastRepositoryProtocol.swift */; };
 		4C3EA13929707EE6003F5BC1 /* PagesBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3EA13829707EE6003F5BC1 /* PagesBuilder.swift */; };
 		4C5E3DA2297AB25500A30966 /* TimeOfDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E3DA1297AB25500A30966 /* TimeOfDayCell.swift */; };
+		4C5E3DA4297EDD0400A30966 /* DayAndNightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E3DA3297EDD0400A30966 /* DayAndNightCell.swift */; };
+		4C5E3DA6297EEA5F00A30966 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E3DA5297EEA5F00A30966 /* SeparatorView.swift */; };
 		4C6D87852971820C006E2749 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D87842971820C006E2749 /* Button.swift */; };
 		4C6D87892971B285006E2749 /* HourOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D87882971B285006E2749 /* HourOverviewCell.swift */; };
 		4C6D878B2971B54C006E2749 /* WeatherParameterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D878A2971B54C006E2749 /* WeatherParameterView.swift */; };
@@ -147,6 +149,8 @@
 		4C3EA13529707689003F5BC1 /* ForecastRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastRepositoryProtocol.swift; sourceTree = "<group>"; };
 		4C3EA13829707EE6003F5BC1 /* PagesBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesBuilder.swift; sourceTree = "<group>"; };
 		4C5E3DA1297AB25500A30966 /* TimeOfDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOfDayCell.swift; sourceTree = "<group>"; };
+		4C5E3DA3297EDD0400A30966 /* DayAndNightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAndNightCell.swift; sourceTree = "<group>"; };
+		4C5E3DA5297EEA5F00A30966 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		4C6D87842971820C006E2749 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		4C6D87882971B285006E2749 /* HourOverviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourOverviewCell.swift; sourceTree = "<group>"; };
 		4C6D878A2971B54C006E2749 /* WeatherParameterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherParameterView.swift; sourceTree = "<group>"; };
@@ -283,6 +287,8 @@
 			children = (
 				4C01C8FD297578F2001D42C1 /* DateBubbleCell.swift */,
 				4C5E3DA1297AB25500A30966 /* TimeOfDayCell.swift */,
+				4C5E3DA3297EDD0400A30966 /* DayAndNightCell.swift */,
+				4C5E3DA5297EEA5F00A30966 /* SeparatorView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -750,6 +756,7 @@
 				4C3EA11E296F0F60003F5BC1 /* DailyForecastModel.swift in Sources */,
 				4C01C8F429756B56001D42C1 /* DailyForecastInteractor.swift in Sources */,
 				4C6D878F2971BBF7006E2749 /* HourlyViewController.swift in Sources */,
+				4C5E3DA4297EDD0400A30966 /* DayAndNightCell.swift in Sources */,
 				4C3EA119296F0E93003F5BC1 /* HourlyForecastModel.swift in Sources */,
 				4C244FE52965F40A0094CB67 /* Decryptor.swift in Sources */,
 				4C01C8FA29756B8D001D42C1 /* DailyViewController.swift in Sources */,
@@ -762,6 +769,7 @@
 				4C17D09B296434F000132ACB /* MainCoordinator.swift in Sources */,
 				4C1FA1DD29673753000A53F4 /* EmptyViewController.swift in Sources */,
 				4C3EA13629707689003F5BC1 /* ForecastRepositoryProtocol.swift in Sources */,
+				4C5E3DA6297EEA5F00A30966 /* SeparatorView.swift in Sources */,
 				4C6D8795297411CF006E2749 /* WeatherDiagramViewModel.swift in Sources */,
 				4C17D09D2964439200132ACB /* OnboardingViewController.swift in Sources */,
 				4C01C8F629756B60001D42C1 /* DailyForecastInteractorProtocol.swift in Sources */,

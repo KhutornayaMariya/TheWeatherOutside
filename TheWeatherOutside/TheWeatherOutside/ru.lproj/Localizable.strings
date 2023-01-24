@@ -67,3 +67,6 @@
 "MORNING_TITLE" = "утро";
 "UV_INDEX" = "УФ индекс";
 "CLOUD_COVER" = "Облачность";
+
+"SUNRISE" = "Восход";
+"SUNSET" = "Закат";

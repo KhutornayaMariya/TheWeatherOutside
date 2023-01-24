@@ -11,8 +11,9 @@ final class DailyViewController: UIViewController {
     private enum Constants {
         static let bubblesSectionIndex: Int = 0
         static let forecastSectionIndex: Int = 1
-        static let sunAndMoonSectionIndex: Int = 2
+        static let dayAndNightSectionIndex: Int = 2
         static let headerIdentifier = "header"
+        static let separatorIdentifier = "separator"
     }
     
     var interactor: DailyForecastInteractor?
@@ -33,8 +34,13 @@ final class DailyViewController: UIViewController {
         
         view.register(DateBubbleCell.self, forCellWithReuseIdentifier: "DateBubbleCell")
         view.register(TimeOfDayCell.self, forCellWithReuseIdentifier: "TimeOfDayCell")
-        //        view.register(DailyForecastViewCell.self, forCellWithReuseIdentifier: "DailyForecastViewCell")
-        view.register(HeaderCell.self, forSupplementaryViewOfKind: Constants.headerIdentifier, withReuseIdentifier: HeaderCell.reuseIdentifier)
+        view.register(DayAndNightCell.self, forCellWithReuseIdentifier: "DayAndNightCell")
+        view.register(HeaderCell.self,
+                      forSupplementaryViewOfKind: Constants.headerIdentifier,
+                      withReuseIdentifier: HeaderCell.reuseIdentifier)
+        view.register(SeparatorView.self,
+                      forSupplementaryViewOfKind: Constants.separatorIdentifier,
+                      withReuseIdentifier: SeparatorView.reuseIdentifier)
         view.allowsMultipleSelection = false
         
         return view
@@ -73,7 +79,7 @@ final class DailyViewController: UIViewController {
             case Constants.forecastSectionIndex:
                 return .forecastSection
             default:
-                return .sunAndMoonSection
+                return .dayAndNightSection
             }
         }
     }
@@ -93,6 +99,8 @@ extension DailyViewController: UICollectionViewDataSource {
             return viewModel?.dailyForecast.count ?? 0
         case Constants.forecastSectionIndex:
             return forecastItems?.timeOfDay.count ?? 0
+        case Constants.dayAndNightSectionIndex:
+            return forecastItems?.dayAndNight.count ?? 0
         default:
             return 1
         }
@@ -100,11 +108,6 @@ extension DailyViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
-            //        case Constants.bubblesSectionIndex:
-            //            let cell = collectionView.dequeueReusableCell(
-            //                withReuseIdentifier: "CurrentForecastViewCell", for: indexPath) as! CurrentForecastViewCell
-            //            cell.configure(with: viewModel.currentForecast)
-            //            return cell
         case Constants.bubblesSectionIndex:
             guard let viewModel = viewModel else { return UICollectionViewCell() }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DateBubbleCell", for: indexPath) as! DateBubbleCell
@@ -112,9 +115,15 @@ extension DailyViewController: UICollectionViewDataSource {
             cell.configure(with: DateBubbleModel(date: data.date))
             
             return cell
-        default:
+        case Constants.forecastSectionIndex:
             guard let data = forecastItems?.timeOfDay else { return UICollectionViewCell() }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TimeOfDayCell", for: indexPath) as! TimeOfDayCell
+            cell.configure(with: data[indexPath.row])
+            
+            return cell
+        default:
+            guard let data = forecastItems?.dayAndNight else { return UICollectionViewCell() }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DayAndNightCell", for: indexPath) as! DayAndNightCell
             cell.configure(with: data[indexPath.row])
             
             return cell
@@ -135,13 +144,31 @@ extension DailyViewController: UICollectionViewDataSource {
             switch indexPath.section {
             case Constants.bubblesSectionIndex:
                 header.configure(with: HeaderCellModel(title: "DAILY_TITLE".localized, link: nil))
-            case Constants.sunAndMoonSectionIndex:
+            case Constants.dayAndNightSectionIndex:
                 header.configure(with: HeaderCellModel(title: "SUN_AND_MOON".localized, link: nil))
             default:
                 break
             }
             
             return header
+            
+        case Constants.separatorIdentifier:
+            guard let separator = collectionView.dequeueReusableSupplementaryView(
+                ofKind: Constants.separatorIdentifier,
+                withReuseIdentifier: SeparatorView.reuseIdentifier,
+                for: indexPath
+            ) as? SeparatorView else {
+                return UICollectionReusableView()
+            }
+            
+            switch indexPath.row {
+            case 0:
+                separator.backgroundColor = .clear
+            default:
+                separator.backgroundColor = .accent
+            }
+            
+            return separator
         default:
             return UICollectionReusableView()
         }
@@ -153,6 +180,7 @@ extension DailyViewController: UICollectionViewDataSource {
 private extension NSCollectionLayoutSection {
     static let safeArea: CGFloat = 16
     static let headerIdentifier = "header"
+    static let separatorIdentifier = "separator"
     
     static let bubblesSection: NSCollectionLayoutSection = {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
@@ -196,18 +224,50 @@ private extension NSCollectionLayoutSection {
         return section
     }()
     
-    static let sunAndMoonSection: NSCollectionLayoutSection = {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 0, leading: 0, bottom: safeArea, trailing: 0)
+    static let dayAndNightSection: NSCollectionLayoutSection = {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize, supplementaryItems: [separatorItem])
+        item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(340))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(120))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: safeArea, leading: safeArea, bottom: safeArea, trailing: safeArea)
+        section.contentInsets = NSDirectionalEdgeInsets(top: safeArea, leading: safeArea, bottom: safeArea*2, trailing: safeArea)
+        
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(22)
+        )
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: headerIdentifier,
+            alignment: .topTrailing
+        )
+        
+        section.boundarySupplementaryItems = [header]
         
         return section
+    }()
+    
+    static let separatorItem: NSCollectionLayoutSupplementaryItem = {
+        let separatorWidth = 0.5
+        let separatorSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(separatorWidth),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let separatorAnchor = NSCollectionLayoutAnchor(
+            edges: [.leading],
+            absoluteOffset: CGPoint(x: separatorWidth, y: 0)
+        )
+        let separator = NSCollectionLayoutSupplementaryItem(
+            layoutSize: separatorSize,
+            elementKind: separatorIdentifier,
+            containerAnchor: separatorAnchor
+        )
+        
+        return separator
     }()
 }
 
@@ -219,7 +279,6 @@ extension DailyViewController: UICollectionViewDelegate {
         case Constants.bubblesSectionIndex:
             guard let selectedCell = collectionView.cellForItem(at: indexPath) as? DateBubbleCell else { return }
             selectedCell.setColor(.accent)
-//            selectedCell.backgroundColor = .accent
             forecastItems = viewModel?.dailyForecast[indexPath.row]
             collectionView.reloadSections([Constants.forecastSectionIndex, Constants.forecastSectionIndex])
         default:
@@ -231,7 +290,6 @@ extension DailyViewController: UICollectionViewDelegate {
         switch indexPath.section {
         case Constants.bubblesSectionIndex:
             guard let selectedCell = collectionView.cellForItem(at: indexPath) as? DateBubbleCell else { return }
-//            selectedCell.backgroundColor = .clear
             selectedCell.setColor(.clear)
         default:
             break

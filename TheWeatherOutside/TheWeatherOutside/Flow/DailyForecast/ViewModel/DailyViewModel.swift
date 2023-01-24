@@ -11,20 +11,18 @@ struct DailyViewModel {
     struct DailyForecastItem {
         let date: String
         let timeOfDay: [TimeOfDayItem]
-        let sunAndMoon: SunAndMoon
+        let dayAndNight: [DayAndNight]
     }
     
     let locationTitle: String
     var dailyForecast: [DailyForecastItem]
 }
 
-struct SunAndMoon {
-    let sunrise: String
-    let sunset: String
-    let moonrise: String
-    let moonset: String
-    let daylength: String
-    let nightlength: String
+struct DayAndNight {
+    let rise: String
+    let set: String
+    let duration: String
+    let imageName: String
 }
 
 struct TimeOfDayItem {

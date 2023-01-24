@@ -65,3 +65,6 @@
 "MORNING_TITLE" = "morning";
 "UV_INDEX" = "UV index";
 "CLOUD_COVER" = "Cloud cover";
+
+"SUNRISE" = "Sunrise";
+"SUNSET" = "Sunset";

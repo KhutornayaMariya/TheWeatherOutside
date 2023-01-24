@@ -96,7 +96,6 @@ final class PagesPresenter {
             } else {
                 isDay = true
             }
-
             
             let model = HourlyForecastModel(
                 time: dateManager.convert(date, to: timeZone, with: "HH:mm"),

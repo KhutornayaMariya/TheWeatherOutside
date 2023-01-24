@@ -41,13 +41,13 @@ final class DailyForecastPresenter {
         for forecast in oneDayForecastArray {
             guard let date = forecast.date else { return [] }
             
-            let sunAndMoonModel = createSunAndMoonModel(data: forecast, timeZone)
+            let dayAndNightModel = createDayAndNightModels(data: forecast, timeZone)
             let timeOfDayModel = createTimeOfDayModel(data: forecast)
             
             let model: DailyViewModel.DailyForecastItem = .init(
                 date: dateManager.convert(date, to: timeZone, with: "dd/MM EE"),
                 timeOfDay: timeOfDayModel,
-                sunAndMoon: sunAndMoonModel
+                dayAndNight: dayAndNightModel
             )
             
             models.append(model)
@@ -120,26 +120,27 @@ final class DailyForecastPresenter {
         )
         
         let precipitation = weatherConditionManager.precipitation(rain: data.rain, snow: data.snow, cloudCover: data.cloudCover, isDay: isDay)
-
+        
         return [realFeel, wind, precipitation, cloudCover, uvi]
     }
     
-    private func createSunAndMoonModel(data: Daily, _ timeZone: String) -> SunAndMoon {
+    private func createDayAndNightModels(data: Daily, _ timeZone: String) -> [DayAndNight] {
         let dayLength = data.sunset! - data.sunrise!
         let nightLength = data.moonset! - data.moonrise!
         
         let formatter = DateComponentsFormatter()
-        
         formatter.unitsStyle = .abbreviated
         formatter.zeroFormattingBehavior = .dropAll
-        formatter.allowedUnits = [.day, .hour, .minute, .second]
+        formatter.allowedUnits = [.hour, .minute]
         
-        return SunAndMoon(sunrise: dateManager.convert(data.sunrise!, to: timeZone, with: "hh:mm"),
-                          sunset: dateManager.convert(data.sunset!, to: timeZone, with: "hh:mm"),
-                          moonrise: dateManager.convert(data.moonrise!, to: timeZone, with: "hh:mm"),
-                          moonset: dateManager.convert(data.moonset!, to: timeZone, with: "hh:mm"),
-                          daylength: formatter.string(from: dayLength)!,
-                          nightlength: formatter.string(from: nightLength)!)
+        return [DayAndNight(rise: dateManager.convert(data.sunrise!, to: timeZone, with: "HH:mm"),
+                            set: dateManager.convert(data.sunset!, to: timeZone, with: "HH:mm"),
+                            duration: formatter.string(from: dayLength)!,
+                            imageName: "sunny"),
+                DayAndNight(rise: dateManager.convert(data.moonrise!, to: timeZone, with: "HH:mm"),
+                            set: dateManager.convert(data.moonset!, to: timeZone, with: "HH:mm"),
+                            duration: formatter.string(from: nightLength)!,
+                            imageName: "moon")]
     }
 }
 
