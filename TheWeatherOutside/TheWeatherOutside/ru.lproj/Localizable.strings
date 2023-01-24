@@ -57,3 +57,16 @@
 "PRESSURE" = "атмосферное давление";
 "PRECIPITATION_TITLE" = "осадки";
 "PRESSURE_UNITS" = "гПа";
+
+// Daily forecast
+"DAILY_TITLE" = "Прогноз на 8 дней";
+"SUN_AND_MOON" = "Солнце и луна";
+"DAY_TITLE" = "День";
+"EVE_TITLE" = "вечер";
+"NIGTH_TITLE" = "ночь";
+"MORNING_TITLE" = "утро";
+"UV_INDEX" = "УФ индекс";
+"CLOUD_COVER" = "Облачность";
+
+"SUNRISE" = "Восход";
+"SUNSET" = "Закат";

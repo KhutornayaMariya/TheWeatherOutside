@@ -28,7 +28,7 @@ final class WeatherParameterView: UIView {
         let view = UILabel()
         
         view.textColor = .label
-        view.font = .rubikRegular(size: 14)
+        view.font = .rubikRegular(size: 16)
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -38,7 +38,7 @@ final class WeatherParameterView: UIView {
         let view = UILabel()
         
         view.textColor = .systemGray
-        view.font = .rubikRegular(size: 14)
+        view.font = .rubikRegular(size: 16)
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -58,23 +58,25 @@ final class WeatherParameterView: UIView {
         subviews.forEach { addSubview($0) }
         
         NSLayoutConstraint.activate([
-            image.heightAnchor.constraint(equalToConstant: 20),
-            image.widthAnchor.constraint(equalToConstant: 20),
+            image.heightAnchor.constraint(equalToConstant: 15),
+            image.widthAnchor.constraint(equalToConstant: 15),
+            image.centerYAnchor.constraint(equalTo: centerYAnchor),
             image.leadingAnchor.constraint(equalTo: leadingAnchor),
-            image.topAnchor.constraint(equalTo: topAnchor),
             
+            parameter.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             parameter.topAnchor.constraint(equalTo: topAnchor),
-            parameter.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 5),
+            parameter.bottomAnchor.constraint(equalTo: bottomAnchor),
             
+            value.trailingAnchor.constraint(equalTo: trailingAnchor),
             value.topAnchor.constraint(equalTo: topAnchor),
-            value.trailingAnchor.constraint(equalTo: trailingAnchor)
+            value.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
 
 extension WeatherParameterView {
     func configure(with model: WeatherParameterViewModel) {
-        parameter.text = model.parameterName.capitalizedSentence
+        parameter.text = model.parameterName
         value.text = model.value
         image.image = UIImage(named: model.imageName)
     }

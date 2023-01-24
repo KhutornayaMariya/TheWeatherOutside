@@ -9,7 +9,7 @@ import UIKit
 
 struct HeaderCellModel {
     let title: String?
-    let link: String
+    let link: String?
 }
 
 final class HeaderCell: UICollectionReusableView {
@@ -54,11 +54,15 @@ final class HeaderCell: UICollectionReusableView {
     }
 
     func configure(with viewModel: HeaderCellModel) {
-        let attributedString = NSMutableAttributedString(string: viewModel.link)
-        attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
+        if let linkText = viewModel.link {
+            let attributedString = NSMutableAttributedString(string: linkText)
+            attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
+            link.setAttributedTitle(attributedString, for: .normal)
+        } else {
+            link.isHidden = true
+        }
         
         titleLabel.text = viewModel.title
-        link.setAttributedTitle(attributedString, for: .normal)
     }
 
     // MARK: - Private properties

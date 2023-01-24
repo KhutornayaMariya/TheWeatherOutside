@@ -16,8 +16,8 @@ protocol GeoCodeApiManagerProtocol {
 final class GeoCodeApiManager {
     
     let geocodeApiUrl = "https://geocode-maps.yandex.ru/1.x/"
-    let encryptedApiKey: [UInt8] = [97, 57, 54, 99, 100, 55, 55, 101, 45, 54, 56, 48, 100, 45, 52, 48, 48, 55,
-                                    45, 57,50, 53, 53, 45, 50, 55, 97, 100, 57, 97, 55, 50, 55, 56, 48, 57]
+    let encryptedApiKey: [UInt8] = [50, 48, 54, 99, 56, 52, 97, 48, 45, 56, 99, 51, 57, 45, 52, 56, 57, 54, 45, 97,
+                                    100, 57, 55, 45, 51, 101, 54, 50, 101, 57, 53, 101, 50, 101, 53, 102]
     
     private func parameters(_ geocode: String) -> [String : Any] {
         let apiKey = Decryptor().getString(from: encryptedApiKey)

@@ -55,3 +55,16 @@
 "PRESSURE" = "PRESSURE";
 "PRECIPITATION_TITLE" = "PRECIPITATION";
 "PRESSURE_UNITS" = "hPa";
+
+// Daily forecast
+"DAILY_TITLE" = "8-day forecast";
+"SUN_AND_MOON" = "Sun and moon";
+"DAY_TITLE" = "day";
+"EVE_TITLE" = "evening";
+"NIGTH_TITLE" = "night";
+"MORNING_TITLE" = "morning";
+"UV_INDEX" = "UV index";
+"CLOUD_COVER" = "Cloud cover";
+
+"SUNRISE" = "Sunrise";
+"SUNSET" = "Sunset";
