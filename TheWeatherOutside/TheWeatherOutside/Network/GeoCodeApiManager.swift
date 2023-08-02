@@ -20,7 +20,7 @@ final class GeoCodeApiManager {
                                     100, 57, 55, 45, 51, 101, 54, 50, 101, 57, 53, 101, 50, 101, 53, 102]
     
     private func parameters(_ geocode: String) -> [String : Any] {
-        let apiKey = Decryptor().getString(from: encryptedApiKey)
+        let apiKey = Decryptor.getString(from: encryptedApiKey)
         
         return ["geocode": geocode,
                 "format": "json",

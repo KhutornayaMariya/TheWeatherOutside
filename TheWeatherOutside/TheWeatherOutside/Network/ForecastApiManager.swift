@@ -19,7 +19,7 @@ final class ForecastApiManager {
     
     private func parameters(lat: Double, lon: Double) -> [String : Any] {
         let language = Locale.preferredLanguages[0].contains("ru") ? "ru" : "en"
-        let apiKey = Decryptor().getString(from: encryptedApiKey)
+        let apiKey = Decryptor.getString(from: encryptedApiKey)
         
         return ["lat": lat,
                 "lon": lon,

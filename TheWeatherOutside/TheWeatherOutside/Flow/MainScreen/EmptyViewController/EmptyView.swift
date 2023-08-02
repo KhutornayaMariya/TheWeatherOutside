@@ -12,7 +12,7 @@ final class EmptyView: UIView {
     private lazy var image: UIImageView = {
         let view = UIImageView()
         
-        view.image = UIImage(named: "umbrella")
+        view.image = UIImage(named: "Umbrella")
         
         view.contentMode = .scaleToFill
         view.translatesAutoresizingMaskIntoConstraints = false
