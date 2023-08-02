@@ -12,14 +12,12 @@ protocol PagesPresenterProtocol: AnyObject {
 }
 
 final class PagesPresenter {
-    private let dateManager: DateManagerProtocol
     private let imageManager = WeatherConditionManager()
     
     weak var viewController: PageViewControllerProtocol?
     
     init(viewController: PageViewControllerProtocol) {
         self.viewController = viewController
-        self.dateManager = DateManager()
     }
     
     private func createViewModels(data: [MetaInfo]) -> [ForecastViewModel] {
@@ -58,9 +56,9 @@ final class PagesPresenter {
             feelsLikeTemp: isImpericUnits ? String(forecast.feelsLikeImp) : String(forecast.feelsLike),
             currentTemp: isImpericUnits ? String(forecast.temperatureImp) : String(forecast.temperature),
             description: forecast.weatherDesc?.capitalizedSentence ?? "",
-            date: dateManager.convert(date, to: timeZone, with: "E, d MMMM yyyy"),
-            sunriseTime: dateManager.convert(sunriseTime, to: timeZone, with: "HH:mm"),
-            sunsetTime: dateManager.convert(sunsetTime, to: timeZone, with: "HH:mm"),
+            date: DateManager.convert(date, to: timeZone, with: "E, d MMMM yyyy"),
+            sunriseTime: DateManager.convert(sunriseTime, to: timeZone, with: "HH:mm"),
+            sunsetTime: DateManager.convert(sunsetTime, to: timeZone, with: "HH:mm"),
             windSpeed: windSpeed,
             cloudCover: String(forecast.cloudCover),
             precipitation: precipitation(rain: forecast.rain, snow: forecast.snow)
@@ -102,7 +100,7 @@ final class PagesPresenter {
             }
             
             let model = HourlyForecastModel(
-                time: dateManager.convert(date, to: timeZone, with: "HH:mm"),
+                time: DateManager.convert(date, to: timeZone, with: "HH:mm"),
                 temperature: isImpericUnits ? "\(String(forecast.temperatureImp))°" : "\(String(forecast.temperature))°",
                 imageName: imageManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: isDay)
             )
@@ -140,7 +138,7 @@ final class PagesPresenter {
             }
             
             let model = DailyForecastModel(
-                date: dateManager.convert(date, to: timeZone, with: "dd/MM") ,
+                date: DateManager.convert(date, to: timeZone, with: "dd/MM") ,
                 temperature: temp,
                 description: forecast.weatherDesc?.capitalizedSentence ?? "",
                 imageName: imageManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: true),

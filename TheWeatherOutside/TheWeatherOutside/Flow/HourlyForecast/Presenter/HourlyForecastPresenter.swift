@@ -12,7 +12,6 @@ protocol HourlyForecastPresenterProtocol: AnyObject {
 }
 
 final class HourlyForecastPresenter {
-    private let dateManager: DateManagerProtocol
     private let weatherConditionManager = WeatherConditionManager()
     
     private weak var viewController: HourlyForecastViewControllerProtocol?
@@ -21,7 +20,6 @@ final class HourlyForecastPresenter {
     
     init(viewController: HourlyForecastViewControllerProtocol) {
         self.viewController = viewController
-        self.dateManager = DateManager()
     }
     
     private var isImpericUnits: Bool = {
@@ -57,8 +55,8 @@ final class HourlyForecastPresenter {
             
             let model = HourOverviewModel(
                 weatherParameters: weatherParametrs,
-                date: dateManager.convert(date, to: timeZone, with: "dd/MM"),
-                time: dateManager.convert(date, to: timeZone, with: "HH:mm"),
+                date: DateManager.convert(date, to: timeZone, with: "dd/MM"),
+                time: DateManager.convert(date, to: timeZone, with: "HH:mm"),
                 temperature: isImpericUnits ? "\(String(forecast.temperatureImp))°" : "\(String(forecast.temperature))°"
             )
             
@@ -144,7 +142,7 @@ final class HourlyForecastPresenter {
             let temp = isImpericUnits ? forecast.temperatureImp : forecast.temperature
             temperature.append(Int(temp))
             temperatureString.append("\(String(temp))°")
-            time.append(dateManager.convert(date, to: timeZone, with: "HH:mm"))
+            time.append(DateManager.convert(date, to: timeZone, with: "HH:mm"))
             precipitation.append(weatherConditionManager.precipitationAmount(rain: forecast.rain, snow: forecast.snow))
             
             var isDay = true
