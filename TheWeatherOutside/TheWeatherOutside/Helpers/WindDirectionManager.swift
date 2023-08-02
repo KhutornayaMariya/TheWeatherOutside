@@ -7,21 +7,18 @@
 
 import Foundation
 
-protocol WindDirectionManagerProtocol {
-    func windDirection(from degrees : Double) -> String
-}
+struct WindDirectionManager {
 
-final class WindDirectionManager: WindDirectionManagerProtocol {
-    private let directions = ["NORTH".localized,
-                              "NORTHEAST".localized,
-                              "EAST".localized,
-                              "SOUTHEAST".localized,
-                              "SOUTH".localized,
-                              "SOUTHWEST".localized,
-                              "WEST".localized,
-                              "NORTHWEST".localized]
+    private static let directions = ["NORTH".localized,
+                                     "NORTHEAST".localized,
+                                     "EAST".localized,
+                                     "SOUTHEAST".localized,
+                                     "SOUTH".localized,
+                                     "SOUTHWEST".localized,
+                                     "WEST".localized,
+                                     "NORTHWEST".localized]
     
-    func windDirection(from degrees : Double) -> String {
-        directions[Int((degrees+11.25)/45) % 8]
+    static func windDirection(from degrees : Double) -> String {
+        directions[Int((degrees + 11.25)/45) % 8]
     }
 }

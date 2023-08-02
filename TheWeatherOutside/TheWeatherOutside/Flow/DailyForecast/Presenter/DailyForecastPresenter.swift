@@ -12,8 +12,7 @@ protocol DailyForecastPresenterProtocol: AnyObject {
 }
 
 final class DailyForecastPresenter {
-    private let weatherConditionManager = WeatherConditionManager()
-    
+
     weak var viewController: DailyViewControllerProtocol?
     
     init(viewController: DailyViewControllerProtocol) {
@@ -71,7 +70,7 @@ final class DailyForecastPresenter {
     }
     
     private func createTimeOfDayModel(data: Daily) -> [TimeOfDayItem] {
-        let dayImage = weatherConditionManager.skyConditionImage(rain: data.rain, snow: data.snow, cloudCover: data.cloudCover, isDay: true)
+        let dayImage = WeatherConditionManager.skyConditionImage(rain: data.rain, snow: data.snow, cloudCover: data.cloudCover, isDay: true)
         let dayData = TimeOfDayItem(
             title: "DAY_TITLE".localized.capitalizedSentence,
             temperature: isImpericUnits ? "\(String( data.tempDayImp))°" : "\(String(data.tempDay))°",
@@ -79,7 +78,7 @@ final class DailyForecastPresenter {
             weatherParameters: createWeatherParameterModels(data: data, isDay: true)
         )
         
-        let nightImage = weatherConditionManager.skyConditionImage(rain: data.rain, snow: data.snow, cloudCover: data.cloudCover, isDay: false)
+        let nightImage = WeatherConditionManager.skyConditionImage(rain: data.rain, snow: data.snow, cloudCover: data.cloudCover, isDay: false)
         let nightData = TimeOfDayItem(
             title: "NIGTH_TITLE".localized.capitalizedSentence,
             temperature: isImpericUnits ? "\(String( data.tempNightImp))°" : "\(String(data.tempNight))°",
@@ -123,7 +122,7 @@ final class DailyForecastPresenter {
             imageName: "cloudy"
         )
         
-        let precipitation = weatherConditionManager.precipitation(rain: data.rain, snow: data.snow, cloudCover: data.cloudCover, isDay: isDay)
+        let precipitation = WeatherConditionManager.precipitation(rain: data.rain, snow: data.snow, cloudCover: data.cloudCover, isDay: isDay)
         
         return [realFeel, wind, precipitation, cloudCover, uvi]
     }

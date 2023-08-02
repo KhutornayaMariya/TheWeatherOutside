@@ -12,8 +12,7 @@ protocol PagesPresenterProtocol: AnyObject {
 }
 
 final class PagesPresenter {
-    private let imageManager = WeatherConditionManager()
-    
+
     weak var viewController: PageViewControllerProtocol?
     
     init(viewController: PageViewControllerProtocol) {
@@ -102,7 +101,7 @@ final class PagesPresenter {
             let model = HourlyForecastModel(
                 time: DateManager.convert(date, to: timeZone, with: "HH:mm"),
                 temperature: isImpericUnits ? "\(String(forecast.temperatureImp))°" : "\(String(forecast.temperature))°",
-                imageName: imageManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: isDay)
+                imageName: WeatherConditionManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: isDay)
             )
             
             models.append(model)
@@ -141,7 +140,7 @@ final class PagesPresenter {
                 date: DateManager.convert(date, to: timeZone, with: "dd/MM") ,
                 temperature: temp,
                 description: forecast.weatherDesc?.capitalizedSentence ?? "",
-                imageName: imageManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: true),
+                imageName: WeatherConditionManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: true),
                 amountOfPrecipitation: precipitation
             )
             

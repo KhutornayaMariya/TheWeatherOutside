@@ -608,9 +608,9 @@
 		4CF2AD8D2962CCB1003DC0F3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6286FC832A7A891B00238856 /* Extensions */,
 				4CF2AD83295F58FD003DC0F3 /* DateManager.swift */,
 				4C12B2412962EB7200887469 /* WindDirectionManager.swift */,
-				4C12B24A2962F37700887469 /* String+Extension.swift */,
 				4C244FE22965CE490094CB67 /* UnitsManager.swift */,
 				4C244FE42965F40A0094CB67 /* Decryptor.swift */,
 				4C3EA104296C113F003F5BC1 /* UserDefaultsManager.swift */,
@@ -625,6 +625,14 @@
 				6286FC812A7A80A000238856 /* DateManagerTests.swift */,
 			);
 			path = WeatherWiseTests;
+			sourceTree = "<group>";
+		};
+		6286FC832A7A891B00238856 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4C12B24A2962F37700887469 /* String+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

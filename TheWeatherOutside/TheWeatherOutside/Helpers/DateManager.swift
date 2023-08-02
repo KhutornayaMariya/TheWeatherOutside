@@ -8,6 +8,7 @@
 import Foundation
 
 struct DateManager {
+
     static func convert(_ date: Date, to timeZone: String, with dateFormat: String) -> String {
         let formatter = DateFormatter()
         formatter.locale = .current

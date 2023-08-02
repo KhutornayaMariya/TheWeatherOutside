@@ -12,8 +12,7 @@ protocol HourlyForecastPresenterProtocol: AnyObject {
 }
 
 final class HourlyForecastPresenter {
-    private let weatherConditionManager = WeatherConditionManager()
-    
+
     private weak var viewController: HourlyForecastViewControllerProtocol?
     
     private var currentForecast: Current?
@@ -113,7 +112,7 @@ final class HourlyForecastPresenter {
            date < nextSunrise
         { isDay = false }
         
-        let precipitation = weatherConditionManager.precipitation(rain: data.rain, snow: data.snow, cloudCover: data.cloudCover, isDay: isDay)
+        let precipitation = WeatherConditionManager.precipitation(rain: data.rain, snow: data.snow, cloudCover: data.cloudCover, isDay: isDay)
         
         return [wind, windGust, humidity, pressure, precipitation]
     }
@@ -143,7 +142,7 @@ final class HourlyForecastPresenter {
             temperature.append(Int(temp))
             temperatureString.append("\(String(temp))°")
             time.append(DateManager.convert(date, to: timeZone, with: "HH:mm"))
-            precipitation.append(weatherConditionManager.precipitationAmount(rain: forecast.rain, snow: forecast.snow))
+            precipitation.append(WeatherConditionManager.precipitationAmount(rain: forecast.rain, snow: forecast.snow))
             
             var isDay = true
             if let sunset = currentForecast.sunset,
@@ -153,7 +152,7 @@ final class HourlyForecastPresenter {
                date < nextSunrise
             { isDay = false }
             
-            let imageName = weatherConditionManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: isDay)
+            let imageName = WeatherConditionManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: isDay)
             image.append(UIImage(named: imageName) ?? UIImage())
         }
         

@@ -7,8 +7,9 @@
 
 import Foundation
 
-final class WeatherConditionManager {
-    func skyConditionImage(rain: Double, snow: Double, cloudCover: Int16, isDay: Bool) -> String {
+struct WeatherConditionManager {
+
+    static func skyConditionImage(rain: Double, snow: Double, cloudCover: Int16, isDay: Bool) -> String {
         if snow == 0 && rain == 0 && cloudCover < 10 {
             return isDay ? "sunny" : "moon"
         } else if rain != 0 && cloudCover < 10 {
@@ -23,7 +24,7 @@ final class WeatherConditionManager {
         return isDay ? "sun_cloud" : "moon"
     }
     
-    func precipitationAmount(rain: Double, snow: Double) -> String {
+    static func precipitationAmount(rain: Double, snow: Double) -> String {
         if rain != 0 && rain > snow {
             return .init("\(String(rain)) \("PRECIPITATION".localized)")
         }
@@ -35,7 +36,7 @@ final class WeatherConditionManager {
         }
     }
     
-    func precipitation(rain: Double, snow: Double, cloudCover: Int16, isDay: Bool) -> WeatherParameterViewModel {
+    static func precipitation(rain: Double, snow: Double, cloudCover: Int16, isDay: Bool) -> WeatherParameterViewModel {
         let parameterName = "PRECIPITATION_TITLE".localized.capitalizedSentence
         let value = precipitationAmount(rain: rain, snow: snow)
         let image = skyConditionImage(rain: rain, snow: snow, cloudCover: cloudCover, isDay: isDay)
