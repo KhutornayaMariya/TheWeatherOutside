@@ -8,12 +8,16 @@
 import UIKit
 
 final class SettingsViewController: UIViewController {
+
+    private var isMetric: Bool = {
+        UserDefaults.standard.string(forKey: UserDefaultsKeys.units.rawValue) == Units.metric.rawValue
+    }()
     
     private lazy var settingView: SettingsView = {
         let view = SettingsView()
         
-        view.configure(with: isMetric())
-        view.setApplyButtonTapAction(action: saveSettrings)
+        view.configure(with: isMetric)
+        view.setApplyButtonTapAction(action: saveSettings)
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -43,12 +47,8 @@ final class SettingsViewController: UIViewController {
         ])
     }
     
-    @objc private func saveSettrings() {
-        let value = settingView.isMetric() ? Units.metric.rawValue : Units.imperial.rawValue
+    @objc private func saveSettings() {
+        let value = isMetric ? Units.metric.rawValue : Units.imperial.rawValue
         UserDefaults.standard.set(value, forKey: UserDefaultsKeys.units.rawValue)
-    }
-    
-    private func isMetric() -> Bool {
-        UserDefaults.standard.string(forKey: UserDefaultsKeys.units.rawValue) == Units.metric.rawValue
     }
 }

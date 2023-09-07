@@ -15,7 +15,6 @@ final class SettingsView: UIView {
         let view = UIImageView()
         
         view.image = UIImage(named: "cloud 1")
-        
         view.contentMode = .scaleToFill
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -26,7 +25,6 @@ final class SettingsView: UIView {
         let view = UIImageView()
         
         view.image = UIImage(named: "cloud 2")
-        
         view.contentMode = .scaleToFill
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -37,7 +35,6 @@ final class SettingsView: UIView {
         let view = UIImageView()
         
         view.image = UIImage(named: "cloud 3")
-        
         view.contentMode = .scaleToFill
         view.translatesAutoresizingMaskIntoConstraints = false
         

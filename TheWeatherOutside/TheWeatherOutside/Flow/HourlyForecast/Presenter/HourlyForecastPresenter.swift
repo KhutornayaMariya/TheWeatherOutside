@@ -16,14 +16,14 @@ final class HourlyForecastPresenter {
     private weak var viewController: HourlyForecastViewControllerProtocol?
     
     private var currentForecast: Current?
+
+    private var isImperialUnits: Bool = {
+        UserDefaultsManager.defaultManager.isImpericUnits()
+    }()
     
     init(viewController: HourlyForecastViewControllerProtocol) {
         self.viewController = viewController
     }
-    
-    private var isImpericUnits: Bool = {
-        UserDefaultsManager.defaultManager.isImpericUnits()
-    }()
     
     private func createViewModel(data: MetaInfo) -> HourViewModel {
         let hourModels = createHourOverviewModels(data: data)
@@ -48,18 +48,18 @@ final class HourlyForecastPresenter {
         let twentyFourHoursForecast = Array(oneHourForecastArray[0...24])
         
         for forecast in twentyFourHoursForecast {
-            guard let date = forecast.date else { return [] }
-            
-            let weatherParametrs = createWeatherParameterModels(data: forecast)
-            
-            let model = HourOverviewModel(
-                weatherParameters: weatherParametrs,
-                date: DateManager.convert(date, to: timeZone, with: "dd/MM"),
-                time: DateManager.convert(date, to: timeZone, with: "HH:mm"),
-                temperature: isImpericUnits ? "\(String(forecast.temperatureImp))°" : "\(String(forecast.temperature))°"
-            )
-            
-            models.append(model)
+            if let date = forecast.date {
+                let weatherParameters = createWeatherParameterModels(data: forecast)
+
+                let model = HourOverviewModel(
+                    weatherParameters: weatherParameters,
+                    date: DateManager.convert(date, to: timeZone, with: "dd/MM"),
+                    time: DateManager.convert(date, to: timeZone, with: "HH:mm"),
+                    temperature: isImperialUnits ? "\(String(forecast.temperatureImp))°" : "\(String(forecast.temperature))°"
+                )
+
+                models.append(model)
+            }
         }
         
         return models
@@ -77,14 +77,14 @@ final class HourlyForecastPresenter {
     
     private func createWeatherParameterModels(data: Hourly) -> [WeatherParameterViewModel] {
         
-        let windSpeed = isImpericUnits ? "\(String(data.windSpeedImp)) \("SPEED_IMP".localized) " : "\(String(data.windSpeed)) \("SPEED_METRIC".localized) "
+        let windSpeed = isImperialUnits ? "\(String(data.windSpeedImp)) \("SPEED_IMP".localized) " : "\(String(data.windSpeed)) \("SPEED_METRIC".localized) "
         let wind = WeatherParameterViewModel(
             parameterName: "WIND".localized.capitalizedSentence,
             value: windSpeed + (data.windDirection ?? ""),
             imageName: "wind"
         )
         
-        let windGustValue = isImpericUnits ? "\(String(data.windGustImp)) \("SPEED_IMP".localized)" : "\(String(data.windGust)) \("SPEED_METRIC".localized)"
+        let windGustValue = isImperialUnits ? "\(String(data.windGustImp)) \("SPEED_IMP".localized)" : "\(String(data.windGust)) \("SPEED_METRIC".localized)"
         let windGust = WeatherParameterViewModel(
             parameterName: "WIND_GUST".localized.capitalizedSentence,
             value: windGustValue,
@@ -133,27 +133,24 @@ final class HourlyForecastPresenter {
         var image: [UIImage] = []
         
         for forecast in sevenHoursForecast {
-            guard let date = forecast.date else
-            {
-                return WeatherDiagramViewModel(temperature: [], temperatureString: [], time: [], precipitation: [], image: [])
+            if let date = forecast.date {
+                let temp = isImperialUnits ? forecast.temperatureImp : forecast.temperature
+                temperature.append(Int(temp))
+                temperatureString.append("\(String(temp))°")
+                time.append(DateManager.convert(date, to: timeZone, with: "HH:mm"))
+                precipitation.append(WeatherConditionManager.precipitationAmount(rain: forecast.rain, snow: forecast.snow))
+
+                var isDay = true
+                if let sunset = currentForecast.sunset,
+                   let sunrise = currentForecast.sunrise,
+                   date > sunset,
+                   let nextSunrise = Calendar.current.date(byAdding: .day, value: 1, to: sunrise),
+                   date < nextSunrise
+                { isDay = false }
+
+                let imageName = WeatherConditionManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: isDay)
+                image.append(UIImage(named: imageName) ?? UIImage())
             }
-            
-            let temp = isImpericUnits ? forecast.temperatureImp : forecast.temperature
-            temperature.append(Int(temp))
-            temperatureString.append("\(String(temp))°")
-            time.append(DateManager.convert(date, to: timeZone, with: "HH:mm"))
-            precipitation.append(WeatherConditionManager.precipitationAmount(rain: forecast.rain, snow: forecast.snow))
-            
-            var isDay = true
-            if let sunset = currentForecast.sunset,
-               let sunrise = currentForecast.sunrise,
-               date > sunset,
-               let nextSunrise = Calendar.current.date(byAdding: .day, value: 1, to: sunrise),
-               date < nextSunrise
-            { isDay = false }
-            
-            let imageName = WeatherConditionManager.skyConditionImage(rain: forecast.rain, snow: forecast.snow, cloudCover: forecast.cloudCover, isDay: isDay)
-            image.append(UIImage(named: imageName) ?? UIImage())
         }
         
         return WeatherDiagramViewModel(temperature: temperature,

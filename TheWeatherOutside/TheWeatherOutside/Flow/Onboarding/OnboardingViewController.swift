@@ -23,20 +23,20 @@ class OnboardingViewController: UIViewController {
         
         return view
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUp()
-    }
-    
+
     init(locationManager: CLLocationManager) {
         self.locationManager = locationManager
         self.pagesBuilder = PagesBuilder()
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUp()
     }
     
     private func setUp() {
@@ -78,16 +78,15 @@ extension OnboardingViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
-            print("notDetermined")
+            print("locationManager notDetermined")
             break
         case .restricted:
-            print("restricted")
+            print("locationManager restricted")
             break
         case .denied:
-            print("deined")
+            print("locationManager deined")
             break
         case .authorizedAlways, .authorizedWhenInUse:
-            print("authorized")
             manager.requestLocation()
             self.navigationController?.pushViewController(pagesBuilder.build(), animated: true)
         @unknown default:
@@ -101,13 +100,13 @@ extension OnboardingViewController: CLLocationManagerDelegate {
         guard let error = error as? CLError else { return }
         switch error.code {
         case .denied:
-            print("denied")
+            print("locationManager denied")
         case .locationUnknown:
-            print("locationUnknown")
+            print("locationManager locationUnknown")
         case .headingFailure:
-            print("headingFailure")
+            print("locationManager headingFailure")
         default:
-            print("default error")
+            print("locationManager default error")
         }
     }
 }

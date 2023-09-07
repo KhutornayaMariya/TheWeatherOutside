@@ -19,7 +19,8 @@ final class HourlyForecastBuilder: HourlyForecastBuilderProtocol {
         let interactor = HourlyForecastInteractor(
             input: location,
             repository: ForecastRepository(),
-            presenter: presenter)
+            presenter: presenter
+        )
         
         viewController.interactor = interactor
         
