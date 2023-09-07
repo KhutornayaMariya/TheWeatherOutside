@@ -12,14 +12,12 @@ protocol DailyForecastPresenterProtocol: AnyObject {
 }
 
 final class DailyForecastPresenter {
-    private let dateManager: DateManagerProtocol
     private let weatherConditionManager = WeatherConditionManager()
     
     weak var viewController: DailyViewControllerProtocol?
     
     init(viewController: DailyViewControllerProtocol) {
         self.viewController = viewController
-        self.dateManager = DateManager()
     }
     
     private var isImpericUnits: Bool = {
@@ -51,7 +49,7 @@ final class DailyForecastPresenter {
             let timeOfDayModel = createTimeOfDayModel(data: forecast)
             
             let model: DailyViewModel.DailyForecastItem = .init(
-                date: dateManager.convert(date, to: timeZone, with: "dd/MM EE"),
+                date: DateManager.convert(date, to: timeZone, with: "dd/MM EE"),
                 timeOfDay: timeOfDayModel,
                 dayAndNight: dayAndNightModel
             )
@@ -139,12 +137,12 @@ final class DailyForecastPresenter {
         formatter.zeroFormattingBehavior = .dropAll
         formatter.allowedUnits = [.hour, .minute]
         
-        return [DayAndNight(rise: dateManager.convert(data.sunrise!, to: timeZone, with: "HH:mm"),
-                            set: dateManager.convert(data.sunset!, to: timeZone, with: "HH:mm"),
+        return [DayAndNight(rise: DateManager.convert(data.sunrise!, to: timeZone, with: "HH:mm"),
+                            set: DateManager.convert(data.sunset!, to: timeZone, with: "HH:mm"),
                             duration: formatter.string(from: dayLength)!,
                             imageName: "sunny"),
-                DayAndNight(rise: dateManager.convert(data.moonrise!, to: timeZone, with: "HH:mm"),
-                            set: dateManager.convert(data.moonset!, to: timeZone, with: "HH:mm"),
+                DayAndNight(rise: DateManager.convert(data.moonrise!, to: timeZone, with: "HH:mm"),
+                            set: DateManager.convert(data.moonset!, to: timeZone, with: "HH:mm"),
                             duration: formatter.string(from: nightLength)!,
                             imageName: "moon")]
     }

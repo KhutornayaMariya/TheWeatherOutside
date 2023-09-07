@@ -10,7 +10,6 @@ import UIKit
 final class CurrentForecastViewCell : UICollectionViewCell {
     static let reuseIdentifier = "CurrentForecastViewCell"
     
-    private let dateManager: DateManagerProtocol = DateManager()
     private let windView = ForecastBriefView()
     private let cloudView = ForecastBriefView()
     private let precipitationView = ForecastBriefView()
